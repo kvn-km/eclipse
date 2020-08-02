@@ -1,0 +1,25 @@
+.navbar {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  color: white;
+  background-color: #000000;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
+  font-weight: 700;
+}
+
+.navbar-toggler {
+  border-color: rgb(255, 255, 255);
+}
