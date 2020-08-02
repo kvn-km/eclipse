@@ -1,13 +1,13 @@
 import React from "react";
 import logo from "../../logo.png";
-import "../App.css";
+import "./pre.css";
 
-function Header() {
+function Landing() {
   return (
-    <header className="App-header">
+    <header className="landing pre">
       <img src={logo} className="App-logo" alt="logo" />
     </header>
   );
 }
 
-export default Header;
+export default Landing;

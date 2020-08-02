@@ -1,25 +1,31 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 import "./Nav.css";
 
 function Nav() {
   return (
 
-    <nav class="navbar navbar-expand-lg navbar-white bg-black">
-      <a class="navbar-brand" href="#">ECLIPSE</a>
+    <nav class="navbar navbar-expand-lg bg-black navbar-custom">
+      <Link to="/" class="navbar-brand">ECLIPSE</Link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+            <Link to="/about" class="nav-link">About</Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sign Up</a>
+            <Link to="/signup" class="nav-link">Sign Up</Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <Link to="/login" class="nav-link">Login</Link>
           </li>
         </ul>
 
