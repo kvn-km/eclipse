@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Sidebar from "../../Nav/Sidebar";
 
@@ -7,6 +8,7 @@ function TasksMain() {
     <section className="tasks-main main">
       <Sidebar />
       <p>TASKS MAIN PAGE</p>
+      <Link to="/user/task" class="nav-link">CLICK HERE TO GOTO A TASK (dev mode)</Link>
     </section>
   );
 }

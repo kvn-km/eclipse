@@ -5,16 +5,16 @@ import "./main.scss";
 
 import Sidebar from "../Nav/Sidebar";
 
-function User() {
+function Profile() {
 
   return (
-    <section className="user main">
+    <section className="profile main">
       <div class="main">
         <Sidebar />
-
+        <p>PROFILE PAGE</p>
       </div>
     </section>
   );
 }
 
-export default User;
+export default Profile;
