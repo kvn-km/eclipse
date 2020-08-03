@@ -1,6 +1,6 @@
 
 // the link to your model provided by Teachable Machine export panel
-const URL = "http://localhost:3000/my_model/";
+const URL = "./my_model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 async function init() {
@@ -45,7 +45,7 @@ async function predict() {
     const prediction = await model.predict(posenetOutput);
 
     for (let i = 0; i < maxPredictions; i++) {
-      //
+        //
         const classPrediction =
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
