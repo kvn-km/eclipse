@@ -1,10 +1,42 @@
 .pre {
-  background-color: #000000;
-  min-height: 90vh;
+  background-color: rgba(0, 0, 0, 0.88);
+  min-height: 102.7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(10px + 2vmin);
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.landing {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.login-input {
+  font-size: 10rem;
+  resize: none;
+  width: 80vw;
+  background: transparent;
+  padding: 5rem;
+  border: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2rem;
+  text-transform: uppercase;
   color: white;
+  outline: none;
+}
+.login-type {
+  position: absolute;
+  right: 0;
+  padding: 5rem 2rem 0 0;
+  font-size: 1rem;
 }
