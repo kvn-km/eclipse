@@ -4,7 +4,7 @@ const URL = "http://localhost:3000/my_model/";
 
 let model, webcam, ctx, labelContainer, maxPredictions;
 
-export async function init() {
+export async function init(status) {
     // const modelURL = URL + "model.json";
     // const metadataURL = URL + "metadata.json";
     const modelURL = URL + "model.json";
@@ -31,6 +31,9 @@ export async function init() {
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
+    }
+    if (status === "STOP") {
+        await webcam.stop();
     }
 }
 
