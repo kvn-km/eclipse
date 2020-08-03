@@ -1,9 +1,12 @@
+import * as tmPose from '@teachablemachine/pose';
 
-// the link to your model provided by Teachable Machine export panel
-const URL = "./my_model/";
+const URL = "http://localhost:3000/my_model/";
+
 let model, webcam, ctx, labelContainer, maxPredictions;
 
-async function init() {
+export async function init() {
+    // const modelURL = URL + "model.json";
+    // const metadataURL = URL + "metadata.json";
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
@@ -14,7 +17,7 @@ async function init() {
     maxPredictions = model.getTotalClasses();
 
     // Convenience function to setup a webcam
-    const size = 400;
+    const size = 600;
     const flip = true; // whether to flip the webcam
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam

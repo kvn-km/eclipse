@@ -19,4 +19,16 @@
     justify-content: flex-start;
     padding: 4rem 2rem 2rem 2rem;
   }
+
+  .task {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  #canvas {
+    object-fit: cover;
+    // height: 40vmin;
+    border-radius: 50%;
+  }
 }
