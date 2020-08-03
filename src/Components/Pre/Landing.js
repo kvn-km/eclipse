@@ -1,11 +1,14 @@
 import React from "react";
 import logo from "../../logo.png";
+import FadeIn from "react-fade-in";
 import "./pre.scss";
 
 function Landing() {
   return (
     <header className="landing pre">
-      <img src={logo} className="App-logo" alt="logo" />
+      <FadeIn>
+        <img src={logo} className="App-logo" alt="logo" />
+      </FadeIn>
     </header>
   );
 }

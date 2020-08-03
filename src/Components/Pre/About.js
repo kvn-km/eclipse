@@ -1,9 +1,12 @@
 import React from "react";
+import FadeIn from "react-fade-in";
 
 function About() {
   return (
     <section className="about pre">
-      <h1>ABOUT PAGE</h1>
+      <FadeIn>
+        <h1>ABOUT PAGE</h1>
+      </FadeIn>
     </section>
   );
 }

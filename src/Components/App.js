@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
-
 import "./App.scss";
 
 import Nav from "./Nav/Nav";
@@ -31,25 +30,27 @@ function App() {
   const MainBody = () => (
     < Switch >
       {/* PRE-LOGIN */}
-      < Route exact path="/" component={Landing} ></Route>
-      <Route exact path="/about" component={About}></Route>
-      <Route exact path="/login" component={Login}></Route>
-      <Route exact path="/signup" component={Signup}></Route>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/signup" component={Signup} />
       {/* LOGGED IN */}
-      <Route exact path="/user" component={User}></Route>
-      <Route exact path="/user/profile" component={Profile}></Route>
-      <Route exact path="/user/tasks" component={TasksMain}></Route>
-      <Route exact path="/user/side" component={TasksSide}></Route>
-      <Route exact path="/user/task" component={Task}></Route>
-      <Route exact path="/user/goals" component={Goals}></Route>
+      <Route exact path="/user" component={User} />
+      <Route exact path="/user/profile" component={Profile} />
+      <Route exact path="/user/tasks" component={TasksMain} />
+      <Route exact path="/user/side" component={TasksSide} />
+      <Route exact path="/user/task" component={Task} />
+      <Route exact path="/user/goals" component={Goals} />
     </Switch >
   );
 
   return (
+
     <div className="App">
       <Nav location={state} />
       <MainBody />
     </div >
+
   );
 }
 

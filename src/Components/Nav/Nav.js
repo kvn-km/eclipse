@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FadeIn from "react-fade-in";
 
 import "./Nav.scss";
 
@@ -40,7 +41,9 @@ function Nav(props) {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse ml-auto mr-1 flex-grow-0" id="navbarSupportedContent">
-        {navbarLinks()}
+        <FadeIn>
+          {navbarLinks()}
+        </FadeIn>
       </div>
     </nav>
   );

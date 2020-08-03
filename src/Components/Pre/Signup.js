@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Redirect } from "react-router-dom";
+import FadeIn from "react-fade-in";
 
 function SignUp(props) {
   let [redirect, setRedirect] = useState("");
@@ -21,7 +22,7 @@ function SignUp(props) {
 
   const signupTypeFullname = () => {
     return (
-      <div>
+      <FadeIn>
         <div className="login-type">Full Name</div>
         <section className="login-input">
           <form
@@ -43,13 +44,13 @@ function SignUp(props) {
             />
           </form>
         </section>
-      </div>
+      </FadeIn>
     );
   };
 
   const signupTypePhone = () => {
     return (
-      <div>
+      <FadeIn>
         <div className="login-type">Phone Number</div>
         <section className="login-input">
           <form
@@ -71,13 +72,13 @@ function SignUp(props) {
             />
           </form>
         </section>
-      </div>
+      </FadeIn>
     );
   };
 
   const signupTypeUsername = () => {
     return (
-      <div>
+      <FadeIn>
         <div className="login-type">Username</div>
         <section className="login-input">
           <form
@@ -99,13 +100,13 @@ function SignUp(props) {
             />
           </form>
         </section>
-      </div>
+      </FadeIn>
     );
   };
 
   const signupTypePass = () => {
     return (
-      <div>
+      <FadeIn>
         <div className="login-type">password</div>
         <section className="login-input">
           <form
@@ -127,7 +128,7 @@ function SignUp(props) {
             />
           </form>
         </section>
-      </div>
+      </FadeIn>
     );
   };
 
