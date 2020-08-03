@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 function Login(props) {
   let [redirect, setRedirect] = useState("");
-  let [username, setUsername] = useState(props.name || "");
+  let [username, setUsername] = useState(props.username || "");
   let [password, setPassword] = useState(props.password || "");
   let [loginType, setLoginType] = useState("LOGIN");
 
