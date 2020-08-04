@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import "./App.scss";
+import axios from 'axios';
 
 import Nav from "./Nav/Nav";
 import Landing from "./Pre/Landing";
@@ -18,12 +19,21 @@ import Goals from "./Main/GoalsAchievs/Goals";
 function App() {
 
   const [state, setState] = useState("/");
+  const [user, setUser] = useState(null);
 
+  function getUser() {
+    axios.get('http://localhost:8001/api/users')
+      .then(response => {
+        console.log(response.data);
+        setUser(response.data);
+      });
+  }
 
   let location = useLocation();
   useEffect(() => {
     console.log(location.pathname);
     setState(location.pathname);
+    getUser();
   }, [location]);
 
 
