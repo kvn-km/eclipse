@@ -34,6 +34,12 @@
     // height: 40vmin;
     border-radius: 50%;
   }
+
+  .next-level-display {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+  }
 }
 
 .progress-ring {
@@ -46,10 +52,19 @@
   transition: stroke-dashoffset 0.35s;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+  stroke: url(#gradient);
 }
+
 input {
   position: fixed;
   top: 10px;
   left: 100px;
   width: 80px;
+}
+
+.task-container {
+  margin: 0;
+  display: flex;
+  position: relative;
+  left: 6.5rem;
 }
