@@ -5,6 +5,7 @@ import FadeIn from "react-fade-in";
 import "../Main/main.scss";
 
 function Sidebar() {
+
   return (
     <section className="sidebar">
       <FadeIn>
