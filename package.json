@@ -2,7 +2,7 @@
   "name": "eclipse",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:8001",
   "dependencies": {
     "@teachablemachine/pose": "^0.8.6",
     "@tensorflow/tfjs": "^2.0.1",
