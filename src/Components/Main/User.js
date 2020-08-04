@@ -5,7 +5,7 @@ import "./main.scss";
 import Sidebar from "../Nav/Sidebar";
 
 function User() {
-  const [progress, setProgress] = useState(30);
+  const [progress, setProgress] = useState(100);
 
   let asdf = (el) => {
     console.log("asdf", el);
@@ -22,7 +22,9 @@ function User() {
     }
 
     const input = document.querySelector('input');
-    setTheProgress(input.value);
+    // setTheProgress(input.value);
+    setTheProgress(25
+    );
 
     input.addEventListener('change', function (e) {
       if (input.value < 101 && input.value > -1) {
@@ -33,7 +35,6 @@ function User() {
   let circleRef = useRef();
   useEffect(() => {
     asdf(circleRef.current);
-
   }, []);
 
   return (
