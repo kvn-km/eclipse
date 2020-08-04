@@ -4,7 +4,8 @@
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   color: white;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  margin-bottom: -5rem;
 }
 
 .navbar-brand {
@@ -22,4 +23,8 @@
 
 .navbar-toggler {
   border-color: rgb(255, 255, 255);
+}
+
+.nav-link {
+  transition: all 0.5s;
 }

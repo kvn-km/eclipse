@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Sidebar from "../../../Nav/Sidebar";
 
 import { init } from "../../../../helpers/pose";
 
 function Task() {
-
-  // useEffect(() => {
-  //   init();
-  // }, []);
 
   return (
     <section className="task main">
