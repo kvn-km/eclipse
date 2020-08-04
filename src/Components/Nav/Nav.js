@@ -36,7 +36,7 @@ function Nav(props) {
 
   return (
     <nav className="navbar navbar-expand-lg bg-black navbar-custom justify-content-end">
-      <Link to="/" className="navbar-brand nav-link">ECLIPSE</Link>
+      {props.location === "/about" ? <Link to="/" className="navbar-brand nav-link">&lt; back</Link> : <Link to="/" className="navbar-brand nav-link">ECLIPSE</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>

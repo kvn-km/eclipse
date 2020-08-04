@@ -6,7 +6,7 @@ import "../Main/main.scss";
 
 function Sidebar() {
   return (
-    <section className="sidebar main">
+    <section className="sidebar">
       <FadeIn>
         <Link to="/user/tasks" className="nav-link">Main Tasks</Link>
         <Link to="/user/side" className="nav-link">Side Tasks</Link>
