@@ -1,6 +1,6 @@
 import * as tmPose from '@teachablemachine/pose';
 
-const URL = "http://localhost:3000/my_model/";
+const URL = "http://localhost:8000/my_model/";
 
 let model, webcam, ctx, labelContainer, maxPredictions;
 
