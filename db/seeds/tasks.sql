@@ -7,5 +7,5 @@ VALUES  (1, 'plank', 3000, 'exercise', 50, 3, 'An exercise training the bodys co
         (6, 'sit ups', 3000, 'exercise', 50, 3, 'Sit ups are an excellent core muscle exercise that target your abdominal muscles, hip flexors, and lower back.'),
         (7, 'tree pose', 3000, 'exercise', 50, 2, 'Stretches the thighs, groins, torso, and shoulders, and builds strength in the ankles and calves, and tones the abdominal muscles.'),
         (8, 'stillness', 5000, 'exercise', 50, 6, 'Stillness is a conscious choice to set aside a period of time and let the body, mind and soul rest.'),
-        (9, 'drink water', 3000, 'diet', 50, 5, 'It\''s good to hydrate.'),
-        ;
+        (9, 'chair pose', 3000, 'exercise', 50, 5, 'strengthens hip flexors, ankles, calves, and back, and stretches chest and shoulders.'),
+        (10, 'drink water', 3000, 'diet', 50, 5, 'It\''s good to hydrate.');
