@@ -5,6 +5,7 @@ import FadeIn from "react-fade-in";
 function SignUp(props) {
   let [redirect, setRedirect] = useState("");
   let [fullname, setFullname] = useState(props.fullname || "");
+  let [email, setEmail] = useState(props.email || "");
   let [phone, setPhone] = useState(props.phone || "");
   let [username, setUsername] = useState(props.username || "");
   let [password, setPassword] = useState(props.password || "");
@@ -30,7 +31,7 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               console.log(fullname);
-              setSignupType("PHONE");
+              setSignupType("EMAIL");
             }}>
             <input
               ref={autofocus}
@@ -40,6 +41,34 @@ function SignUp(props) {
               placeholder=""
               value={fullname}
               onChange={(event) => setFullname(event.target.value)}
+              onInput={toInputUppercase}
+            />
+          </form>
+        </section>
+      </FadeIn>
+    );
+  };
+
+  const signupTypeEmail = () => {
+    return (
+      <FadeIn>
+        <div className="login-type">Email</div>
+        <section className="login-input">
+          <form
+            autoComplete="off"
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log(email);
+              setSignupType("PHONE");
+            }}>
+            <input
+              ref={autofocus}
+              className="login-input"
+              name="email"
+              type="email"
+              placeholder=""
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               onInput={toInputUppercase}
             />
           </form>
@@ -135,6 +164,7 @@ function SignUp(props) {
   return (
     <main className="login pre">
       {signupType === "FULLNAME" && signupTypeFullname()}
+      {signupType === "EMAIL" && signupTypeEmail()}
       {signupType === "PHONE" && signupTypePhone()}
       {signupType === "USERNAME" && signupTypeUsername()}
       {signupType === "PASSWORD" && signupTypePass()}
