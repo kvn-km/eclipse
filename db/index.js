@@ -9,6 +9,8 @@ const pool = new Pool({
 });
 
 const getUsers = (request, response) => {
+  console.log(request.params);
+  console.log(request.query);
   pool.query('SELECT * FROM users;', (error, results) => {
     if (error) {
       throw error;
@@ -16,6 +18,17 @@ const getUsers = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+
+// const getUsers = (request, response) => {
+//   console.log(request.params);
+//   console.log(request.query);
+//   pool.query('SELECT * FROM users WHERE name = $1;', [request.query.name], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
+//     response.status(200).json(results.rows[0]);
+//   });
+// };
 
 const addUser =  function(user) {
   return pool.query(`

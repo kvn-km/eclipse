@@ -22,6 +22,7 @@ function Login(props) {
   function authName (username) {
     axios.get('http://localhost:8001/api/users')
       .then(response => {
+        console.log(response);
         response.data.forEach(user => {
           if (username === user.name.toUpperCase()) {
             setLoginType("PASSWORD");
