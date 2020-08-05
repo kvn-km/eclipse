@@ -1,6 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
+import axios from "axios";
+
+const cookieSession = require('cookie-session');
+
 
 function Login(props) {
   let [redirect, setRedirect] = useState("");
@@ -18,6 +22,20 @@ function Login(props) {
     e.target.value = ("" + e.target.value).toUpperCase();
   };
 
+  function authName (username) {
+    axios.get('http://localhost:8001/api/users')
+      .then(response => {
+        response.data.forEach(user => {
+          console.log(username);
+          console.log(user.name.toUpperCase())
+          if (username === user.name.toUpperCase()) {
+            setLoginType("PASSWORD");
+          }
+        })
+        setLoginType("LOGIN");
+      });
+  }
+
   const loginTypeLogin = () => {
     return (
       <FadeIn>
@@ -27,8 +45,8 @@ function Login(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(username);
-              setLoginType("PASSWORD");
+              authName(username);
+              // setLoginType("PASSWORD");
             }}>
             <input
               ref={autofocus}

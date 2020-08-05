@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     console.log(location.pathname);
     setState(location.pathname);
-    getUser();
+    // getUser();
   }, [location]);
 
 
