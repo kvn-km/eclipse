@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import "./App.scss";
+import "./Main/main.scss";
 
 import Nav from "./Nav/Nav";
+import Sidebar from "./Nav/Sidebar";
 import Landing from "./Pre/Landing";
 import Login from "./Pre/Login";
 import Signup from "./Pre/Signup";
@@ -14,16 +16,15 @@ import TasksSide from "./Main/Tasks/TasksSide";
 import Task from "./Main/Tasks/Task/Task";
 import Goals from "./Main/GoalsAchievs/Goals";
 
-
 function App() {
 
-  const [state, setState] = useState("/");
+  const [path, setPath] = useState("/");
 
 
   let location = useLocation();
   useEffect(() => {
     console.log(location.pathname);
-    setState(location.pathname);
+    setPath(location.pathname);
   }, [location]);
 
 
@@ -47,8 +48,11 @@ function App() {
   return (
 
     <div className="App">
-      <Nav location={state} />
-      <MainBody />
+      <Nav location={path} />
+      <div className="main-container">
+        <Sidebar location={path} />
+        <MainBody />
+      </div>
     </div >
 
   );

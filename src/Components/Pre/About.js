@@ -1,6 +1,7 @@
 import React from "react";
 import FadeIn from "react-fade-in";
 
+import "./pre.scss";
 
 function About() {
   return (

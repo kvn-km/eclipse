@@ -2,30 +2,86 @@ import React from "react";
 import FadeIn from "react-fade-in";
 
 import TaskButton from "../TaskButtons/TaskButton";
-import Sidebar from "../../Nav/Sidebar";
+import "../main.scss";
+
+const mockData = [
+  {
+    id: 1,
+    taskTitle: "Task Title 1",
+    taskProgress: 75,
+    link: "/user/task"
+  },
+  {
+    id: 2,
+    taskTitle: "Task Title 2",
+    taskProgress: 56,
+    link: "/user/task"
+  },
+  {
+    id: 3,
+    taskTitle: "Task Title 3",
+    taskProgress: 33,
+    link: "/user/task"
+  },
+  {
+    id: 4,
+    taskTitle: "Task Title 4",
+    taskProgress: 12,
+    link: "/user/task"
+  },
+  {
+    id: 5,
+    taskTitle: "Task Title 5",
+    taskProgress: 40,
+    link: "/user/task"
+  },
+  {
+    id: 6,
+    taskTitle: "Task Title 6",
+    taskProgress: 60,
+    link: "/user/task"
+  },
+  {
+    id: 7,
+    taskTitle: "Task Title 7",
+    taskProgress: 25,
+    link: "/user/task"
+  },
+  {
+    id: 8,
+    taskTitle: "Task Title 8",
+    taskProgress: 90,
+    link: "/user/task"
+  }
+];
+
 
 function TasksMain() {
+
+  const tasks = mockData.map((task) => {
+    return (
+      <TaskButton
+        key={task.id}
+        id={task.id}
+        link={task.link}
+        taskTitle={task.taskTitle}
+        progress={task.taskProgress}
+        taskCompletionAmount={`${task.taskProgress}%`}
+      />
+    );
+  });
+
   return (
-    <section className="tasks-main main">
-      <Sidebar />
-      <FadeIn>
+    <section className="main">
+      <div className="tasks-main">
+        <FadeIn>
 
-        {/* MAP FUNCTION TO LOOP FOR BELOW */}
+          <div className="task-container">
+            {tasks}
+          </div>
 
-        <div className="task-container">
-          <TaskButton link="/user/task" taskTitle={"Task Title 1"} progress={75} taskCompletionAmount={`${75}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 2"} progress={56} taskCompletionAmount={`${56}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 3"} progress={33} taskCompletionAmount={`${33}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 4"} progress={12} taskCompletionAmount={`${12}%`} />
-        </div>
-        <div className="task-container">
-          <TaskButton link="/user/task" taskTitle={"Task Title 5"} progress={40} taskCompletionAmount={`${40}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 6"} progress={60} taskCompletionAmount={`${60}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 7"} progress={25} taskCompletionAmount={`${25}%`} />
-          <TaskButton link="/user/task" taskTitle={"Task Title 8"} progress={90} taskCompletionAmount={`${90}%`} />
-        </div>
-
-      </FadeIn>
+        </FadeIn>
+      </div>
     </section>
   );
 }

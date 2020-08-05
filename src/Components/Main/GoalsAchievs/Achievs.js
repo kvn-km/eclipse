@@ -2,9 +2,9 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FadeIn from "react-fade-in";
 
-import "./taskButton.scss";
+import "./achievs.scss";
 
-function TaskButton(props) {
+function Achievs(props) {
   const [progress, setProgress] = useState(0);
 
   let theCircle = (el) => {
@@ -31,33 +31,33 @@ function TaskButton(props) {
   }, [progress]);
 
   return (
-    <Link to={props.link} className="task-link" >
+    <Link to={props.link} className="task-link">
       <article className="task-button">
         <FadeIn>
           <div className="task-button-el">
             <p>{props.taskTitle}</p>
             <svg
               className="progress-ring"
-              width="200"
-              height="200">
+              width="150"
+              height="150">
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stop-color="#65c0e0" />
-                  <stop offset="20%" stop-color="#e9a5a5" />
+                  <stop offset="25%" stop-color="#e9a5a5" />
                   <stop offset="40%" stop-color="#b8c135" />
-                  <stop offset="60%" stop-color="#81c1d9" />
+                  <stop offset="50%" stop-color="#81c1d9" />
                   <stop offset="100%" stop-color="#aea2db" />
                 </linearGradient>
               </defs>
               <circle
                 ref={circleRef}
-                className="progress-ring__circle"
+                className="progress-ring__circle profile-circle"
                 stroke="white"
-                strokeWidth="4"
+                strokeWidth="0"
                 fill="transparent"
-                r="92"
-                cx="100"
-                cy="100" />
+                r="75"
+                cx="75"
+                cy="75" />
             </svg>
           </div>
           <div className="task-completion-amount">
@@ -69,4 +69,4 @@ function TaskButton(props) {
   );
 }
 
-export default TaskButton;
+export default Achievs;

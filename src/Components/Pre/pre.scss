@@ -1,5 +1,5 @@
 .pre {
-  background-color: rgba(0, 0, 0, 0.88);
+  // background-color: rgba(0, 0, 0, 0.88);
   min-height: 102.7vh;
   display: flex;
   flex-direction: column;
@@ -19,6 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
 }
 .login-input {
   font-size: 10rem;
