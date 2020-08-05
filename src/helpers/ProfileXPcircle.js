@@ -1,70 +1,43 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import FadeIn from "react-fade-in";
 
-import "./main.scss";
+import "../Components/Main/TaskButtons/taskButton.scss";
 
-
-function User() {
-  let [progress, setProgress] = useState(100);
+function ProfileXPcircle(props) {
+  const [progress, setProgress] = useState(0);
 
   let theCircle = (el) => {
     console.log("theCircle", el);
     let circle = el;
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
-
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
-
     function setTheProgress(percent) {
       console.log("percent", percent);
       const offset = circumference - percent / 100 * circumference;
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
     };
-
     // TIMEOUT TO ANIMATE XP BAR
     setTimeout(() => {
-      setTheProgress(66); // XP SHOULD BE PASSED HERE
+      setTheProgress(props.progress); // XP SHOULD BE PASSED HERE
     }, 350);
-
-
-    // for using an INPUT to change XP... DEV MODE
-    // const input = document.querySelector('input');
-    // setTheProgress(input.value);
-    // setTheProgress(100);
-    // input.addEventListener('change', function (e) {
-    //   if (input.value < 101 && input.value > -1) {
-    //     setTheProgress(input.value);
-    //   }
-    // });
   };
-
-  // WRONG INFO: NEEDS LEVEL'S TOTAL XP AMOUNT, NOT 100 or PROGRESS
-  const nextLevelDisplay = () => {
-    return (
-      <div className="next-level-display">
-        <p>{`Next level in ${100 - progress} points`}</p>
-      </div>
-    );
-  };
-
   let circleRef = useRef();
-
   useEffect(() => {
     theCircle(circleRef.current);
   }, [progress]);
 
-
-
   return (
-    <section className="user">
-      <div className="main">
-        <FadeIn>
+    <article className="task-button xpxp">
+      <FadeIn>
+        <div className="task-button-el">
           <svg
             className="progress-ring"
-            width="600"
-            height="600">
+            width="200"
+            height="200">
             <defs>
               <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#65c0e0" />
@@ -78,28 +51,19 @@ function User() {
               ref={circleRef}
               className="progress-ring__circle"
               stroke="white"
-              strokeWidth="8"
+              strokeWidth="4"
               fill="transparent"
-              r="284"
-              cx="300"
-              cy="300" />
+              r="92"
+              cx="100"
+              cy="100" />
           </svg>
-
-          {/* DEV MODE */}
-          {/* <input
-          value={progress}
-          onChange={(event) => setProgress(event.target.value)}
-          type="number"
-          step="5"
-          min="0"
-          max="100"
-          placeholder="progress"
-        /> */}
-        </FadeIn>
-        {nextLevelDisplay()}
-      </div>
-    </section>
+        </div>
+        <div className="task-completion-amount">
+          <p>{props.taskCompletionAmount}</p>
+        </div>
+      </FadeIn>
+    </article>
   );
-};
+}
 
-export default User;
+export default ProfileXPcircle;
