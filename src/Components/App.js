@@ -23,10 +23,10 @@ function App() {
   const [user, setUser] = useState(null);
 
   function getUser() {
-    axios.get('http://localhost:8001/api/users')
+    axios.get('http://localhost:8001/api/users', { params: {username: 'Victor'}})
       .then(response => {
         console.log(response.data);
-        setUser(response.data);
+        // setUser(response.data);
       });
   }
 
