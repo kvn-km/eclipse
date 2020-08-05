@@ -3,9 +3,6 @@ import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
-const cookieSession = require('cookie-session');
-
-
 function Login(props) {
   let [redirect, setRedirect] = useState("");
   let [username, setUsername] = useState(props.username || "");
@@ -26,13 +23,21 @@ function Login(props) {
     axios.get('http://localhost:8001/api/users')
       .then(response => {
         response.data.forEach(user => {
-          console.log(username);
-          console.log(user.name.toUpperCase())
           if (username === user.name.toUpperCase()) {
             setLoginType("PASSWORD");
           }
         })
-        setLoginType("LOGIN");
+      });
+  }
+
+  function authPass (password) {
+    axios.get('http://localhost:8001/api/users')
+      .then(response => {
+        response.data.forEach(user => {
+          if (password === user.password.toUpperCase()) {
+            setRedirect("/user");
+          }
+        })
       });
   }
 
@@ -46,7 +51,6 @@ function Login(props) {
             onSubmit={(event) => {
               event.preventDefault();
               authName(username);
-              // setLoginType("PASSWORD");
             }}>
             <input
               ref={autofocus}
@@ -73,8 +77,7 @@ function Login(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(password);
-              setRedirect("/user");
+              authPass(password);
             }}>
             <input
               ref={autofocus}
