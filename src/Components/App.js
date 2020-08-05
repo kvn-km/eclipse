@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import "./App.scss";
+<<<<<<< HEAD
 import "./Main/main.scss";
+=======
+import axios from 'axios';
+>>>>>>> login
 
 import Nav from "./Nav/Nav";
 import Sidebar from "./Nav/Sidebar";
@@ -18,13 +22,30 @@ import Goals from "./Main/GoalsAchievs/Goals";
 
 function App() {
 
+<<<<<<< HEAD
   const [path, setPath] = useState("/");
+=======
+  const [state, setState] = useState("/");
+  const [user, setUser] = useState(null);
+>>>>>>> login
 
+  function getUser() {
+    axios.get('http://localhost:8001/api/users')
+      .then(response => {
+        console.log(response.data);
+        setUser(response.data);
+      });
+  }
 
   let location = useLocation();
   useEffect(() => {
     console.log(location.pathname);
+<<<<<<< HEAD
     setPath(location.pathname);
+=======
+    setState(location.pathname);
+    getUser();
+>>>>>>> login
   }, [location]);
 
 

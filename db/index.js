@@ -17,6 +17,23 @@ const getUsers = (request, response) => {
   });
 };
 
+const addUser =  function(user) {
+  return pool.query(`
+  INSERT INTO users (name, email, password) 
+  VALUES ($1, $2, $3)
+  RETURNING *`, [user.name, user.email, user.password])
+  .then(res => res.rows[0] || null);
+}
+
+const getUserWithEmail = function(email) {
+  return pool.query(`
+  SELECT * FROM users
+  WHERE email = $1`, [email])
+  .then(res => res.rows[0] || null);
+}
+
 module.exports = {
-  getUsers
+  getUsers,
+  addUser,
+  getUserWithEmail
 };
