@@ -19,18 +19,11 @@ app.use(cookieSession({
   keys: ['key1']
 }));
 
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
-//   next();
-// });
-
 app.get('/', (request, response) => {
   response.json({Message: "Hello World"})
 })
 
-app.get('/api/users', db.getUsers);
+app.get('/api/users', db.getUser);
 
 app.post('/api/users', db.addUser);
 

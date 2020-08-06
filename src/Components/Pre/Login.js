@@ -19,26 +19,20 @@ function Login(props) {
     e.target.value = ("" + e.target.value).toUpperCase();
   };
 
-  function authName (username) {
-    axios.get('http://localhost:8001/api/users')
+  function authUser(username, password) {
+    axios.get('http://localhost:8001/api/users', { params: {name: username, password: password}})
       .then(response => {
-        console.log(response);
-        response.data.forEach(user => {
-          if (username === user.name.toUpperCase()) {
-            setLoginType("PASSWORD");
-          }
-        })
-      });
-  }
-
-  function authPass (password) {
-    axios.get('http://localhost:8001/api/users')
-      .then(response => {
-        response.data.forEach(user => {
-          if (password === user.password.toUpperCase()) {
-            setRedirect("/user");
-          }
-        })
+        console.log(response.data);
+        if (response.data.name !== undefined && response.data.name.toUpperCase() === username) {
+          setLoginType("PASSWORD");
+        }
+        else if (response.data.password === password) {
+          console.log('YOU ARE IN!')
+          setRedirect("/user");
+        } else {
+          console.log('WRONG!')
+          setLoginType("PASSWORD");
+        }
       });
   }
 
@@ -51,7 +45,7 @@ function Login(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              authName(username);
+              authUser(username, null);
             }}>
             <input
               ref={autofocus}
@@ -78,7 +72,7 @@ function Login(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              authPass(password);
+              authUser(null, password);
             }}>
             <input
               ref={autofocus}
@@ -88,7 +82,7 @@ function Login(props) {
               placeholder=""
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              onInput={toInputUppercase}
+              // onInput={toInputUppercase}
             />
           </form>
         </section>
