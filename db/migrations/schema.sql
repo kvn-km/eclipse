@@ -1,6 +1,9 @@
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS achievements CASCADE;
 DROP TABLE IF EXISTS tasks CASCADE;
+DROP TABLE IF EXISTS user_task CASCADE;
+DROP TABLE IF EXISTS achievements CASCADE;
+DROP TABLE IF EXISTS user_achievs CASCADE;
+DROP TABLE IF EXISTS levels CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -10,13 +13,14 @@ CREATE TABLE users (
   phone INTEGER,
   username VARCHAR(255),
   date_created DATE DEFAULT CURRENT_DATE,
-  experience_points INTEGER,
-  level INTEGER
+  xp INTEGER DEFAULT 0,
+  level INTEGER DEFAULT 1
 );
 
 CREATE TABLE achievements (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255),
+  xp INTEGER,
   image_URL TEXT,
   description TEXT
 );
@@ -24,9 +28,30 @@ CREATE TABLE achievements (
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255),
-  completion_time_in_seconds INTEGER,
+  completion_time_in_seconds INTEGER DEFAULT 0,
   type VARCHAR(255),
-  xp_points INTEGER,
-  times_to_complete INTEGER,
+  xp INTEGER,
   description TEXT
 );
+
+CREATE TABLE levels (
+  id SERIAL PRIMARY KEY NOT NULL,
+  xp INTEGER
+);
+
+CREATE TABLE user_task (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE,
+  progress INTEGER DEFAULT 0,
+  times_completed INTEGER DEFAULT 0 
+);
+
+CREATE TABLE user_achievs (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  achiev_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE,
+  progress INTEGER DEFAULT 0,
+  times_completed INTEGER DEFAULT 0
+);
+

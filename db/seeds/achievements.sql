@@ -1,11 +1,17 @@
-INSERT INTO achievements (id, name, image_URL, description)
-VALUES  (1, '2 minute plank', 'imageurl', 'This achievement is given to those who managed to plank for 2 minutes straight.'),
-        (2, '100 jumping jacks', 'imageurl', 'This achievement is given to those who complete a total of 1000 jumping jacks.'),
-        (3, '50 squats', 'imageurl', 'This achievement is given to those who complete a total of 50 squats.'),
-        (4, '100 push ups', 'imageurl', 'This achievement is given to those who complete a total of 100 push ups.'),
-        (5, '15 minute stretch session', 'imageurl', 'This achievement is given to those who complete a 12 minutes of stretches.'),
-        (6, '100 sit ups', 'imageurl', 'This achievement is given to those who complete 100 sit ups.'),
-        (7, '10 minute tree pose', 'imageurl', 'This achievement is given to those who complete a tree pose for a total of 10 minutes.'),
-        (8, '1 hour stillness', 'imageurl', 'This achievement is given to those who complete stillness task for a total of 1 hour.'),
-        (9, '10 minute chair pose', 'imageurl', 'This achievement is given to those who complete a chair pose for a total of 10 minutes.'),
-        (10, 'drink 8 cups of water', 'imageurl', 'This achievement is given to those who complete drinking 8 cups of water.');
+INSERT INTO achievements (id, name, image_URL, description, xp)
+VALUES  (1, '2 minute plank', 'imageurl', 'This achievement is given to those who managed to plank for 2 minutes straight.', 100),
+        (2, '100 jumping jacks', 'imageurl', 'This achievement is given to those who complete a total of 1000 jumping jacks.', 100),
+        (3, '50 squats', 'imageurl', 'This achievement is given to those who complete a total of 50 squats.', 100),
+        (4, '100 push ups', 'imageurl', 'This achievement is given to those who complete a total of 100 push ups.', 100),
+        (5, '15 minute stretch session', 'imageurl', 'This achievement is given to those who complete a 12 minutes of stretches.', 100),
+        (6, '100 sit ups', 'imageurl', 'This achievement is given to those who complete 100 sit ups.', 100),
+        (7, '10 minute tree pose', 'imageurl', 'This achievement is given to those who complete a tree pose for a total of 10 minutes.', 100),
+        (8, '10 minute chair pose', 'imageurl', 'This achievement is given to those who complete a chair pose for a total of 10 minutes.', 100),
+        (9, 'drink 8 cups of water', 'imageurl', 'This achievement is given to those who complete drinking 8 cups of water.', 100),
+        (10, '1 hour stillness', 'imageurl', 'This achievement is given to those who complete stillness task for a total of 1 hour.', 100),
+        (11, 'eat 3 meals', 'imageurl', 'This achievement is given to those who ate 3 meals a day.', 100),
+        (12, 'wash dishes 3 times', 'imageurl', 'This achievement is given to those who completed 3 dish washing sessions.', 100),
+        (13, '100 dips', 'imageurl', 'This achievement is given to those who completed 100 dips.', 100),
+        (14, '2 meal preps', 'imageurl', 'This achievement is given to those who completed prepared meals 2 times.', 100),
+        (15, '15 minute run', 'imageurl', 'This achievement is given to those who completed 15 minutes of running in place.', 100),
+        (16, '15 minute neck stretch', 'imageurl', 'This achievement is given to those who completed 15 minutes of neck stretches.', 100);

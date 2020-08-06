@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
+import axios from "axios";
 
 import "./main.scss";
 
@@ -7,28 +8,34 @@ import "./main.scss";
 function User() {
   let [progress, setProgress] = useState(100);
 
+  function getUserXP(username) {
+    axios.get('http://localhost:8001/api/users')
+      .then(response => {
+        response.data.forEach(user => {
+          if (username === user.username.toUpperCase()) {
+            return user.experience_points;
+          }
+        });
+      });
+  }
+
   let theCircle = (el) => {
     console.log("theCircle", el);
     let circle = el;
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
-
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
-
     function setTheProgress(percent) {
       console.log("percent", percent);
       const offset = circumference - percent / 100 * circumference;
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
     };
-
     // TIMEOUT TO ANIMATE XP BAR
     setTimeout(() => {
       setTheProgress(66); // XP SHOULD BE PASSED HERE
     }, 350);
-
-
     // for using an INPUT to change XP... DEV MODE
     // const input = document.querySelector('input');
     // setTheProgress(input.value);

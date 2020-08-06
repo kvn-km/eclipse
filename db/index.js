@@ -19,6 +19,37 @@ const getUsers = (request, response) => {
   });
 };
 
+const getTasks = (request, response) => {
+  console.log(request.params);
+  console.log(request.query);
+  pool.query('SELECT * FROM tasks;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getAchievs = (request, response) => {
+  console.log(request.params);
+  console.log(request.query);
+  pool.query('SELECT * FROM achievements;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getLevels = (request, response) => {
+  console.log(request.params);
+  console.log(request.query);
+  pool.query('SELECT * FROM levels;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 // const getUsers = (request, response) => {
 //   console.log(request.params);
 //   console.log(request.query);
@@ -47,6 +78,9 @@ const getUserWithEmail = function (email) {
 
 module.exports = {
   getUsers,
+  getTasks,
+  getAchievs,
+  getLevels,
   addUser,
   getUserWithEmail
 };
