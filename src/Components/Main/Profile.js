@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
+import axios from "axios";
 
 import "./main.scss";
 import "./GoalsAchievs/achievs.scss";
@@ -80,7 +81,27 @@ const mockData = [
   },
 ];
 
-function Profile() {
+function Profile(props) {
+  console.log("PROFILEE", props);
+  let [user, setUser] = useState({ info: null, levelInfo: null });
+
+  const currentUser = () => {
+    Promise.all([axios.get('/api/user/current', { params: { id: props.match.url.slice(6, 7) } }), axios.get('/api/levels')])
+      .then((all) => {
+        let level = all[1].data[all[0].data.level - 1];
+        setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+      });
+  };
+
+  let user_id = "";
+  if (props.match.url.includes("/profile")) {
+    user_id = props.match.url.slice(6, 7);
+  }
+
+  useEffect(() => {
+    currentUser();
+  }, [props.location]);
+
 
   const tasks = mockData.map((task) => {
     return (

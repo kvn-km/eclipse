@@ -10,13 +10,14 @@ function User(props) {
   let [progress, setProgress] = useState(0);
 
   const currentUser = () => {
-    Promise.all([axios.get('http://localhost:8001/api/user/current', { params: { id: props.match.params.username } }), axios.get('http://localhost:8001/api/levels')])
+    Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
       .then((all) => {
         let level = all[1].data[all[0].data.level - 1];
         setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
       });
   };
 
+  // SETS THE CURRENT USER 
   useEffect(() => {
     currentUser();
   }, []);
@@ -32,8 +33,9 @@ function User(props) {
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
     };
+    // DUE TO MULTIPLE RENDERS, THIS RENDERS THE CIRCLE ONCE A USER INFO IS LOADED
     if (user.info) {
-      console.log("CURRENT USER", user);
+      // console.log("CURRENT USER", user);
       let percent = (user.info.xp / user.levelInfo) * 100;
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -51,8 +53,10 @@ function User(props) {
     );
   };
 
+  // FIND WHERE TO RENDER CIRCLE
   let circleRef = useRef();
 
+  // CREATE THE CIRCLE
   useEffect(() => {
     theCircle(circleRef.current);
   }, [user]);
@@ -85,17 +89,6 @@ function User(props) {
               cx="300"
               cy="300" />
           </svg>
-
-          {/* DEV MODE */}
-          {/* <input
-          value={progress}
-          onChange={(event) => setProgress(event.target.value)}
-          type="number"
-          step="5"
-          min="0"
-          max="100"
-          placeholder="progress"
-        /> */}
         </FadeIn>
         {nextLevelDisplay()}
       </div>

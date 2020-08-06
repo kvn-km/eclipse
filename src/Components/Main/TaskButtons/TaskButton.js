@@ -8,14 +8,12 @@ function TaskButton(props) {
   const [progress, setProgress] = useState(0);
 
   let theCircle = (el) => {
-    console.log("theCircle", el);
     let circle = el;
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
     function setTheProgress(percent) {
-      console.log("percent", percent);
       const offset = circumference - percent / 100 * circumference;
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
@@ -42,11 +40,11 @@ function TaskButton(props) {
               height="200">
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#65c0e0" />
-                  <stop offset="20%" stop-color="#e9a5a5" />
-                  <stop offset="40%" stop-color="#b8c135" />
-                  <stop offset="60%" stop-color="#81c1d9" />
-                  <stop offset="100%" stop-color="#aea2db" />
+                  <stop offset="0%" stopColor="#65c0e0" />
+                  <stop offset="20%" stopColor="#e9a5a5" />
+                  <stop offset="40%" stopColor="#b8c135" />
+                  <stop offset="60%" stopColor="#81c1d9" />
+                  <stop offset="100%" stopColor="#aea2db" />
                 </linearGradient>
               </defs>
               <circle

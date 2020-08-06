@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
+// const x = axios.create({ withCredentials: true, });
+
 function Login(props) {
   let [username, setUsername] = useState();
   let [redirect, setRedirect] = useState({
@@ -24,10 +26,10 @@ function Login(props) {
   };
 
   function authUser(username, password) {
-    axios.get('http://localhost:8001/api/user', { params: { name: username, password: password } })
+    axios.get('/api/user', { params: { username: username, password: password }, withCredentials: true })
       .then(response => {
         // console.log(response.data);
-        if (response.data.name !== undefined && response.data.name.toUpperCase() === username) {
+        if (response.data.username !== undefined && response.data.username.toUpperCase() === username) {
           setLoginType("PASSWORD");
         }
         else if (response.data.password === password) {
@@ -87,7 +89,6 @@ function Login(props) {
               placeholder=""
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-            // onInput={toInputUppercase}
             />
           </form>
         </section>
