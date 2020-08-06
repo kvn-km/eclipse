@@ -6,7 +6,7 @@ import axios from 'axios';
 let newUser = {};
 
 function addUser(name, password, email, phone, username) {
-  axios.post('http://localhost:8001/api/users', { params: {name: name, password: password, email: email, phone: phone, username: username}})
+  axios.post('http://localhost:8001/api/users', { params: { name: name, password: password, email: email, phone: phone, username: username } })
     .then(response => {
       // console.log(response.data);
     });
@@ -24,7 +24,7 @@ function SignUp(props) {
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
   if (redirect) {
-    return <Redirect to={redirect} />;
+    return <Redirect to={`${redirect.path}/${redirect.user_id}`} />;
   }
 
   const toInputUppercase = e => {
@@ -41,8 +41,8 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser = {};
-              newUser.name = fullname
-              console.log(newUser)
+              newUser.name = fullname;
+              console.log(newUser);
               setSignupType("EMAIL");
             }}>
             <input
@@ -70,8 +70,8 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.email = email
-              console.log(newUser)
+              newUser.email = email;
+              console.log(newUser);
               setSignupType("PHONE");
             }}>
             <input
@@ -99,8 +99,8 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.phone = phone
-              console.log(newUser)
+              newUser.phone = phone;
+              console.log(newUser);
               setSignupType("USERNAME");
             }}>
             <input
@@ -157,7 +157,7 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.password = password
+              newUser.password = password;
               console.log(newUser);
               addUser(newUser.name, newUser.password, newUser.email, newUser.phone, newUser.username);
               setRedirect("/user");
