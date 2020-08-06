@@ -20,21 +20,11 @@ import Goals from "./Main/GoalsAchievs/Goals";
 function App() {
 
   const [path, setPath] = useState("/");
-  const [user, setUser] = useState(null);
-
-  function getUser() {
-    axios.get('http://localhost:8001/api/users', { params: {username: 'Victor'}})
-      .then(response => {
-        console.log(response.data);
-        // setUser(response.data);
-      });
-  }
 
   let location = useLocation();
   useEffect(() => {
     console.log(location.pathname);
     setPath(location.pathname);
-    getUser();
   }, [location]);
 
 

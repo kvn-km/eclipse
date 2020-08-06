@@ -8,17 +8,18 @@ const pool = new Pool({
   port: 5432
 });
 
-const getUsers = (request, response) => {
-  console.log(request.params);
+//ISSUE: IF USERS PASSWORD OF ANOTHER USER, THEY CAN STILL GET IN
+const getUser = (request, response) => {
   console.log(request.query);
-  pool.query('SELECT * FROM users;', (error, results) => {
+  pool.query('SELECT * FROM users WHERE UPPER(name) = $1 OR password = $2;', [request.query.name, request.query.password], (error, results) => {
     if (error) {
       throw error;
     }
-    response.status(200).json(results.rows);
+    response.status(200).json(results.rows[0]);
   });
 };
 
+<<<<<<< HEAD
 const getTasks = (request, response) => {
   console.log(request.params);
   console.log(request.query);
@@ -62,6 +63,9 @@ const getLevels = (request, response) => {
 // };
 
 const addUser = function (user) {
+=======
+const addUser =  function(user) {
+>>>>>>> login2
   return pool.query(`
   INSERT INTO users (name, email, password) 
   VALUES ($1, $2, $3)
@@ -69,6 +73,7 @@ const addUser = function (user) {
     .then(res => res.rows[0] || null);
 };
 
+<<<<<<< HEAD
 const getUserWithEmail = function (email) {
   return pool.query(`
   SELECT * FROM users
@@ -83,4 +88,9 @@ module.exports = {
   getLevels,
   addUser,
   getUserWithEmail
+=======
+module.exports = {
+  getUser,
+  addUser
+>>>>>>> login2
 };
