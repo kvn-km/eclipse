@@ -11,8 +11,6 @@ const mockData =
   link: "/user/task"
 };
 
-
-
 function Task(props) {
 
   return (

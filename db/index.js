@@ -26,7 +26,6 @@ const getCookies = (req, res) => {
 // for logged in info
 const getCurrentUser = (request, response) => {
   if (request.query.id) {
-    // console.log("index.js, getCurrentUser", request.query);
     pool.query('SELECT * FROM users WHERE id = $1', [request.query.id], (error, results) => {
       if (error) {
         throw error;
@@ -37,7 +36,6 @@ const getCurrentUser = (request, response) => {
 };
 
 const getUsers = (request, response) => {
-  // console.log(request.query);
   pool.query('SELECT * FROM users;', (error, results) => {
     if (error) {
       throw error;
@@ -47,8 +45,6 @@ const getUsers = (request, response) => {
 };
 
 const getTasks = (request, response) => {
-  // console.log(request.params);
-  // console.log(request.query);
   pool.query('SELECT * FROM tasks;', (error, results) => {
     if (error) {
       throw error;
@@ -57,8 +53,6 @@ const getTasks = (request, response) => {
   });
 };
 const getAchievs = (request, response) => {
-  // console.log(request.params);
-  // console.log(request.query);
   pool.query('SELECT * FROM achievements;', (error, results) => {
     if (error) {
       throw error;
@@ -80,8 +74,11 @@ const addUser = (request, response) => {
   return pool.query(`
   INSERT INTO users (name, password, email, phone, username) 
   VALUES ($1, $2, $3, $4, $5)
-  RETURNING *`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.phone, request.body.params.username])
-    .then(res => res.rows[0] || null);
+  RETURNING *;`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.phone, request.body.params.username])
+    .then(res => {
+      response.status(200).json(res.rows[0]);
+    })
+    .catch(error => error);
 };
 
 module.exports = {

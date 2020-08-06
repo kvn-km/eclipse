@@ -3,28 +3,35 @@ import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
 import axios from 'axios';
 
-let newUser = {};
-
-function addUser(name, password, email, phone, username) {
-  axios.post('http://localhost:8001/api/users', { params: { name: name, password: password, email: email, phone: phone, username: username } })
-    .then(response => {
-      // console.log(response.data);
-    });
-}
-
 function SignUp(props) {
-  let [redirect, setRedirect] = useState("");
+  let [redirect, setRedirect] = useState({
+    path: "/login",
+    user_id: null
+  });
   let [fullname, setFullname] = useState(props.fullname || "");
   let [email, setEmail] = useState(props.email || "");
   let [phone, setPhone] = useState(props.phone || "");
   let [username, setUsername] = useState(props.username || "");
   let [password, setPassword] = useState(props.password || "");
   let [signupType, setSignupType] = useState("FULLNAME");
+  let [newUser, setNewUser] = useState({ name: "", password: "", email: "", phone: "", username: "" });
 
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
-  if (redirect) {
+  if (redirect.user_id) {
     return <Redirect to={`${redirect.path}/${redirect.user_id}`} />;
+  }
+
+  function addUser(name, password, email, phone, username) {
+    console.log("SIGNUP ADD USER", newUser);
+    axios.post('/api/users', { params: { name: name, password: password, email: email, phone: phone, username: username } })
+      .then(response => {
+        let newState = { path: "/user", user_id: response.data.id };
+        setRedirect((prev) => ({ ...prev, ...newState }));
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   const toInputUppercase = e => {
@@ -40,7 +47,6 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser = {};
               newUser.name = fullname;
               console.log(newUser);
               setSignupType("EMAIL");
@@ -160,7 +166,6 @@ function SignUp(props) {
               newUser.password = password;
               console.log(newUser);
               addUser(newUser.name, newUser.password, newUser.email, newUser.phone, newUser.username);
-              setRedirect("/user");
             }}>
             <input
               ref={autofocus}
@@ -170,7 +175,6 @@ function SignUp(props) {
               placeholder=""
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              onInput={toInputUppercase}
             />
           </form>
         </section>

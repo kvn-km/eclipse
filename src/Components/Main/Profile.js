@@ -82,7 +82,6 @@ const mockData = [
 ];
 
 function Profile(props) {
-  console.log("PROFILEE", props);
   let [user, setUser] = useState({ info: null, levelInfo: null });
 
   const currentUser = () => {
@@ -100,7 +99,7 @@ function Profile(props) {
 
   useEffect(() => {
     currentUser();
-  }, [props.location]);
+  }, []);
 
 
   const tasks = mockData.map((task) => {

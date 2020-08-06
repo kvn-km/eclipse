@@ -27,7 +27,9 @@ function Nav(props) {
   }
 
   useEffect(() => {
-    currentUser();
+    if (location.includes("/user")) {
+      currentUser();
+    }
   }, [location]);
 
 
@@ -37,7 +39,10 @@ function Nav(props) {
       return (
         <ul className="navbar-nav text-right">
           <li className="nav-item active">
-            <Link to="/" onClick={() => setLocation("/")} className="nav-link">{`Log out`}</Link>
+            <Link to={`/user/${user_id}`} className="nav-link">{user.info.username}</Link>
+          </li>
+          <li className="nav-item active">
+            <Link to="/" onClick={() => { setLocation("/"); setUser(null); }} className="nav-link">{`Log out`}</Link>
           </li>
         </ul>
       );
@@ -71,6 +76,8 @@ function Nav(props) {
   return (
     <nav className="navbar navbar-expand-lg bg-black navbar-custom justify-content-end">
       {props.location === "/about" ? <Link to="/" className="navbar-brand nav-link">&lt; back</Link> : "ECLIPSE"}
+      {props.location === `/signup` && <Link to={`/`} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location === `/login` && <Link to={`/`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location === `/user/${user_id}/side` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location === `/user/${user_id}/tasks` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location === `/user/${user_id}/task` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
@@ -81,7 +88,7 @@ function Nav(props) {
       </button>
       <div className="collapse navbar-collapse ml-auto mr-1 flex-grow-0" id="navbarSupportedContent">
         <FadeIn>
-          {user.info && navbarLinks()}
+          {user && user.info && navbarLinks()}
           {props.location === "/" && navbarLinks()}
           {props.location === "/about" && navbarLinks()}
           {props.location === "/signup" && navbarLinks()}
