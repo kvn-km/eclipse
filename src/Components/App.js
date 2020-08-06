@@ -21,11 +21,11 @@ function App() {
   let [path, setPath] = useState("/");
 
   let location = useLocation();
+
   useEffect(() => {
     console.log(location.pathname);
-    setPath(location.pathname);
+    setPath((prev) => location.pathname);
   }, [location]);
-
 
   const MainBody = () => (
     < Switch >
@@ -35,14 +35,16 @@ function App() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       {/* LOGGED IN */}
-      <Route exact path="/user/:username" component={User} />
-      <Route exact path="/user/profile" component={Profile} />
-      <Route exact path="/user/tasks" component={TasksMain} />
-      <Route exact path="/user/side" component={TasksSide} />
-      <Route exact path="/user/task" component={Task} />
-      <Route exact path="/user/goals" component={Goals} />
+      <Route exact path="/user/:user_id" component={User} />
+      <Route exact path="/user/:user_id/profile" component={Profile} />
+      <Route exact path="/user/:user_id/tasks" component={TasksMain} />
+      <Route exact path="/user/:user_id/side" component={TasksSide} />
+      <Route exact path="/user/:user_id/task" component={Task} />
+      <Route exact path="/user/:user_id/goals" component={Goals} />
     </Switch >
   );
+
+
 
   return (
 

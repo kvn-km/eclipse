@@ -29,7 +29,6 @@ function Login(props) {
     axios.get('/api/user', { params: { username: username, password: password }, withCredentials: true })
       .then(response => {
         // console.log(response.data);
-        axios.get('/', { withCredentials: true });
         if (response.data.username !== undefined && response.data.username.toUpperCase() === username) {
           setLoginType("PASSWORD");
         }

@@ -1,5 +1,4 @@
 const express = require('express');
-// const session = express.session;
 const app = express();
 const bodyParser = require('body-parser');
 const port = 8001;

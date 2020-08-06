@@ -10,7 +10,7 @@ function User(props) {
   let [progress, setProgress] = useState(0);
 
   const currentUser = () => {
-    Promise.all([axios.get('http://localhost:8001/api/user/current', { params: { id: props.match.params.username } }), axios.get('http://localhost:8001/api/levels')])
+    Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
       .then((all) => {
         let level = all[1].data[all[0].data.level - 1];
         setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
@@ -35,7 +35,7 @@ function User(props) {
     };
     // DUE TO MULTIPLE RENDERS, THIS RENDERS THE CIRCLE ONCE A USER INFO IS LOADED
     if (user.info) {
-      console.log("CURRENT USER", user);
+      // console.log("CURRENT USER", user);
       let percent = (user.info.xp / user.levelInfo) * 100;
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
