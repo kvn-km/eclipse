@@ -4,15 +4,19 @@ import FadeIn from "react-fade-in";
 import axios from "axios";
 
 function Login(props) {
-  let [redirect, setRedirect] = useState("");
-  let [username, setUsername] = useState(props.username || "");
+  let [username, setUsername] = useState();
+  let [redirect, setRedirect] = useState({
+    path: "/login",
+    user_id: null
+  });
   let [password, setPassword] = useState(props.password || "");
   let [loginType, setLoginType] = useState("LOGIN");
 
+
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
-  if (redirect) {
-    return <Redirect to={redirect} />;
+  if (redirect.user_id) {
+    return <Redirect to={`${redirect.path}/${redirect.user_id}`} />;
   }
 
   const toInputUppercase = e => {
@@ -20,17 +24,18 @@ function Login(props) {
   };
 
   function authUser(username, password) {
-    axios.get('http://localhost:8001/api/users', { params: {name: username, password: password}})
+    axios.get('http://localhost:8001/api/user', { params: { name: username, password: password } })
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.name !== undefined && response.data.name.toUpperCase() === username) {
           setLoginType("PASSWORD");
         }
         else if (response.data.password === password) {
-          console.log('YOU ARE IN!')
-          setRedirect("/user");
+          console.log('YOU ARE IN!');
+          let newState = { path: "/user", user_id: response.data.id };
+          setRedirect((prev) => ({ ...prev, ...newState }));
         } else {
-          console.log('WRONG!')
+          console.log('WRONG!');
           setLoginType("PASSWORD");
         }
       });
@@ -82,7 +87,7 @@ function Login(props) {
               placeholder=""
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              // onInput={toInputUppercase}
+            // onInput={toInputUppercase}
             />
           </form>
         </section>

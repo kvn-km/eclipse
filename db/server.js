@@ -23,7 +23,9 @@ app.get('/', (request, response) => {
   response.json({ Message: "Hello World" });
 });
 
-app.get('/api/users', db.getUser);
+app.get('/api/user', db.getUser);
+app.get('/api/user/current', db.getCurrentUser);
+app.get('/api/users', db.getUsers);
 app.get('/api/tasks', db.getTasks);
 app.get('/api/achievs', db.getAchievs);
 app.get('/api/levels', db.getLevels);

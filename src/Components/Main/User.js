@@ -5,46 +5,41 @@ import axios from "axios";
 import "./main.scss";
 
 
-function User() {
-  let [progress, setProgress] = useState(100);
+function User(props) {
+  let [user, setUser] = useState({ info: null, levelInfo: null });
+  let [progress, setProgress] = useState(0);
 
-  function getUserXP(username) {
-    axios.get('http://localhost:8001/api/users')
-      .then(response => {
-        response.data.forEach(user => {
-          if (username === user.username.toUpperCase()) {
-            return user.experience_points;
-          }
-        });
+  const currentUser = () => {
+    Promise.all([axios.get('http://localhost:8001/api/user/current', { params: { id: props.match.params.username } }), axios.get('http://localhost:8001/api/levels')])
+      .then((all) => {
+        let level = all[1].data[all[0].data.level - 1];
+        setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
       });
-  }
+  };
+
+  useEffect(() => {
+    currentUser();
+  }, []);
 
   let theCircle = (el) => {
-    console.log("theCircle", el);
     let circle = el;
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
     function setTheProgress(percent) {
-      console.log("percent", percent);
       const offset = circumference - percent / 100 * circumference;
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
     };
-    // TIMEOUT TO ANIMATE XP BAR
-    setTimeout(() => {
-      setTheProgress(66); // XP SHOULD BE PASSED HERE
-    }, 350);
-    // for using an INPUT to change XP... DEV MODE
-    // const input = document.querySelector('input');
-    // setTheProgress(input.value);
-    // setTheProgress(100);
-    // input.addEventListener('change', function (e) {
-    //   if (input.value < 101 && input.value > -1) {
-    //     setTheProgress(input.value);
-    //   }
-    // });
+    if (user.info) {
+      console.log("CURRENT USER", user);
+      let percent = (user.info.xp / user.levelInfo) * 100;
+      // TIMEOUT TO ANIMATE XP BAR
+      setTimeout(() => {
+        setTheProgress(percent);
+      }, 350);
+    }
   };
 
   // WRONG INFO: NEEDS LEVEL'S TOTAL XP AMOUNT, NOT 100 or PROGRESS
@@ -60,8 +55,7 @@ function User() {
 
   useEffect(() => {
     theCircle(circleRef.current);
-  }, [progress]);
-
+  }, [user]);
 
 
   return (
@@ -74,11 +68,11 @@ function User() {
             height="600">
             <defs>
               <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#65c0e0" />
-                <stop offset="25%" stop-color="#e9a5a5" />
-                <stop offset="40%" stop-color="#b8c135" />
-                <stop offset="50%" stop-color="#81c1d9" />
-                <stop offset="100%" stop-color="#aea2db" />
+                <stop offset="0%" stopColor="#65c0e0" />
+                <stop offset="25%" stopColor="#e9a5a5" />
+                <stop offset="40%" stopColor="#b8c135" />
+                <stop offset="50%" stopColor="#81c1d9" />
+                <stop offset="100%" stopColor="#aea2db" />
               </linearGradient>
             </defs>
             <circle

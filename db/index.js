@@ -19,9 +19,30 @@ const getUser = (request, response) => {
   });
 };
 
-const getTasks = (request, response) => {
-  console.log(request.params);
+// for logged in info
+const getCurrentUser = (request, response) => {
   console.log(request.query);
+  pool.query('SELECT * FROM users WHERE id = $1', [request.query.id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows[0]);
+  });
+};
+
+const getUsers = (request, response) => {
+  // console.log(request.query);
+  pool.query('SELECT * FROM users;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+const getTasks = (request, response) => {
+  // console.log(request.params);
+  // console.log(request.query);
   pool.query('SELECT * FROM tasks;', (error, results) => {
     if (error) {
       throw error;
@@ -30,8 +51,8 @@ const getTasks = (request, response) => {
   });
 };
 const getAchievs = (request, response) => {
-  console.log(request.params);
-  console.log(request.query);
+  // console.log(request.params);
+  // console.log(request.query);
   pool.query('SELECT * FROM achievements;', (error, results) => {
     if (error) {
       throw error;
@@ -41,8 +62,8 @@ const getAchievs = (request, response) => {
 };
 
 const getLevels = (request, response) => {
-  console.log(request.params);
-  console.log(request.query);
+  // console.log(request.params);
+  // console.log(request.query);
   pool.query('SELECT * FROM levels;', (error, results) => {
     if (error) {
       throw error;
@@ -61,6 +82,8 @@ const addUser = function (user) {
 
 module.exports = {
   getUser,
+  getCurrentUser,
+  getUsers,
   getTasks,
   getAchievs,
   getLevels,

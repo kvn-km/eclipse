@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import "./App.scss";
 import "./Main/main.scss";
-import axios from 'axios';
+// import axios from 'axios';
 
 import Nav from "./Nav/Nav";
 import Sidebar from "./Nav/Sidebar";
@@ -18,8 +18,7 @@ import Task from "./Main/Tasks/Task/Task";
 import Goals from "./Main/GoalsAchievs/Goals";
 
 function App() {
-
-  const [path, setPath] = useState("/");
+  let [path, setPath] = useState("/");
 
   let location = useLocation();
   useEffect(() => {
@@ -36,7 +35,7 @@ function App() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
       {/* LOGGED IN */}
-      <Route exact path="/user" component={User} />
+      <Route exact path="/user/:username" component={User} />
       <Route exact path="/user/profile" component={Profile} />
       <Route exact path="/user/tasks" component={TasksMain} />
       <Route exact path="/user/side" component={TasksSide} />
