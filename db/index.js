@@ -72,11 +72,11 @@ const getLevels = (request, response) => {
   });
 };
 
-const addUser = function (user) {
+const addUser = (request, response) => {
   return pool.query(`
-  INSERT INTO users (name, email, password) 
-  VALUES ($1, $2, $3)
-  RETURNING *`, [user.name, user.email, user.password])
+  INSERT INTO users (name, password, email, phone, username) 
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING *`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.phone, request.body.params.username])
     .then(res => res.rows[0] || null);
 };
 

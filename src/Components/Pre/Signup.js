@@ -1,6 +1,16 @@
 import React, { useState, useCallback } from "react";
 import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
+import axios from 'axios';
+
+let newUser = {};
+
+function addUser(name, password, email, phone, username) {
+  axios.post('http://localhost:8001/api/users', { params: {name: name, password: password, email: email, phone: phone, username: username}})
+    .then(response => {
+      // console.log(response.data);
+    });
+}
 
 function SignUp(props) {
   let [redirect, setRedirect] = useState("");
@@ -30,7 +40,9 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(fullname);
+              newUser = {};
+              newUser.name = fullname
+              console.log(newUser)
               setSignupType("EMAIL");
             }}>
             <input
@@ -58,7 +70,8 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(email);
+              newUser.email = email
+              console.log(newUser)
               setSignupType("PHONE");
             }}>
             <input
@@ -86,7 +99,8 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(phone);
+              newUser.phone = phone
+              console.log(newUser)
               setSignupType("USERNAME");
             }}>
             <input
@@ -114,7 +128,8 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(username);
+              newUser.username = username;
+              console.log(newUser);
               setSignupType("PASSWORD");
             }}>
             <input
@@ -142,7 +157,9 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              console.log(password);
+              newUser.password = password
+              console.log(newUser);
+              addUser(newUser.name, newUser.password, newUser.email, newUser.phone, newUser.username);
               setRedirect("/user");
             }}>
             <input
