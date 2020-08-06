@@ -23,14 +23,10 @@ app.get('/', (request, response) => {
   response.json({ Message: "Hello World" });
 });
 
-<<<<<<< HEAD
-app.get('/api/users', db.getUsers);
+app.get('/api/users', db.getUser);
 app.get('/api/tasks', db.getTasks);
 app.get('/api/achievs', db.getAchievs);
 app.get('/api/levels', db.getLevels);
-=======
-app.get('/api/users', db.getUser);
->>>>>>> login2
 
 app.post('/api/users', db.addUser);
 
