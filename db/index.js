@@ -11,10 +11,12 @@ const pool = new Pool({
 //ISSUE: IF USERS PASSWORD OF ANOTHER USER, THEY CAN STILL GET IN
 const getUser = (request, response) => {
   console.log(request.query);
-  pool.query('SELECT * FROM users WHERE UPPER(name) = $1 OR password = $2;', [request.query.name, request.query.password], (error, results) => {
+  pool.query('SELECT * FROM users WHERE UPPER(username) = $1 OR password = $2;', [request.query.username, request.query.password], (error, results) => {
     if (error) {
       throw error;
     }
+    request.session = { username: results.rows[0].username };
+    console.log("REQUEST SESSIONSSSSSS", request.session);
     response.status(200).json(results.rows[0]);
   });
 };

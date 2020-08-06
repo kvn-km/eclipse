@@ -17,6 +17,7 @@ function User(props) {
       });
   };
 
+  // SETS THE CURRENT USER 
   useEffect(() => {
     currentUser();
   }, []);
@@ -32,6 +33,7 @@ function User(props) {
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
     };
+    // DUE TO MULTIPLE RENDERS, THIS RENDERS THE CIRCLE ONCE A USER INFO IS LOADED
     if (user.info) {
       console.log("CURRENT USER", user);
       let percent = (user.info.xp / user.levelInfo) * 100;
@@ -51,8 +53,10 @@ function User(props) {
     );
   };
 
+  // FIND WHERE TO RENDER CIRCLE
   let circleRef = useRef();
 
+  // CREATE THE CIRCLE
   useEffect(() => {
     theCircle(circleRef.current);
   }, [user]);
@@ -85,17 +89,6 @@ function User(props) {
               cx="300"
               cy="300" />
           </svg>
-
-          {/* DEV MODE */}
-          {/* <input
-          value={progress}
-          onChange={(event) => setProgress(event.target.value)}
-          type="number"
-          step="5"
-          min="0"
-          max="100"
-          placeholder="progress"
-        /> */}
         </FadeIn>
         {nextLevelDisplay()}
       </div>
