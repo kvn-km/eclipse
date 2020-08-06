@@ -14,7 +14,7 @@ const getUser = (request, response) => {
     if (error) {
       throw error;
     }
-    request.session = { username: results.rows[0].username };
+    request.session = { username: results.rows[0] };
     response.status(200).json(results.rows[0]);
   });
 };

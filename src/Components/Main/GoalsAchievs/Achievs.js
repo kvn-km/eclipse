@@ -8,14 +8,12 @@ function Achievs(props) {
   const [progress, setProgress] = useState(0);
 
   let theCircle = (el) => {
-    console.log("theCircle", el);
     let circle = el;
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = `${circumference}`;
     function setTheProgress(percent) {
-      console.log("percent", percent);
       const offset = circumference - percent / 100 * circumference;
       circle.style.strokeDashoffset = offset;
       setProgress(percent);
