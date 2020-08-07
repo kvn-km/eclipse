@@ -23,7 +23,6 @@ function App() {
   let location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
     setPath((prev) => location.pathname);
   }, [location]);
 

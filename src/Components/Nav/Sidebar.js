@@ -9,13 +9,6 @@ import ProfileXPcircle from "../../helpers/ProfileXPcircle";
 function Sidebar(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
 
-  const currentUser = () => {
-    Promise.all([axios.get('/api/user/current', { params: { id: props.location.slice(6, 7) } }), axios.get('/api/levels')])
-      .then((all) => {
-        let level = all[1].data[all[0].data.level - 1];
-        setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
-      });
-  };
 
   let path = false;
 
@@ -26,6 +19,13 @@ function Sidebar(props) {
   }
 
   useEffect(() => {
+    const currentUser = () => {
+      Promise.all([axios.get('/api/user/current', { params: { id: props.location.slice(6, 7) } }), axios.get('/api/levels')])
+        .then((all) => {
+          let level = all[1].data[all[0].data.level - 1];
+          setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+        });
+    };
     if (!props.location === "/signup" || !props.location === "/login") {
       currentUser();
     }
@@ -39,7 +39,6 @@ function Sidebar(props) {
         <section className="sidebar sidebar-xp">
           <div className="achievs">Achievements</div>
           <FadeIn>
-            {console.log(user)}
             <ProfileXPcircle
               progress={(user.info.xp / user.levelInfo) * 100}
               taskCompletionAmount={`${user.info.xp}/${user.levelInfo}`}

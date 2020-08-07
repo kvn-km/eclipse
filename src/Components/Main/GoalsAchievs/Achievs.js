@@ -7,26 +7,28 @@ import "./achievs.scss";
 function Achievs(props) {
   const [progress, setProgress] = useState(0);
 
-  let theCircle = (el) => {
-    let circle = el;
-    let radius = circle.r.baseVal.value;
-    let circumference = radius * 2 * Math.PI;
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-    function setTheProgress(percent) {
-      const offset = circumference - percent / 100 * circumference;
-      circle.style.strokeDashoffset = offset;
-      setProgress(percent);
-    };
-    // TIMEOUT TO ANIMATE XP BAR
-    setTimeout(() => {
-      setTheProgress(props.progress); // XP SHOULD BE PASSED HERE
-    }, 350);
-  };
+  console.log("TEMPVAR", progress);
+
   let circleRef = useRef();
   useEffect(() => {
+    let theCircle = (el) => {
+      let circle = el;
+      let radius = circle.r.baseVal.value;
+      let circumference = radius * 2 * Math.PI;
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      circle.style.strokeDashoffset = `${circumference}`;
+      function setTheProgress(percent) {
+        const offset = circumference - percent / 100 * circumference;
+        circle.style.strokeDashoffset = offset;
+        setProgress(percent);
+      };
+      // TIMEOUT TO ANIMATE XP BAR
+      setTimeout(() => {
+        setTheProgress(props.progress); // XP SHOULD BE PASSED HERE
+      }, 350);
+    };
     theCircle(circleRef.current);
-  }, [progress]);
+  }, [props.progress]);
 
   return (
     <Link to={props.link} className="task-link">

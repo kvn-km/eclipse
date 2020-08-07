@@ -20,7 +20,6 @@ app.use(cookieSession({
 }));
 
 app.get('/', (request, response) => {
-  console.log("<><><><><><>", request.session.username);
   response.json({ Message: "Hello World" });
 });
 

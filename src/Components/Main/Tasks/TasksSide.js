@@ -9,19 +9,20 @@ import "../main.scss";
 function TasksSide(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
 
+  console.log("TEMPVAR", user);
+
   let location = props.location.pathname;
 
-  const currentUser = () => {
-    Promise.all([axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }), axios.get('/api/levels')])
-      .then((all) => {
-        let level = all[1].data[all[0].data.level - 1];
-        setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
-      });
-  };
-
   useEffect(() => {
+    const currentUser = () => {
+      Promise.all([axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }), axios.get('/api/levels')])
+        .then((all) => {
+          let level = all[1].data[all[0].data.level - 1];
+          setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+        });
+    };
     currentUser();
-  }, []);
+  }, [location]);
 
   const mockData = [
     {

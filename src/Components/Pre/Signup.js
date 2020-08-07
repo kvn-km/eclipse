@@ -23,7 +23,6 @@ function SignUp(props) {
   }
 
   function addUser(name, password, email, phone, username) {
-    console.log("SIGNUP ADD USER", newUser);
     axios.post('/api/users', { params: { name: name, password: password, email: email, phone: phone, username: username } })
       .then(response => {
         let newState = { path: "/user", user_id: response.data.id };
@@ -48,7 +47,6 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser.name = fullname;
-              console.log(newUser);
               setSignupType("EMAIL");
             }}>
             <input
@@ -77,7 +75,7 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser.email = email;
-              console.log(newUser);
+
               setSignupType("PHONE");
             }}>
             <input
@@ -106,7 +104,7 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser.phone = phone;
-              console.log(newUser);
+
               setSignupType("USERNAME");
             }}>
             <input
@@ -135,7 +133,7 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser.username = username;
-              console.log(newUser);
+
               setSignupType("PASSWORD");
             }}>
             <input
@@ -164,7 +162,7 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               newUser.password = password;
-              console.log(newUser);
+              setNewUser();
               addUser(newUser.name, newUser.password, newUser.email, newUser.phone, newUser.username);
             }}>
             <input

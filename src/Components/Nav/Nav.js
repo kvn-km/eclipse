@@ -9,17 +9,13 @@ function Nav(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
   let [location, setLocation] = useState(props.location);
 
+  console.log("TEMPVAR", location);
+
   useEffect(() => {
     setLocation((prev) => props.location);
   }, [props.location]);
 
-  const currentUser = () => {
-    Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
-      .then((all) => {
-        let level = all[1].data[all[0].data.level - 1];
-        setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
-      });
-  };
+
 
   let user_id = "";
   if (props.location.pathname.includes("/user")) {
@@ -27,10 +23,17 @@ function Nav(props) {
   }
 
   useEffect(() => {
+    const currentUser = () => {
+      Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
+        .then((all) => {
+          let level = all[1].data[all[0].data.level - 1];
+          setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+        });
+    };
     if (props.location.pathname.includes("/user")) {
       currentUser();
     }
-  }, [location]);
+  }, [props.location.pathname]);
 
 
   const navbarLinks = () => {

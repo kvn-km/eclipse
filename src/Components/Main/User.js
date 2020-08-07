@@ -9,40 +9,20 @@ function User(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
   let [progress, setProgress] = useState(0);
 
-  const currentUser = () => {
-    Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
-      .then((all) => {
-        let level = all[1].data[all[0].data.level - 1];
-        setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
-      });
-  };
 
   // SETS THE CURRENT USER 
   useEffect(() => {
-    currentUser();
-  }, []);
-
-  let theCircle = (el) => {
-    let circle = el;
-    let radius = circle.r.baseVal.value;
-    let circumference = radius * 2 * Math.PI;
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
-    function setTheProgress(percent) {
-      const offset = circumference - percent / 100 * circumference;
-      circle.style.strokeDashoffset = offset;
-      setProgress(percent);
+    const currentUser = () => {
+      Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
+        .then((all) => {
+          let level = all[1].data[all[0].data.level - 1];
+          setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+        });
     };
-    // DUE TO MULTIPLE RENDERS, THIS RENDERS THE CIRCLE ONCE A USER INFO IS LOADED
-    if (user.info) {
-      // console.log("CURRENT USER", user);
-      let percent = (user.info.xp / user.levelInfo) * 100;
-      // TIMEOUT TO ANIMATE XP BAR
-      setTimeout(() => {
-        setTheProgress(percent);
-      }, 350);
-    }
-  };
+    currentUser();
+  }, [props.match.params.user_id]);
+
+
 
   // WRONG INFO: NEEDS LEVEL'S TOTAL XP AMOUNT, NOT 100 or PROGRESS
   const nextLevelDisplay = () => {
@@ -58,6 +38,26 @@ function User(props) {
 
   // CREATE THE CIRCLE
   useEffect(() => {
+    let theCircle = (el) => {
+      let circle = el;
+      let radius = circle.r.baseVal.value;
+      let circumference = radius * 2 * Math.PI;
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      circle.style.strokeDashoffset = `${circumference}`;
+      function setTheProgress(percent) {
+        const offset = circumference - percent / 100 * circumference;
+        circle.style.strokeDashoffset = offset;
+        setProgress(percent);
+      };
+      // DUE TO MULTIPLE RENDERS, THIS RENDERS THE CIRCLE ONCE A USER INFO IS LOADED
+      if (user.info) {
+        let percent = (user.info.xp / user.levelInfo) * 100;
+        // TIMEOUT TO ANIMATE XP BAR
+        setTimeout(() => {
+          setTheProgress(percent);
+        }, 350);
+      }
+    };
     theCircle(circleRef.current);
   }, [user]);
 
