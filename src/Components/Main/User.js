@@ -12,6 +12,7 @@ function User(props) {
 
   // SETS THE CURRENT USER 
   useEffect(() => {
+    let mounted = true;
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
         .then((all) => {
@@ -19,7 +20,9 @@ function User(props) {
           setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         });
     };
-    currentUser();
+
+    mounted && currentUser();
+    mounted = false;
   }, [props.match.params.user_id]);
 
 

@@ -18,6 +18,7 @@ function TasksSide(props) {
   let location = props.location.pathname;
 
   useEffect(() => {
+    let mounted = true;
     const currentUser = () => {
       Promise.all([
         axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }),
@@ -36,7 +37,10 @@ function TasksSide(props) {
           }));
         });
     };
-    currentUser();
+    if (mounted) {
+      currentUser();
+    }
+    mounted = false;
   }, [location]);
 
   const tasks = user.allTasks.map((task, i) => {

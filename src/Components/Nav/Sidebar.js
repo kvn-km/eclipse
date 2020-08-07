@@ -19,6 +19,7 @@ function Sidebar(props) {
   // }
 
   useEffect(() => {
+    let mounted = true;
     const currentUser = () => {
       Promise.all([
         axios.get('/api/user/current', { params: { id: props.location.slice(6, 7) } }),
@@ -31,9 +32,10 @@ function Sidebar(props) {
           }));
         });
     };
-    if (props.location.includes("/user")) {
+    if (props.location.includes("/user") && mounted) {
       currentUser();
     }
+    mounted = false;
   }, [props.location]);
 
   const theSidebar = () => {
@@ -49,7 +51,7 @@ function Sidebar(props) {
           </FadeIn>
         </section>
       );
-    } else if (user.info && props.location.includes("/user")) {
+    } else if (user.info && props.location.includes("/user") && !props.location.includes("task/")) {
       return (
         <section className="sidebar">
           <FadeIn>

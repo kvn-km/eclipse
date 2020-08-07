@@ -23,6 +23,7 @@ function Nav(props) {
   }
 
   useEffect(() => {
+    let mounted = true;
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
@@ -30,14 +31,15 @@ function Nav(props) {
           setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         });
     };
-    if (props.location.pathname.includes("/user")) {
+    if (props.location.pathname.includes("/user") && mounted) {
       currentUser();
     }
+    mounted = false;
   }, [props.location.pathname]);
 
 
   const navbarLinks = () => {
-    // IF USER LOGGED IN
+    // IF USER ON PROFILE PAGE
     if (props.location.pathname === `/user/${user_id}/profile`) {
       return (
         <ul className="navbar-nav text-right">
@@ -64,7 +66,7 @@ function Nav(props) {
           </li>
         </ul>
       );
-      // IF ON PROFILE PAGE
+      // IF LOGGED IN
     } else if (props.location.pathname.includes(`/user/${user_id}`)) {
       return (
         <ul className="navbar-nav text-right">
@@ -86,6 +88,7 @@ function Nav(props) {
       {props.location.pathname === `/user/${user_id}/side` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/tasks` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/task` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname.includes(`/user/${user_id}/task/`) && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/goals` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/profile` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
