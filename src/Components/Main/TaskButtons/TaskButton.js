@@ -28,8 +28,10 @@ function TaskButton(props) {
     theCircle(circleRef.current);
   }, [progress]);
 
+  const aLink = props.link;
+
   return (
-    <Link to={props.link} className="task-link" >
+    <Link to={props.link} onClick={aLink !== undefined ? "" : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
       <article className="task-button">
         <FadeIn>
           <div className="task-button-el">
@@ -65,6 +67,6 @@ function TaskButton(props) {
       </article>
     </Link>
   );
-}
+};
 
 export default TaskButton;

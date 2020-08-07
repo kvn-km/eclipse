@@ -14,7 +14,7 @@ function Nav(props) {
   }, [props.location]);
 
   const currentUser = () => {
-    Promise.all([axios.get('/api/user/current', { params: { id: props.location.slice(6, 7) } }), axios.get('/api/levels')])
+    Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
       .then((all) => {
         let level = all[1].data[all[0].data.level - 1];
         setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
@@ -22,12 +22,12 @@ function Nav(props) {
   };
 
   let user_id = "";
-  if (props.location.includes("/user")) {
-    user_id = props.location.slice(6, 7);
+  if (props.location.pathname.includes("/user")) {
+    user_id = props.location.pathname.slice(6, 7);
   }
 
   useEffect(() => {
-    if (location.includes("/user")) {
+    if (props.location.pathname.includes("/user")) {
       currentUser();
     }
   }, [location]);
@@ -35,7 +35,7 @@ function Nav(props) {
 
   const navbarLinks = () => {
     // IF USER LOGGED IN
-    if (location === `/user/${user_id}/profile`) {
+    if (props.location.pathname === `/user/${user_id}/profile`) {
       return (
         <ul className="navbar-nav text-right">
           <li className="nav-item active">
@@ -47,7 +47,7 @@ function Nav(props) {
         </ul>
       );
       // IF NOT LOGGED IN
-    } else if (!location.includes("/user")) {
+    } else if (!props.location.pathname.includes("/user")) {
       return (
         <ul className="navbar-nav text-right">
           <li className="nav-item active">
@@ -62,7 +62,7 @@ function Nav(props) {
         </ul>
       );
       // IF ON PROFILE PAGE
-    } else if (location.includes(`/user/${user_id}`)) {
+    } else if (props.location.pathname.includes(`/user/${user_id}`)) {
       return (
         <ul className="navbar-nav text-right">
           <li className="nav-item active">
@@ -75,28 +75,30 @@ function Nav(props) {
 
   return (
     <nav className="navbar navbar-expand-lg bg-black navbar-custom justify-content-end">
-      {props.location === "/about" ? <Link to="/" className="navbar-brand nav-link">&lt; back</Link> : "ECLIPSE"}
-      {props.location === `/signup` && <Link to={`/`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/login` && <Link to={`/`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/user/${user_id}/side` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/user/${user_id}/tasks` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/user/${user_id}/task` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/user/${user_id}/goals` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location === `/user/${user_id}/profile` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === "/" && <h1 className="navbar" >ECLIPSE</h1>}
+      {props.location.pathname.includes("/user") && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">ECLIPSE</Link>}
+      {props.location.pathname === "/about" && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/signup` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}
+      {props.location.pathname === `/login` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/side` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/tasks` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/task` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/goals` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/profile` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse ml-auto mr-1 flex-grow-0" id="navbarSupportedContent">
         <FadeIn>
           {user && user.info && navbarLinks()}
-          {props.location === "/" && navbarLinks()}
-          {props.location === "/about" && navbarLinks()}
-          {props.location === "/signup" && navbarLinks()}
-          {props.location === "/login" && navbarLinks()}
+          {props.location.pathname === "/" && navbarLinks()}
+          {props.location.pathname === "/about" && navbarLinks()}
+          {props.location.pathname === "/signup" && navbarLinks()}
+          {props.location.pathname === "/login" && navbarLinks()}
         </FadeIn>
       </div>
     </nav >
   );
 };
 
-export default Nav;
+export default withRouter(Nav);

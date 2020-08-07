@@ -10,74 +10,62 @@ const mockData = [
   {
     id: 1,
     taskTitle: "Task Title 1",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 2,
     taskTitle: "Task Title 2",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 3,
     taskTitle: "Task Title 3",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 4,
     taskTitle: "Task Title 4",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 5,
     taskTitle: "Task Title 5",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 6,
     taskTitle: "Task Title 6",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 7,
     taskTitle: "Task Title 7",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 8,
     taskTitle: "Task Title 8",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 9,
     taskTitle: "Task Title 9",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 10,
     taskTitle: "Task Title 10",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 11,
     taskTitle: "Task Title 11",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
   {
     id: 12,
     taskTitle: "Task Title 12",
-    taskProgress: 100,
-    link: "/user/task"
+    taskProgress: 100
   },
 ];
 
