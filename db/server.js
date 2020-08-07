@@ -27,11 +27,18 @@ app.get('/', (request, response) => {
 app.get('/api/user', db.getUser);
 // GET USER FOR USER LANDING PAGES, ONCE LOGGED IN
 app.get('/api/user/current', db.getCurrentUser);
-// GET ALL USERS
+// GET ALL USERS/TASKS/ACHIEVS/LEVELS
 app.get('/api/users', db.getUsers);
 app.get('/api/tasks', db.getTasks);
 app.get('/api/achievs', db.getAchievs);
 app.get('/api/levels', db.getLevels);
+// GET USER'S TASKS
+app.get('/api/tasks/user', db.getUsersTasks);
+app.get('/api/tasks/main', db.getMainTasks);
+app.get('/api/tasks/side', db.getSideTasks);
+// GET USER'S GOALS/ACHIEV PROGRESS
+app.get('/api/achievs/user', db.getUsersAchievs);
+
 
 app.post('/api/users', db.addUser);
 

@@ -5,9 +5,13 @@ import axios from "axios";
 import TaskButton from "../TaskButtons/TaskButton";
 import "../main.scss";
 
-
 function TasksSide(props) {
-  let [user, setUser] = useState({ info: null, levelInfo: null });
+  let [user, setUser] = useState({
+    info: null,
+    levelInfo: null,
+    tasks: null,
+    allTasks: []
+  });
 
   console.log("TEMPVAR", user);
 
@@ -15,75 +19,36 @@ function TasksSide(props) {
 
   useEffect(() => {
     const currentUser = () => {
-      Promise.all([axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }), axios.get('/api/levels')])
+      Promise.all([
+        axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }),
+        axios.get('/api/levels'),
+        axios.get('/api/tasks/user', { params: { id: location.slice(6, 7) } }),
+        axios.get('/api/tasks/side')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          let allUserTasks = all[2].data;
+          let allTasks = all[3].data;
+          setUser((...prev) => ({
+            info: all[0].data,
+            levelInfo: level.xp,
+            tasks: allUserTasks,
+            allTasks: allTasks
+          }));
         });
     };
     currentUser();
   }, [location]);
 
-  const mockData = [
-    {
-      id: 1,
-      taskTitle: "Task Title 1",
-      taskProgress: 75,
-      link: "/user/2/task"
-    },
-    {
-      id: 2,
-      taskTitle: "Task Title 2",
-      taskProgress: 56,
-      link: "/user/2/task"
-    },
-    {
-      id: 3,
-      taskTitle: "Task Title 3",
-      taskProgress: 33,
-      link: "/user/2/task"
-    },
-    {
-      id: 4,
-      taskTitle: "Task Title 4",
-      taskProgress: 12,
-      link: "/user/2/task"
-    },
-    {
-      id: 5,
-      taskTitle: "Task Title 5",
-      taskProgress: 40,
-      link: "/user/2/task"
-    },
-    {
-      id: 6,
-      taskTitle: "Task Title 6",
-      taskProgress: 60,
-      link: "/user/2/task"
-    },
-    {
-      id: 7,
-      taskTitle: "Task Title 7",
-      taskProgress: 25,
-      link: "/user/2/task"
-    },
-    {
-      id: 8,
-      taskTitle: "Task Title 8",
-      taskProgress: 90,
-      link: "/user/2/task"
-    }
-  ];
-
-  const tasks = mockData.map((task) => {
+  const tasks = user.allTasks.map((task, i) => {
+    const userTask = user.tasks[i + 8];
     return (
       <TaskButton
         key={task.id}
         id={task.id}
-        link={task.link}
-        taskTitle={task.taskTitle}
-        progress={task.taskProgress}
-        taskCompletionAmount={`${task.taskProgress}%`}
+        link={"/user/2/task"}
+        taskTitle={task.name}
+        progress={userTask.progress}
+        taskCompletionAmount={`${userTask.progress}%`}
       />
     );
   });

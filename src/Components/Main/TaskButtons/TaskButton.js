@@ -33,7 +33,7 @@ function TaskButton(props) {
   const aLink = props.link;
 
   return (
-    <Link to={props.link} onClick={aLink !== undefined ? "" : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
+    <Link to={props.link} onClick={aLink !== undefined ? (e) => (console.log(e)) : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
       <article className="task-button">
         <FadeIn>
           <div className="task-button-el">

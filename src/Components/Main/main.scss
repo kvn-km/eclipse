@@ -76,7 +76,7 @@
 }
 
 .task {
-  width: 100vw;
+  width: 85vw;
   height: 100vh;
   display: flex;
   margin-top: -5rem;
@@ -87,8 +87,8 @@
 
 .task-title {
   position: absolute;
-  bottom: 2rem;
-  left: 2rem;
+  bottom: 1rem;
+  left: -15rem;
   font-size: 5rem;
   resize: none;
   font-family: "Roboto Condensed", sans-serif;

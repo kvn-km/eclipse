@@ -6,77 +6,49 @@ import TaskButton from "../TaskButtons/TaskButton";
 import "../main.scss";
 
 function Goals(props) {
-  let [user, setUser] = useState({ info: null, levelInfo: null });
+  let [user, setUser] = useState({
+    info: null,
+    levelInfo: null,
+    goals: null,
+    allAchievs: []
+  });
 
   console.log("TEMPVAR", user);
 
-
   let location = props.location.pathname;
-
 
   useEffect(() => {
     const currentUser = () => {
-      Promise.all([axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }), axios.get('/api/levels')])
+      Promise.all([
+        axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }),
+        axios.get('/api/levels'),
+        axios.get('/api/achievs/user', { params: { id: location.slice(6, 7) } }),
+        axios.get('/api/achievs')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          let allUserAchievs = all[2].data;
+          let allAchievements = all[3].data;
+          setUser((...prev) => ({
+            info: all[0].data,
+            levelInfo: level.xp,
+            goals: allUserAchievs,
+            allAchievs: allAchievements
+          }));
         });
     };
     currentUser();
   }, [location]);
 
-  const mockData = [
-    {
-      id: 1,
-      taskTitle: "Task Title 1",
-      taskProgress: 75
-    },
-    {
-      id: 2,
-      taskTitle: "Task Title 2",
-      taskProgress: 56
-    },
-    {
-      id: 3,
-      taskTitle: "Task Title 3",
-      taskProgress: 33
-    },
-    {
-      id: 4,
-      taskTitle: "Task Title 4",
-      taskProgress: 12
-    },
-    {
-      id: 5,
-      taskTitle: "Task Title 5",
-      taskProgress: 40
-    },
-    {
-      id: 6,
-      taskTitle: "Task Title 6",
-      taskProgress: 60
-    },
-    {
-      id: 7,
-      taskTitle: "Task Title 7",
-      taskProgress: 25
-    },
-    {
-      id: 8,
-      taskTitle: "Task Title 8",
-      taskProgress: 90
-    }
-  ];
 
-  const tasks = mockData.map((task) => {
+  const achievs = user.allAchievs.map((achievs, i) => {
+    const goals = user.goals[i];
     return (
       <TaskButton
-        key={task.id}
-        id={task.id}
-        link={task.link}
-        taskTitle={task.taskTitle}
-        progress={task.taskProgress}
-        taskCompletionAmount={`${task.taskProgress}%`}
+        key={achievs.id}
+        id={achievs.id}
+        taskTitle={achievs.name}
+        progress={goals.progress}
+        taskCompletionAmount={`${goals.progress}%`}
       />
     );
   });
@@ -87,7 +59,7 @@ function Goals(props) {
         <FadeIn>
 
           <div className="task-container">
-            {tasks}
+            {achievs}
           </div>
 
         </FadeIn>

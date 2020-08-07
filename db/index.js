@@ -52,8 +52,41 @@ const getTasks = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+const getUsersTasks = (request, response) => {
+  pool.query('SELECT * FROM user_task WHERE user_id = $1;', [request.query.id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getMainTasks = (request, response) => {
+  pool.query('SELECT * FROM tasks WHERE type = $1;', ['main'], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getSideTasks = (request, response) => {
+  pool.query('SELECT * FROM tasks WHERE type = $1;', ['side'], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 const getAchievs = (request, response) => {
   pool.query('SELECT * FROM achievements;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getUsersAchievs = (request, response) => {
+  pool.query('SELECT * FROM user_achievs WHERE user_id = $1;', [request.query.id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -77,6 +110,44 @@ const addUser = (request, response) => {
   RETURNING *;`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.phone, request.body.params.username])
     .then(res => {
       response.status(200).json(res.rows[0]);
+      pool.query(`
+      INSERT INTO user_task (user_id, task_id) 
+      VALUES  ($1, 1),
+              ($1, 2),
+              ($1, 3),
+              ($1, 4),
+              ($1, 5),
+              ($1, 6),
+              ($1, 7),
+              ($1, 8),
+              ($1, 9),
+              ($1, 10),
+              ($1, 11),
+              ($1, 12),
+              ($1, 13),
+              ($1, 14),
+              ($1, 15),
+              ($1, 16);`,
+        [res.rows[0].id]);
+      pool.query(`
+      INSERT INTO user_achievs (user_id, achiev_id) 
+      VALUES  ($1, 1),
+              ($1, 2),
+              ($1, 3),
+              ($1, 4),
+              ($1, 5),
+              ($1, 6),
+              ($1, 7),
+              ($1, 8),
+              ($1, 9),
+              ($1, 10),
+              ($1, 11),
+              ($1, 12),
+              ($1, 13),
+              ($1, 14),
+              ($1, 15),
+              ($1, 16);`,
+        [res.rows[0].id]);
     })
     .catch(error => error);
 };
@@ -87,7 +158,11 @@ module.exports = {
   getCurrentUser,
   getUsers,
   getTasks,
+  getMainTasks,
+  getSideTasks,
+  getUsersTasks,
   getAchievs,
+  getUsersAchievs,
   getLevels,
   addUser
 };
