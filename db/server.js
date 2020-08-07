@@ -36,6 +36,7 @@ app.get('/api/levels', db.getLevels);
 app.get('/api/tasks/user', db.getUsersTasks);
 app.get('/api/tasks/main', db.getMainTasks);
 app.get('/api/tasks/side', db.getSideTasks);
+app.get('/api/tasks/task', db.getTaskById);
 // GET USER'S GOALS/ACHIEV PROGRESS
 app.get('/api/achievs/user', db.getUsersAchievs);
 

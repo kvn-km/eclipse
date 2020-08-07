@@ -39,6 +39,7 @@ function App() {
       <Route exact path="/user/:user_id/tasks" component={TasksMain} />
       <Route exact path="/user/:user_id/side" component={TasksSide} />
       <Route exact path="/user/:user_id/task" component={Task} />
+      <Route exact path="/user/:user_id/task/:task_id" component={Task} />
       <Route exact path="/user/:user_id/goals" component={Goals} />
     </Switch >
   );
