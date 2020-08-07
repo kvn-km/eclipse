@@ -76,6 +76,14 @@ const getSideTasks = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+const getTaskById = (request, response) => {
+  pool.query('SELECT * FROM tasks WHERE id = $1;', [request.query.id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
 
 const getAchievs = (request, response) => {
   pool.query('SELECT * FROM achievements;', (error, results) => {
@@ -161,6 +169,7 @@ module.exports = {
   getMainTasks,
   getSideTasks,
   getUsersTasks,
+  getTaskById,
   getAchievs,
   getUsersAchievs,
   getLevels,
