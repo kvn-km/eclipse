@@ -44,11 +44,11 @@ async function loop(timestamp) {
     window.requestAnimationFrame(loop);
 }
 
-async function predictTask() {
+export async function predictTask() {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
-    console.log(prediction);
+    return prediction;
 
     // for (let i = 0; i < maxPredictions; i++) {
     //     //

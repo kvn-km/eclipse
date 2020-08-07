@@ -5,6 +5,7 @@ import axios from "axios";
 
 import TaskButton from "../TaskButtons/TaskButton";
 import "../main.scss";
+import { predictTask } from "../../../helpers/pose";
 
 
 function TasksMain(props) {
@@ -15,7 +16,7 @@ function TasksMain(props) {
   const mockData = [
     {
       id: 1,
-      taskTitle: "Task Title 1",
+      taskTitle: "watching",
       taskProgress: 75,
       link: "/user/2/task"
     },
@@ -99,6 +100,7 @@ function TasksMain(props) {
 
           <div className="task-container">
             {tasks}
+            {predictTask};
           </div>
 
         </FadeIn>
