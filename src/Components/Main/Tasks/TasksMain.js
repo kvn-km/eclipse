@@ -5,7 +5,6 @@ import axios from "axios";
 
 import TaskButton from "../TaskButtons/TaskButton";
 import "../main.scss";
-import { predictTask } from "../../../helpers/pose";
 
 
 function TasksMain(props) {
@@ -100,7 +99,6 @@ function TasksMain(props) {
 
           <div className="task-container">
             {tasks}
-            {predictTask};
           </div>
 
         </FadeIn>
