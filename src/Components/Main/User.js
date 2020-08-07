@@ -17,12 +17,11 @@ function User(props) {
       Promise.all([axios.get('/api/user/current', { params: { id: props.match.params.user_id } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         });
     };
-
-    mounted && currentUser();
-    mounted = false;
+    currentUser();
+    return () => { mounted = false; };
   }, [props.match.params.user_id]);
 
 

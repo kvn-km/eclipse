@@ -37,16 +37,13 @@ function Task(props) {
             usersTaskInfo: taskInfo,
             task: theTask
           };
-          setUser(prev => newState);
+          mounted && setUser(prev => newState);
         })
         .catch(e => console.log("ERRORRRR", e));
     };
-    if (mounted) {
-      currentUser();
-    }
+    currentUser();
     return () => { mounted = false; };
   }, [location]);
-
 
   return (
     <FadeIn>

@@ -29,7 +29,7 @@ function TasksSide(props) {
           let level = all[1].data[all[0].data.level - 1];
           let allUserTasks = all[2].data;
           let allTasks = all[3].data;
-          setUser((...prev) => ({
+          mounted && setUser((...prev) => ({
             info: all[0].data,
             levelInfo: level.xp,
             tasks: allUserTasks,
@@ -37,10 +37,8 @@ function TasksSide(props) {
           }));
         });
     };
-    if (mounted) {
-      currentUser();
-    }
-    mounted = false;
+    currentUser();
+    return () => { mounted = false; };
   }, [location]);
 
   const tasks = user.allTasks.map((task, i) => {

@@ -26,16 +26,16 @@ function Sidebar(props) {
         axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((...prev) => ({
+          mounted && setUser((...prev) => ({
             info: all[0].data,
             levelInfo: level.xp
           }));
         });
     };
-    if (props.location.includes("/user") && mounted) {
+    if (props.location.includes("/user")) {
       currentUser();
     }
-    mounted = false;
+    return () => { mounted = false; };
   }, [props.location]);
 
   const theSidebar = () => {

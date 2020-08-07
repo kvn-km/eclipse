@@ -28,13 +28,13 @@ function Nav(props) {
       Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         });
     };
-    if (props.location.pathname.includes("/user") && mounted) {
+    if (props.location.pathname.includes("/user")) {
       currentUser();
     }
-    mounted = false;
+    return () => { mounted = false; };
   }, [props.location.pathname]);
 
 
