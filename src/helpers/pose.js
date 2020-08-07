@@ -3,8 +3,9 @@ import * as tmPose from '@teachablemachine/pose';
 const URL = "http://localhost:8000/my_model/";
 
 let model, webcam, ctx, labelContainer, maxPredictions;
-
+let i = "";
 export async function init(status) {
+    i = 0;
     // const modelURL = URL + "model.json";
     // const metadataURL = URL + "metadata.json";
     const modelURL = URL + "model.json";
@@ -22,7 +23,7 @@ export async function init(status) {
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam
     await webcam.play();
-    predictTask();
+    // predictTask();
     window.requestAnimationFrame(loop);
 
     // append/get elements to the DOM
@@ -41,10 +42,14 @@ export async function init(status) {
 async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
-    window.requestAnimationFrame(loop);
+
+    if (i < 20) {
+        window.requestAnimationFrame(loop);
+        i++;
+    }
 }
 
-async function predictTask() {
+export async function predictTask() {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
@@ -68,7 +73,7 @@ async function predict() {
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
-    // console.log(prediction);
+    console.log(prediction);
 
     for (let i = 0; i < maxPredictions; i++) {
         //
