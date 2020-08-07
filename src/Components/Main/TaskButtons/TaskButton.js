@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FadeIn from "react-fade-in";
-import ReactTooltip from 'react-tooltip';
 
 
 import "./taskButton.scss";
@@ -39,17 +38,15 @@ function TaskButton(props) {
 
   return (
     <Link to={`${props.link}/${props.id}`} onClick={aLink !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
-      <article className="task-button" data-tip data-for="tooltipz">
+      <article className="task-button" >
         <FadeIn>
           <div className="task-button-el">
             <p>{props.taskTitle}</p>
-            <ReactTooltip id="tooltipz" place="bottom" type="dark" effect="float" >
-              {props.taskTitle}
-            </ReactTooltip>
             <svg
               className="progress-ring"
               width="200"
-              height="200">
+              height="200"
+            >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#65c0e0" />
