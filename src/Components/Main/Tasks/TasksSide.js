@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
+
 import TaskButton from "../TaskButtons/TaskButton";
 import "../main.scss";
 
@@ -44,6 +45,7 @@ function TasksSide(props) {
   const tasks = user.allTasks.map((task, i) => {
     const userTask = user.tasks[i + 8];
     return (
+
       <TaskButton
         key={task.id}
         id={task.id}
@@ -51,7 +53,9 @@ function TasksSide(props) {
         taskTitle={task.name}
         progress={userTask.progress}
         taskCompletionAmount={`${userTask.progress}%`}
+        description={task.description}
       />
+
     );
   });
 

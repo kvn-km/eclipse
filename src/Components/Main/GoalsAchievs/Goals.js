@@ -49,6 +49,7 @@ function Goals(props) {
         taskTitle={achievs.name}
         progress={goals.progress}
         taskCompletionAmount={`${goals.progress}%`}
+        description={achievs.description}
       />
     );
   });

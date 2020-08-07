@@ -10,62 +10,74 @@ const mockData = [
   {
     id: 1,
     taskTitle: "Task Title 1",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 2,
     taskTitle: "Task Title 2",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 3,
     taskTitle: "Task Title 3",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 4,
     taskTitle: "Task Title 4",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 5,
     taskTitle: "Task Title 5",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 6,
     taskTitle: "Task Title 6",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 7,
     taskTitle: "Task Title 7",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 8,
     taskTitle: "Task Title 8",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 9,
     taskTitle: "Task Title 9",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 10,
     taskTitle: "Task Title 10",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 11,
     taskTitle: "Task Title 11",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
   {
     id: 12,
     taskTitle: "Task Title 12",
-    taskProgress: 100
+    taskProgress: 100,
+    description: "GREAT JOB!"
   },
 ];
 
@@ -101,6 +113,7 @@ function Profile(props) {
         link={task.link}
         taskTitle={task.taskTitle}
         className={"progress-ring__circle profile-circle"}
+        description={task.description}
       />
     );
   });

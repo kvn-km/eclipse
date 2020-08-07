@@ -32,20 +32,23 @@ function Achievs(props) {
     return () => { mounted = false; };
   }, [props.progress]);
 
+
+
   return (
     <Link
       to={props.link ? props.link : ""}
       onClick={!props.link ? (event) => event.preventDefault() : ""}
       className={props.link ? "task-link" : "disabled-cursor"}
     >
-      <article className="task-button">
+      <article className="task-button" >
         <FadeIn>
-          <div className="task-button-el" data-toggle="tooltip" data-placement="bottom" title={props.taskTitle}>
+          <div className="task-button-el" >
             <p>{props.taskTitle}</p>
             <svg
               className="progress-ring"
               width="150"
-              height="150">
+              height="150"
+            >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#65c0e0" />
@@ -71,7 +74,7 @@ function Achievs(props) {
           </div>
         </FadeIn>
       </article>
-    </Link>
+    </Link >
   );
 }
 

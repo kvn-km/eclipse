@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import FadeIn from "react-fade-in";
+import ReactTooltip from 'react-tooltip';
+
 
 import "./taskButton.scss";
 
@@ -11,6 +13,7 @@ function TaskButton(props) {
 
   let circleRef = useRef();
   useEffect(() => {
+    let mounted = true;
     let theCircle = (el) => {
       let circle = el;
       let radius = circle.r.baseVal.value;
@@ -20,7 +23,7 @@ function TaskButton(props) {
       function setTheProgress(percent) {
         const offset = circumference - percent / 100 * circumference;
         circle.style.strokeDashoffset = offset;
-        setProgress(percent);
+        mounted && setProgress(percent);
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -28,16 +31,21 @@ function TaskButton(props) {
       }, 350);
     };
     theCircle(circleRef.current);
+    return () => { mounted = false; };
   }, [props.progress]);
 
   const aLink = props.link;
 
+
   return (
     <Link to={`${props.link}/${props.id}`} onClick={aLink !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
-      <article className="task-button" data-toggle="tooltip" data-placement="bottom" title={props.description}>
+      <article className="task-button" data-tip data-for="tooltipz">
         <FadeIn>
           <div className="task-button-el">
             <p>{props.taskTitle}</p>
+            <ReactTooltip id="tooltipz" place="bottom" type="dark" effect="float" >
+              {props.taskTitle}
+            </ReactTooltip>
             <svg
               className="progress-ring"
               width="200"
@@ -67,7 +75,7 @@ function TaskButton(props) {
           </div>
         </FadeIn>
       </article>
-    </Link>
+    </Link >
   );
 };
 

@@ -29,6 +29,7 @@ function ProfileXPcircle(props) {
     theCircle(circleRef.current);
   }, [props.progress]);
 
+
   return (
     <article className="task-button xpxp">
       <FadeIn>
