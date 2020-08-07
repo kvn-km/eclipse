@@ -24,7 +24,7 @@ function SignUp(props) {
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
   if (redirect) {
-    return <Redirect to={redirect} />;
+    return <Redirect to={`${redirect.path}/${redirect.user_id}`} />;
   }
 
   const toInputUppercase = e => {
