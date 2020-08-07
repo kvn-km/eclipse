@@ -80,14 +80,16 @@ function Profile(props) {
   // }
 
   useEffect(() => {
+    let mounted = true;
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.match.url.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         });
     };
     currentUser();
+    return () => { mounted = false; };
   }, [props.match.url]);
 
 

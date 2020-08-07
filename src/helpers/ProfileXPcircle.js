@@ -39,11 +39,11 @@ function ProfileXPcircle(props) {
             height="200">
             <defs>
               <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#65c0e0" />
-                <stop offset="25%" stop-color="#e9a5a5" />
-                <stop offset="40%" stop-color="#b8c135" />
-                <stop offset="50%" stop-color="#81c1d9" />
-                <stop offset="100%" stop-color="#aea2db" />
+                <stop offset="0%" stopColor="#65c0e0" />
+                <stop offset="25%" stopColor="#e9a5a5" />
+                <stop offset="40%" stopColor="#b8c135" />
+                <stop offset="50%" stopColor="#81c1d9" />
+                <stop offset="100%" stopColor="#aea2db" />
               </linearGradient>
             </defs>
             <circle

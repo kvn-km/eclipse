@@ -55,6 +55,7 @@ function TasksMain(props) {
         taskTitle={task.name}
         progress={userTask.progress}
         taskCompletionAmount={`${userTask.progress}%`}
+        description={task.description}
       />
     );
   });

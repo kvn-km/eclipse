@@ -11,6 +11,7 @@ function Achievs(props) {
 
   let circleRef = useRef();
   useEffect(() => {
+    let mounted = true;
     let theCircle = (el) => {
       let circle = el;
       let radius = circle.r.baseVal.value;
@@ -20,7 +21,7 @@ function Achievs(props) {
       function setTheProgress(percent) {
         const offset = circumference - percent / 100 * circumference;
         circle.style.strokeDashoffset = offset;
-        setProgress(percent);
+        mounted && setProgress(percent);
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -28,13 +29,18 @@ function Achievs(props) {
       }, 350);
     };
     theCircle(circleRef.current);
+    return () => { mounted = false; };
   }, [props.progress]);
 
   return (
-    <Link to={props.link} className="task-link">
+    <Link
+      to={props.link ? props.link : ""}
+      onClick={!props.link ? (event) => event.preventDefault() : ""}
+      className={props.link ? "task-link" : "disabled-cursor"}
+    >
       <article className="task-button">
         <FadeIn>
-          <div className="task-button-el">
+          <div className="task-button-el" data-toggle="tooltip" data-placement="bottom" title={props.taskTitle}>
             <p>{props.taskTitle}</p>
             <svg
               className="progress-ring"
@@ -42,11 +48,11 @@ function Achievs(props) {
               height="150">
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#65c0e0" />
-                  <stop offset="25%" stop-color="#e9a5a5" />
-                  <stop offset="40%" stop-color="#b8c135" />
-                  <stop offset="50%" stop-color="#81c1d9" />
-                  <stop offset="100%" stop-color="#aea2db" />
+                  <stop offset="0%" stopColor="#65c0e0" />
+                  <stop offset="25%" stopColor="#e9a5a5" />
+                  <stop offset="40%" stopColor="#b8c135" />
+                  <stop offset="50%" stopColor="#81c1d9" />
+                  <stop offset="100%" stopColor="#aea2db" />
                 </linearGradient>
               </defs>
               <circle
