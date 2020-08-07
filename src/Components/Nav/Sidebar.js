@@ -7,34 +7,40 @@ import "../Main/main.scss";
 import ProfileXPcircle from "../../helpers/ProfileXPcircle";
 
 function Sidebar(props) {
-  let [user, setUser] = useState({ info: null, levelInfo: null });
 
+  let [user, setUser] = useState({ info: null, levelInfo: null });
+  let location = props.location;
 
   let path = false;
 
   let user_id = "";
-  if (props.location.includes("/user")) {
+  if (location.includes("/user")) {
     path = true;
-    user_id = props.location.slice(6, 7);
+    user_id = location.slice(6, 7);
   }
 
   useEffect(() => {
     const currentUser = () => {
-      Promise.all([axios.get('/api/user/current', { params: { id: props.location.slice(6, 7) } }), axios.get('/api/levels')])
+      Promise.all([
+        axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }),
+        axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
-          setUser((...prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+          setUser((...prev) => ({
+            info: all[0].data,
+            levelInfo: level.xp
+          }));
         });
     };
-    if (!props.location === "/signup" || !props.location === "/login") {
+    if (location !== "/signup" || location !== "/login" || !location !== "/signup") {
       currentUser();
     }
-  }, [props.location]);
+  }, [location]);
 
 
 
   const theSidebar = () => {
-    if (user.info && props.location === `/user/${user_id}/profile`) {
+    if (user.info && location === `/user/${user_id}/profile`) {
       return (
         <section className="sidebar sidebar-xp">
           <div className="achievs">Achievements</div>
