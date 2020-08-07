@@ -52,8 +52,43 @@ const getTasks = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+const getUsersTasks = (request, response) => {
+  pool.query('SELECT * FROM user_task WHERE user_id = $1;', [request.query.id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getMainTasks = (request, response) => {
+  pool.query('SELECT * FROM tasks WHERE type = $1;', ['main'], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getSideTasks = (request, response) => {
+  pool.query('SELECT * FROM tasks WHERE type = $1;', ['side'], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
 const getAchievs = (request, response) => {
+  console.log("REQUESTSTST", request.query);
   pool.query('SELECT * FROM achievements;', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+const getUsersAchievs = (request, response) => {
+  console.log("REQUESTSTST", request.query);
+  pool.query('SELECT * FROM user_achievs WHERE user_id = $1;', [request.query.id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -87,7 +122,11 @@ module.exports = {
   getCurrentUser,
   getUsers,
   getTasks,
+  getMainTasks,
+  getSideTasks,
+  getUsersTasks,
   getAchievs,
+  getUsersAchievs,
   getLevels,
   addUser
 };
