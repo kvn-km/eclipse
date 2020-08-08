@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import FadeIn from "react-fade-in";
 
 
@@ -8,7 +7,7 @@ import "./taskButton.scss";
 function GoalButton(props) {
   const [progress, setProgress] = useState(0);
 
-  console.log("TEMPVAR", progress);
+  console.log("TEMPVAR", props);
 
   let circleRef = useRef();
   useEffect(() => {
@@ -20,8 +19,13 @@ function GoalButton(props) {
       circle.style.strokeDasharray = `${circumference} ${circumference}`;
       circle.style.strokeDashoffset = `${circumference}`;
       function setTheProgress(percent) {
-        const offset = circumference - percent / 100 * circumference;
-        circle.style.strokeDashoffset = offset;
+        if (percent === 0) {
+          const offset = circumference - 100 / 100 * circumference;
+          circle.style.strokeDashoffset = offset;
+        } else {
+          const offset = circumference - percent / 100 * circumference;
+          circle.style.strokeDashoffset = offset;
+        }
         mounted && setProgress(percent);
       };
       // TIMEOUT TO ANIMATE XP BAR
@@ -31,10 +35,22 @@ function GoalButton(props) {
     };
     theCircle(circleRef.current);
     return () => { mounted = false; };
-  }, [props.progress]);
+  }, [props.progress, progress]);
 
-  const aLink = props.link;
-
+  const stopColour = {
+    offset0: "#65c0e0",
+    offset25: "#e9a5a5",
+    offset50: "#b8c135",
+    offset75: "#81c1d9",
+    offset100: "#aea2db",
+  };
+  const stopColourBW = {
+    offset0: "#666666",
+    offset25: "#000",
+    offset50: "#000",
+    offset75: "#000",
+    offset100: "#666666"
+  };
 
   return (
     <div>
@@ -49,11 +65,11 @@ function GoalButton(props) {
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#65c0e0" />
-                  <stop offset="20%" stopColor="#e9a5a5" />
-                  <stop offset="40%" stopColor="#b8c135" />
-                  <stop offset="60%" stopColor="#81c1d9" />
-                  <stop offset="100%" stopColor="#aea2db" />
+                  <stop offset="0%" stopColor={props.progress > 0 ? stopColour.offset0 : stopColourBW.offset0} />
+                  <stop offset="25%" stopColor={props.progress > 0 ? stopColour.offset25 : stopColourBW.offset25} />
+                  <stop offset="40%" stopColor={props.progress > 0 ? stopColour.offset50 : stopColourBW.offset50} />
+                  <stop offset="50%" stopColor={props.progress > 0 ? stopColour.offset75 : stopColourBW.offset75} />
+                  <stop offset="100%" stopColor={props.progress > 0 ? stopColour.offset100 : stopColourBW.offset100} />
                 </linearGradient>
               </defs>
               <circle

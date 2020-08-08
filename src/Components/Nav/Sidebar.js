@@ -10,14 +10,6 @@ function Sidebar(props) {
 
   let [user, setUser] = useState({ info: null, levelInfo: null });
 
-  // let path = false;
-
-  // let user_id = "";
-  // if (props.location.includes("/user")) {
-  //   path = true;
-  //   user_id = props.location.slice(6, 7);
-  // }
-
   useEffect(() => {
     let mounted = true;
     const currentUser = () => {
@@ -45,7 +37,7 @@ function Sidebar(props) {
           <div className="achievs">Achievements</div>
           <FadeIn>
             <ProfileXPcircle
-              progress={(user.info.xp / user.levelInfo) * 100}
+              progress={((user.info.xp / user.levelInfo) * 100)}
               taskCompletionAmount={`${user.info.xp}/${user.levelInfo}`}
             />
           </FadeIn>

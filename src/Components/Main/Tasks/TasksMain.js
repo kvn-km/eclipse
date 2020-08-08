@@ -15,8 +15,6 @@ function TasksMain(props) {
     allTasks: []
   });
 
-  console.log("TEMPVAR", user);
-
   let location = props.location.pathname;
 
   useEffect(() => {

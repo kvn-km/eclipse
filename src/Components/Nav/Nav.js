@@ -9,8 +9,6 @@ function Nav(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
   let [location, setLocation] = useState(props.location);
 
-  console.log("TEMPVAR", location);
-
   useEffect(() => {
     setLocation((prev) => props.location);
   }, [props.location]);
@@ -35,7 +33,7 @@ function Nav(props) {
       currentUser();
     }
     return () => { mounted = false; };
-  }, [props.location.pathname]);
+  }, [props.location.pathname, location]);
 
 
   const navbarLinks = () => {
@@ -85,11 +83,11 @@ function Nav(props) {
       {props.location.pathname === "/about" && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/signup` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}
       {props.location.pathname === `/login` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}
-      {props.location.pathname === `/user/${user_id}/side` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location.pathname === `/user/${user_id}/tasks` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/side` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/tasks` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/task` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname.includes(`/user/${user_id}/task/`) && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location.pathname === `/user/${user_id}/goals` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/goals` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/profile` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>

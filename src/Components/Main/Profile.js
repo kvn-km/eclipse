@@ -43,7 +43,7 @@ function Profile(props) {
   }, [location]);
 
   // 
-  let asdfasdfasdf = user.info && user.usersAchievs
+  const userAchievBadges = user.info && user.usersAchievs
     .filter(userAchiev => userAchiev.progress === 100)
     .map((uA, i) => {
       const achievs = user.allAchievs[i];
@@ -64,7 +64,7 @@ function Profile(props) {
       <div className="tasks-main">
         <FadeIn>
           <div className="task-container">
-            {user.info && asdfasdfasdf}
+            {user.info && userAchievBadges}
           </div>
         </FadeIn>
       </div>
