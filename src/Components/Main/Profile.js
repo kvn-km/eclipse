@@ -47,7 +47,6 @@ function Profile(props) {
     .filter(userAchiev => userAchiev.progress === 100)
     .map((uA, i) => {
       const achievs = user.allAchievs[i];
-      console.log(achievs);
       return (
         <Achievs
           key={uA.id}
@@ -63,7 +62,7 @@ function Profile(props) {
     <section className="main">
       <div className="tasks-main">
         <FadeIn>
-          <div className="task-container">
+          <div className="task-container-achiev">
             {user.info && userAchievBadges}
           </div>
         </FadeIn>

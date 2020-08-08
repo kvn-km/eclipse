@@ -15,7 +15,7 @@ article {
   margin: 0.5rem 1rem;
 }
 
-article:hover {
+article.task-button:hover {
   text-decoration: none;
   font-weight: 700;
   transition: 0.3s;
@@ -23,7 +23,22 @@ article:hover {
 
 .task-completion-amount {
   position: absolute;
-  top: -8.75rem;
+  top: -7.2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.task-completed-amount {
+  position: absolute;
+  top: -7.2rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.task-completion-amount-profile {
+  position: absolute;
+  top: -8.5rem;
   width: 100%;
   text-align: center;
   font-size: 1.5rem;

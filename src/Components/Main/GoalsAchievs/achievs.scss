@@ -1,14 +1,25 @@
-.task-button {
+.task-button-achiev {
+  margin-bottom: -1rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.task-container-achiev {
+  width: 90vw;
+  margin: 0;
+  padding: 5rem 0 0 3rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .profile-circle {
-  fill: url(#gradient);
+  fill: url(#gradientAchiev);
 }
 
 .disabled-cursor {
   cursor: default;
 }
 .disabled-cursor:hover {
-  // text-decoration: none;
   font-weight: 300;
 }

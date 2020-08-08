@@ -79,9 +79,9 @@ function TaskButton(props) {
                 ref={circleRef}
                 className="progress-ring__circle"
                 stroke="white"
-                strokeWidth="4"
+                strokeWidth="10"
                 fill="transparent"
-                r="92"
+                r="95"
                 cx="100"
                 cy="100" />
             </svg>

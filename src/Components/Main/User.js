@@ -105,9 +105,9 @@ function User(props) {
               ref={circleRef}
               className="progress-ring__circle"
               stroke="white"
-              strokeWidth="8"
+              strokeWidth="20"
               fill="transparent"
-              r="284"
+              r="260"
               cx="300"
               cy="300" />
           </svg>

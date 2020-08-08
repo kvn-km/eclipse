@@ -54,7 +54,7 @@ function GoalButton(props) {
 
   return (
     <div>
-      <article className="task-button" >
+      <article className="goal-button" >
         <FadeIn>
           <div className="task-button-el">
             <p>{props.taskTitle}</p>
@@ -76,15 +76,15 @@ function GoalButton(props) {
                 ref={circleRef}
                 className="progress-ring__circle"
                 stroke="white"
-                strokeWidth="4"
+                strokeWidth="10"
                 fill="transparent"
-                r="92"
+                r="95"
                 cx="100"
                 cy="100" />
             </svg>
           </div>
-          <div className="task-completion-amount">
-            <p>{props.taskCompletionAmount}</p>
+          <div className={props.taskCompletionAmount === "100%" ? "task-completed-amount" : "task-completion-amount"}>
+            <p>{props.taskCompletionAmount === "100%" ? `completed` : props.taskCompletionAmount}</p>
           </div>
         </FadeIn>
       </article>
