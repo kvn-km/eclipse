@@ -168,8 +168,24 @@ const completeTask = (request, response) => {
   WHERE user_id = $1 AND task_id = $2
   RETURNING *;`, [request.body.params.id, request.body.params.taskId, request.body.params.taskXP])
     .then(res => {
-      response.status(200).json(res.rows[0]);
-    });
+      return pool.query(`
+        UPDATE users
+        SET xp = xp + $2
+        WHERE id = $1
+        RETURNING *;`, [request.body.params.id, request.body.params.taskXP])
+        .then(() => {
+          return pool.query(`
+            UPDATE users
+            SET level = level + 1, xp = 0
+            WHERE id = $1 AND xp > $2
+            RETURNING *;`, [request.body.params.id, request.body.params.levelXP])
+            .then(() => {
+              console.log("WE MADE IT");
+              response.status(200).json(res.rows[0]);
+            });
+        });
+    })
+    .catch(e => console.log("EEEEEEEEEEEE", e));
 };
 
 module.exports = {

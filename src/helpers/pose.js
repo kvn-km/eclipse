@@ -68,9 +68,7 @@ export async function preINIT(stuff) {
             //  Checks whether average probability is enough to register pose
             // if (avg(probabilityArr) >= 0.01) {
 
-            // let taskTitle = document.getElementsByClassName('task-title')[0].innerHTML;
-
-            Promise.resolve(axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp } }))
+            Promise.resolve(axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } }))
                 .then((response) => {
                     console.log("RESPONSE:", response);
                     // window.location = "/user/" 
