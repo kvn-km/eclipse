@@ -162,6 +162,14 @@ const addUser = (request, response) => {
     .catch(error => error);
 };
 
+const completeTask = (request, response) => {
+  console.log("REQUEST HERE: ", request.body)
+  return pool.query(`
+  UPDATE user_task
+  SET progress = $1, times_completed = $2
+  WHERE user_id = $3 AND task_id = $4;`, [request.body.params.progress, request.body.params.timesCompleted, request.body.params.id, request.body.params.taskId])
+}
+
 module.exports = {
   getCookies,
   getUser,
@@ -175,5 +183,6 @@ module.exports = {
   getAchievs,
   getUsersAchievs,
   getLevels,
-  addUser
+  addUser,
+  completeTask
 };

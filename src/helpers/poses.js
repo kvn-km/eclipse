@@ -43,13 +43,13 @@ function standStill() {
 
 //below has no models
 function stretches() {
-  if (taskName === "plank") {
+  if (taskName === "arm-stretch") {
     return true;
   }
 }
 
 function chairPose() {
-  if (taskName === "plank") {
+  if (taskName === "chaire pose") {
     return true;
   }
 }
