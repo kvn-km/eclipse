@@ -51,7 +51,7 @@ export async function init(status) {
 
     //Checks whether average probability is enough to register pose
     if (avg(probabilityArr) >= 0.75) {
-            axios.put('/api/tasks/user', { params: { progress: 1, timesCompleted: 1, id: 2, taskId: 1 } })
+            axios.put('/api/tasks/user', { params: { id: 2, taskId: 1 } })
             .then((response) => {
                 console.log(response);
             })
