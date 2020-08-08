@@ -43,7 +43,7 @@ function TasksMain(props) {
     return () => { mounted = false; };
   }, [location]);
 
-  const tasks = user.allTasks.map((task, i) => {
+  const tasks = user.info && user.allTasks.map((task, i) => {
     const userTask = user.tasks[i];
     return (
       <TaskButton
@@ -64,7 +64,7 @@ function TasksMain(props) {
         <FadeIn>
 
           <div className="task-container">
-            {tasks}
+            {user.info && tasks}
           </div>
 
         </FadeIn>

@@ -42,7 +42,7 @@ function TasksSide(props) {
     return () => { mounted = false; };
   }, [location]);
 
-  const tasks = user.allTasks.map((task, i) => {
+  const tasks = user.info && user.allTasks.map((task, i) => {
     const userTask = user.tasks[i + 8];
     return (
       <TaskButton
@@ -63,7 +63,7 @@ function TasksSide(props) {
         <FadeIn>
 
           <div className="task-container">
-            {tasks}
+            {user.info && tasks}
           </div>
 
         </FadeIn>

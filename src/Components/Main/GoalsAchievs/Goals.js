@@ -40,7 +40,7 @@ function Goals(props) {
   }, [location]);
 
 
-  const achievs = user.allAchievs.map((achievs, i) => {
+  const achievs = user.info && user.allAchievs.map((achievs, i) => {
     const goals = user.goals[i];
     return (
       <GoalButton
@@ -60,7 +60,7 @@ function Goals(props) {
         <FadeIn>
 
           <div className="task-container">
-            {achievs}
+            {user.info && achievs}
           </div>
 
         </FadeIn>

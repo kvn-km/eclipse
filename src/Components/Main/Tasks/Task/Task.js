@@ -3,7 +3,7 @@ import FadeIn from "react-fade-in";
 import axios from "axios";
 
 
-import { init } from "../../../../helpers/pose";
+import { preINIT } from "../../../../helpers/pose";
 
 function refreshPage() {
   window.location.reload(false);
@@ -51,7 +51,7 @@ function Task(props) {
 
         <div className="task-title">{user.task && user.task.name}</div>
 
-        <button type="button" onClick={init}>Start</button>
+        <button type="button" onClick={() => { preINIT(user); }}>Start</button>
         <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
         <div id="label-container"></div>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>

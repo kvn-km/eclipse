@@ -53,7 +53,7 @@ const getTasks = (request, response) => {
   });
 };
 const getUsersTasks = (request, response) => {
-  pool.query('SELECT * FROM user_task WHERE user_id = $1;', [request.query.id], (error, results) => {
+  pool.query('SELECT * FROM user_task WHERE user_id = $1 ORDER BY task_id;', [request.query.id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -161,15 +161,16 @@ const addUser = (request, response) => {
 };
 
 const completeTask = (request, response) => {
-  console.log("REQUEST HERE: ", request.body)
+  console.log("REQUEST HERE: ", request.body);
   return pool.query(`
   UPDATE user_task
-  SET progress = $3, times_completed = times_completed + 1
+  SET progress = progress + $3, times_completed = times_completed + 1
   WHERE user_id = $1 AND task_id = $2
-  RETURNING *;`, [request.body.params.id, request.body.params.taskId, 99])
-  .then(res => {
-    response.status(200).json(res.rows[0])});
-}
+  RETURNING *;`, [request.body.params.id, request.body.params.taskId, request.body.params.taskXP])
+    .then(res => {
+      response.status(200).json(res.rows[0]);
+    });
+};
 
 module.exports = {
   getCookies,
