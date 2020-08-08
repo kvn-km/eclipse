@@ -7,7 +7,6 @@ let model, webcam, ctx, labelContainer, maxPredictions;
 let i = "";
 let sum = 0;
 const probabilityArr = [];
-let sum = 0;
 
 const avg = (arr) => {
     for (let j = 0; j < arr.length; j++) {
@@ -49,8 +48,10 @@ export async function init(status) {
     if (status === "STOP") {
         await webcam.stop();
     }
+
+    //Checks whether average probability is enough to register pose
     if (avg(probabilityArr) >= 0.75) {
-            axios.put('/api/tasks/user', { params: { progress: 100, timesCompleted: 100, id: 2, taskId: 1 } })
+            axios.put('/api/tasks/user', { params: { progress: 1, timesCompleted: 100, id: 2, taskId: 1 } })
             .then((response) => {
                 console.log(response);
             })
@@ -62,7 +63,7 @@ async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
 
-    if (i < 50) {
+    if (i < 70) {
         window.requestAnimationFrame(loop);
         i++;
     }
@@ -71,14 +72,15 @@ async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+    
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
-    // console.log(prediction);
 
     //Task name on the task page
     let taskTitle = document.getElementsByClassName('task-title')[0].innerHTML
 
     for (let i = 0; i < maxPredictions; i++) {
+
         //
         if (taskTitle === prediction[i].className) {
         const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
