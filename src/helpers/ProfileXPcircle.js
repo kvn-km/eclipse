@@ -78,7 +78,7 @@ function ProfileXPcircle(props) {
           </svg>
         </div>
         <div className="task-completion-amount">
-          <p>{props.taskCompletionAmount}</p>
+          <p>xp <br />{props.taskCompletionAmount}</p>
         </div>
       </FadeIn>
     </article>
