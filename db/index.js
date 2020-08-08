@@ -164,8 +164,8 @@ const completeTask = (request, response) => {
   console.log("REQUEST HERE: ", request.body)
   return pool.query(`
   UPDATE user_task
-  SET progress = $1, times_completed = $2
-  WHERE user_id = $3 AND task_id = $4;`, [request.body.params.progress, request.body.params.timesCompleted, request.body.params.id, request.body.params.taskId])
+  SET progress = progress + 1, times_completed = times_completed + 1
+  WHERE user_id = $1 AND task_id = $2;`, [request.body.params.id, request.body.params.taskId])
 }
 
 module.exports = {
