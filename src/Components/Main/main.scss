@@ -101,6 +101,21 @@
 .progress-ring {
   pointer-events: none;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .progress-ring {
+    animation: App-logo-spin infinite 60s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .progress-ring__circle {
   stroke-dasharray: 10 20;
   // 10px dash separated by 20px

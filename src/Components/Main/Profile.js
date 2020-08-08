@@ -43,10 +43,11 @@ function Profile(props) {
   }, [location]);
 
   // 
-  let asdfasdfasdf = user.usersAchievs
+  let asdfasdfasdf = user.info && user.usersAchievs
     .filter(userAchiev => userAchiev.progress === 100)
     .map((uA, i) => {
-      const achievs = user.allAchievs[i - 1];
+      const achievs = user.allAchievs[i];
+      console.log(achievs);
       return (
         <Achievs
           key={uA.id}

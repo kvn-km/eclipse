@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
-import TaskButton from "../TaskButtons/TaskButton";
+import GoalButton from "../TaskButtons/GoalButton";
 import "../main.scss";
 
 function Goals(props) {
@@ -43,7 +43,7 @@ function Goals(props) {
   const achievs = user.allAchievs.map((achievs, i) => {
     const goals = user.goals[i];
     return (
-      <TaskButton
+      <GoalButton
         key={achievs.id}
         id={achievs.id}
         taskTitle={achievs.name}

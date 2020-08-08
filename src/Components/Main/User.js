@@ -28,9 +28,10 @@ function User(props) {
 
   // WRONG INFO: NEEDS LEVEL'S TOTAL XP AMOUNT, NOT 100 or PROGRESS
   const nextLevelDisplay = () => {
+    console.log(user);
     return (
       <div className="next-level-display">
-        <p>{`Next level in ${100 - progress} points`}</p>
+        <p>{`Next level in ${Math.floor(user.levelInfo - user.info.xp)} points`}</p>
       </div>
     );
   };
@@ -92,7 +93,7 @@ function User(props) {
               cy="300" />
           </svg>
         </FadeIn>
-        {nextLevelDisplay()}
+        {user.info && nextLevelDisplay()}
       </div>
     </section>
   );
