@@ -12,7 +12,7 @@ function TasksMain(props) {
     info: null,
     levelInfo: null,
     tasks: null,
-    allTasks: []
+    allTasks: null
   });
 
   let location = props.location.pathname;
@@ -49,7 +49,7 @@ function TasksMain(props) {
       <TaskButton
         key={task.id}
         id={task.id}
-        link={"/user/2/task"}
+        link={`/user/${user.info.id}/task`}
         taskTitle={task.name}
         progress={userTask.progress}
         taskCompletionAmount={`${userTask.progress}%`}
