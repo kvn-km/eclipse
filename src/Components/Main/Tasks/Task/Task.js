@@ -52,7 +52,11 @@ function Task(props) {
         <div className="task-title">{user.task && user.task.name}</div>
 
         <button type="button" onClick={init}>Start</button>
+<<<<<<< HEAD
         <div className="canvas-canvas" ><canvas id="canvas">Hello</canvas></div>
+=======
+        <div className="canvas-canvas" id><canvas id="canvas"></canvas></div>
+>>>>>>> poses
         <div id="label-container"></div>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
