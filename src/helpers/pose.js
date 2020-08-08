@@ -50,22 +50,27 @@ export async function init(status) {
     }
 
     //Checks whether average probability is enough to register pose
-    if (avg(probabilityArr) >= 0.75) {
-            axios.put('/api/tasks/user', { params: { id: 2, taskId: 1 } })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch(e => console.log("ERRORRRR", e));
-        }
+    // if (avg(probabilityArr) >= 0.75) {
+
     }
+    // }
 
 async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
 
-    if (i < 70) {
+    if (i < 30) {
         window.requestAnimationFrame(loop);
         i++;
+    } 
+    else {
+        Promise.resolve(axios.put('/api/tasks/user', { params: { id: 3, taskId: 1 } }))
+        .then((response) => {    
+            console.log("RESPONSE:", response);
+            // window.location = "/user/" 
+        
+        })
+        .catch(e => console.log("ERRORRRR", e));
     }
 }
 async function predict() {

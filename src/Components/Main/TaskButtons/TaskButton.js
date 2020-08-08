@@ -6,6 +6,7 @@ import FadeIn from "react-fade-in";
 import "./taskButton.scss";
 
 function TaskButton(props) {
+  console.log(props);
   const [progress, setProgress] = useState(0);
 
   console.log("TEMPVAR", progress);
@@ -87,6 +88,7 @@ function TaskButton(props) {
             </svg>
           </div>
           <div className="task-completion-amount">
+            {/* <p>{props.progress}</p> */}
             <p>{props.taskCompletionAmount}</p>
           </div>
         </FadeIn>

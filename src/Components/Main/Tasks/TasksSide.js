@@ -48,7 +48,7 @@ function TasksSide(props) {
       <TaskButton
         key={task.id}
         id={task.id}
-        link={"/user/2/task"}
+        link={`/user/${user.info.id}/task`}
         taskTitle={task.name}
         progress={userTask.progress}
         taskCompletionAmount={`${userTask.progress}%`}
