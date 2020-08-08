@@ -23,7 +23,6 @@ export async function init(status) {
     webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
     await webcam.setup(); // request access to the webcam
     await webcam.play();
-    // predictTask();
     window.requestAnimationFrame(loop);
 
     // append/get elements to the DOM
@@ -43,30 +42,11 @@ async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
 
-    if (i < 20) {
+    if (i < 50) {
         window.requestAnimationFrame(loop);
         i++;
     }
 }
-
-export async function predictTask() {
-    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-    // Prediction 2: run input through teachable machine classification model
-    const prediction = await model.predict(posenetOutput);
-    console.log(prediction);
-
-    // for (let i = 0; i < maxPredictions; i++) {
-    //     //
-    //     const classPrediction =
-    //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-    //     labelContainer.childNodes[i].innerHTML = classPrediction;
-    // }
-
-    // // finally draw the poses; shows webcam
-    // drawPose(pose);
-    // webcam.update();
-}
-
 async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
@@ -75,11 +55,16 @@ async function predict() {
     const prediction = await model.predict(posenetOutput);
     console.log(prediction);
 
+    //Task name on the task page
+    let taskTitle = document.getElementsByClassName('task-title')[0].innerHTML
+
     for (let i = 0; i < maxPredictions; i++) {
         //
+        if (taskTitle === prediction[i].className) {
         const classPrediction =
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
         labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
     }
 
     // finally draw the poses; shows webcam
