@@ -51,7 +51,7 @@ export async function init(status) {
 
     //Checks whether average probability is enough to register pose
     if (avg(probabilityArr) >= 0.75) {
-            axios.put('/api/tasks/user', { params: { progress: 1, timesCompleted: 100, id: 2, taskId: 1 } })
+            axios.put('/api/tasks/user', { params: { progress: 1, timesCompleted: 1, id: 2, taskId: 1 } })
             .then((response) => {
                 console.log(response);
             })
@@ -72,7 +72,7 @@ async function predict() {
     // Prediction #1: run input through posenet
     // estimatePose can take in an image, video or canvas html element
     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-    
+
     // Prediction 2: run input through teachable machine classification model
     const prediction = await model.predict(posenetOutput);
 
