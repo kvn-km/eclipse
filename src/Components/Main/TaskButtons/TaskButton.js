@@ -6,10 +6,8 @@ import FadeIn from "react-fade-in";
 import "./taskButton.scss";
 
 function TaskButton(props) {
-  console.log(props);
   const [progress, setProgress] = useState(0);
-
-  console.log("TEMPVAR", progress);
+  const [hasProgress, setHasProgress] = useState(false);
 
   let circleRef = useRef();
   useEffect(() => {
@@ -29,6 +27,7 @@ function TaskButton(props) {
           circle.style.strokeDashoffset = offset;
         }
         mounted && setProgress(percent);
+        mounted && setHasProgress(props.hasProgress);
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -37,27 +36,33 @@ function TaskButton(props) {
     };
     theCircle(circleRef.current);
     return () => { mounted = false; };
-  }, [props.progress]);
+  }, [props.progress, progress, props.hasProgress]);
 
-  const aLink = props.link;
-
-  const stopColour = {
-    offset0: "#65c0e0",
-    offset25: "#e9a5a5",
-    offset50: "#b8c135",
-    offset75: "#81c1d9",
-    offset100: "#aea2db",
+  const theGradient = () => {
+    return (
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#65c0e0" />
+        <stop offset="25%" stopColor="#e9a5a5" />
+        <stop offset="40%" stopColor="#b8c135" />
+        <stop offset="50%" stopColor="#81c1d9" />
+        <stop offset="100%" stopColor="#aea2db" />
+      </linearGradient>
+    );
   };
-  const stopColourBW = {
-    offset0: "#666666",
-    offset25: "#000",
-    offset50: "#000",
-    offset75: "#000",
-    offset100: "#666666"
+  const theBW = () => {
+    return (
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#666666" />
+        <stop offset="25%" stopColor="#000000" />
+        <stop offset="40%" stopColor="#000000" />
+        <stop offset="50%" stopColor="#000000" />
+        <stop offset="100%" stopColor="#666666" />
+      </linearGradient>
+    );
   };
 
   return (
-    <Link to={`${props.link}/${props.id}`} onClick={aLink !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={aLink !== undefined ? "task-link" : "disabled-cursor"}>
+    <Link to={`${props.link}/${props.id}`} onClick={props.link !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={props.link !== undefined ? "task-link" : "disabled-cursor"}>
       <article className="task-button" >
         <FadeIn>
           <div className="task-button-el">
@@ -68,13 +73,7 @@ function TaskButton(props) {
               height="200"
             >
               <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={props.progress > 0 ? stopColour.offset0 : stopColourBW.offset0} />
-                  <stop offset="25%" stopColor={props.progress > 0 ? stopColour.offset25 : stopColourBW.offset25} />
-                  <stop offset="40%" stopColor={props.progress > 0 ? stopColour.offset50 : stopColourBW.offset50} />
-                  <stop offset="50%" stopColor={props.progress > 0 ? stopColour.offset75 : stopColourBW.offset75} />
-                  <stop offset="100%" stopColor={props.progress > 0 ? stopColour.offset100 : stopColourBW.offset100} />
-                </linearGradient>
+                {hasProgress ? theGradient() : theBW()}
               </defs>
               <circle
                 ref={circleRef}
