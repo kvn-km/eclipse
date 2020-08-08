@@ -86,6 +86,7 @@ const getTaskById = (request, response) => {
 };
 
 const getAchievs = (request, response) => {
+  console.log("REQ Achievs", request.query);
   pool.query('SELECT * FROM achievements;', (error, results) => {
     if (error) {
       throw error;
@@ -94,6 +95,7 @@ const getAchievs = (request, response) => {
   });
 };
 const getUsersAchievs = (request, response) => {
+  console.log("REQ USER Achievs", request.query);
   pool.query('SELECT * FROM user_achievs WHERE user_id = $1;', [request.query.id], (error, results) => {
     if (error) {
       throw error;

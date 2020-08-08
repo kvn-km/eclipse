@@ -7,7 +7,7 @@ import "./achievs.scss";
 function Achievs(props) {
   const [progress, setProgress] = useState(0);
 
-  console.log("TEMPVAR", progress);
+  console.log("TEMPVAR ACHIEVS", props);
 
   let circleRef = useRef();
   useEffect(() => {

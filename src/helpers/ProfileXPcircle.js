@@ -10,6 +10,7 @@ function ProfileXPcircle(props) {
 
   let circleRef = useRef();
   useEffect(() => {
+    let mounted = true;
     let theCircle = (el) => {
       let circle = el;
       let radius = circle.r.baseVal.value;
@@ -19,7 +20,7 @@ function ProfileXPcircle(props) {
       function setTheProgress(percent) {
         const offset = circumference - percent / 100 * circumference;
         circle.style.strokeDashoffset = offset;
-        setProgress(percent);
+        mounted && setProgress(percent);
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -27,6 +28,7 @@ function ProfileXPcircle(props) {
       }, 350);
     };
     theCircle(circleRef.current);
+    return () => { mounted = false; };
   }, [props.progress]);
 
 

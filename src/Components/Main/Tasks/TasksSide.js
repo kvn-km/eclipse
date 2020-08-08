@@ -45,7 +45,6 @@ function TasksSide(props) {
   const tasks = user.allTasks.map((task, i) => {
     const userTask = user.tasks[i + 8];
     return (
-
       <TaskButton
         key={task.id}
         id={task.id}
@@ -55,7 +54,6 @@ function TasksSide(props) {
         taskCompletionAmount={`${userTask.progress}%`}
         description={task.description}
       />
-
     );
   });
 
