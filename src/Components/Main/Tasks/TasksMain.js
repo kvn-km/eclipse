@@ -29,7 +29,6 @@ function TasksMain(props) {
           let level = all[1].data[all[0].data.level - 1];
           let allUserTasks = all[2].data;
           let allTasks = all[3].data;
-
           mounted && setUser((...prev) => ({
             info: all[0].data,
             levelInfo: level.xp,
@@ -45,9 +44,6 @@ function TasksMain(props) {
 
   const tasks = user.info && user.allTasks.map((task, i) => {
     const userTask = user.tasks[i];
-
-    console.log("ASDFASDF", task);
-
     let taskCompletionAmount = ((userTask.times_completed / task.amount_to_complete).toFixed(2)) * 100;
     let taskCompleted = false;
 

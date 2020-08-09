@@ -8,6 +8,7 @@ function GoalButton(props) {
   const [progress, setProgress] = useState(0);
 
   let circleRef = useRef();
+
   useEffect(() => {
     let mounted = true;
     let theCircle = (el) => {
@@ -63,11 +64,11 @@ function GoalButton(props) {
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={props.progress > 0 ? stopColour.offset0 : stopColourBW.offset0} />
-                  <stop offset="25%" stopColor={props.progress > 0 ? stopColour.offset25 : stopColourBW.offset25} />
-                  <stop offset="40%" stopColor={props.progress > 0 ? stopColour.offset50 : stopColourBW.offset50} />
-                  <stop offset="50%" stopColor={props.progress > 0 ? stopColour.offset75 : stopColourBW.offset75} />
-                  <stop offset="100%" stopColor={props.progress > 0 ? stopColour.offset100 : stopColourBW.offset100} />
+                  <stop offset="0%" stopColor={stopColour.offset0} />
+                  <stop offset="25%" stopColor={stopColour.offset25} />
+                  <stop offset="40%" stopColor={stopColour.offset50} />
+                  <stop offset="50%" stopColor={stopColour.offset75} />
+                  <stop offset="100%" stopColor={stopColour.offset100} />
                 </linearGradient>
               </defs>
               <circle

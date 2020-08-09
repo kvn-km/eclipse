@@ -37,29 +37,6 @@ function TaskButton(props) {
     return () => { mounted = false; };
   }, [props.progress, progress]);
 
-  const theGradient = () => {
-    return (
-      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#65c0e0" />
-        <stop offset="25%" stopColor="#e9a5a5" />
-        <stop offset="40%" stopColor="#b8c135" />
-        <stop offset="50%" stopColor="#81c1d9" />
-        <stop offset="100%" stopColor="#aea2db" />
-      </linearGradient>
-    );
-  };
-  const theBW = () => {
-    return (
-      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#666666" />
-        <stop offset="25%" stopColor="#000000" />
-        <stop offset="40%" stopColor="#000000" />
-        <stop offset="50%" stopColor="#000000" />
-        <stop offset="100%" stopColor="#666666" />
-      </linearGradient>
-    );
-  };
-
   return (
     <Link to={`${props.link}/${props.id}`} onClick={props.link !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={props.link !== undefined ? "task-link" : "disabled-cursor"}>
       <article className="task-button" >
@@ -72,7 +49,13 @@ function TaskButton(props) {
               height="200"
             >
               <defs>
-                {progress ? theGradient() : theBW()}
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#65c0e0" />
+                  <stop offset="25%" stopColor="#e9a5a5" />
+                  <stop offset="40%" stopColor="#b8c135" />
+                  <stop offset="50%" stopColor="#81c1d9" />
+                  <stop offset="100%" stopColor="#aea2db" />
+                </linearGradient>
               </defs>
               <circle
                 ref={circleRef}
@@ -87,8 +70,7 @@ function TaskButton(props) {
           </div>
           <div className={props.taskCompletionAmount === "100%" ? "task-completed-amount" : "task-completion-amount"}>
             <p>{props.taskCompletionAmount === "100%" ? `completed` : props.taskCompletionAmount}</p>
-            {/* <div className="task-completion-amount">
-            <p>{props.taskCompletionAmount}</p> */}
+
           </div>
         </FadeIn>
       </article>
