@@ -3,8 +3,6 @@ import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
-// const x = axios.create({ withCredentials: true, });
-
 function Login(props) {
   let [username, setUsername] = useState();
   let [redirect, setRedirect] = useState({
@@ -60,7 +58,9 @@ function Login(props) {
               type="text"
               placeholder=""
               value={username}
-              onChange={(event) => setUsername(event.target.value)}
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
               onInput={toInputUppercase}
             />
           </form>

@@ -37,16 +37,27 @@ function TaskButton(props) {
     return () => { mounted = false; };
   }, [props.progress, progress]);
 
+  // const filterStyleC = {
+  //   filter: "grayscale(0%)",
+  //   opacity: 1
+  // };
+  // const filterStyleBW = {
+  //   filter: "grayscale(100%)",
+  //   opacity: 0.1
+  // };
+
+
   return (
     <Link to={`${props.link}/${props.id}`} onClick={props.link !== undefined ? (e) => ("") : (event) => event.preventDefault()} className={props.link !== undefined ? "task-link" : "disabled-cursor"}>
       <article className="task-button" >
         <FadeIn>
           <div className="task-button-el">
-            <p>{props.taskTitle}</p>
+            <p>{props.taskCompletionAmount === "100%" ? `reset task` : props.taskTitle}</p>
             <svg
               className="progress-ring"
               width="200"
               height="200"
+            // style={progress && props.progress > 0 ? { filterStyleC } : { filterStyleBW }}
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">

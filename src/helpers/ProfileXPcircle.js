@@ -42,11 +42,11 @@ function ProfileXPcircle(props) {
     offset100: "#aea2db",
   };
   const stopColourBW = {
-    offset0: "#666666",
-    offset25: "#000",
-    offset50: "#000",
-    offset75: "#000",
-    offset100: "#666666"
+    offset0: "#6666664d",
+    offset25: "#0000001c",
+    offset50: "#00000080",
+    offset75: "#0000001c",
+    offset100: "#6666664d"
   };
 
   return (

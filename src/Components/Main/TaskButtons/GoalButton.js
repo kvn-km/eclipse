@@ -43,13 +43,18 @@ function GoalButton(props) {
     offset75: "#81c1d9",
     offset100: "#aea2db",
   };
-  const stopColourBW = {
-    offset0: "#666666",
-    offset25: "#000",
-    offset50: "#000",
-    offset75: "#000",
-    offset100: "#666666"
-  };
+  // const stopColourBW = {
+  //   offset0: "#666666",
+  //   offset25: "#000",
+  //   offset50: "#000",
+  //   offset75: "#000",
+  //   offset100: "#666666"
+  // };
+
+  // const filterStyle = {
+  //   filter: "grayscale(100%)",
+  //   opacity: 0.1
+  // };
 
   return (
     <div>
@@ -61,6 +66,7 @@ function GoalButton(props) {
               className="progress-ring"
               width="200"
               height="200"
+            // style={props.progress ? "" : filterStyle}
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
+import { Textfit } from "react-textfit";
 
 
 import { preINIT } from "../../../../helpers/pose";
@@ -57,11 +58,18 @@ function Task(props) {
 
   }, [user, props]);
 
-
   return (
     <FadeIn>
       <section className="task main">
-        <div className="task-title">{user.task && user.task.name}</div>
+        <div className="task-title">
+          <Textfit
+            mode="single"
+            forceSingleModeWidth={false}
+            max="160px"
+          >
+            {user.task && user.task.name}
+          </Textfit>
+        </div>
 
         <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
         <div id="label-container"></div>
