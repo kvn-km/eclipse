@@ -43,7 +43,10 @@ app.get('/api/achievs/user', db.getUsersAchievs);
 
 app.post('/api/users', db.addUser);
 
-app.put('/api/tasks/user', db.completeTask)
+app.put('/api/tasks/user', db.completeTask);
+
+app.put('/api/achievs', db.updateAchievs);
+
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

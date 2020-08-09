@@ -72,7 +72,7 @@ function TaskButton(props) {
               height="200"
             >
               <defs>
-                {progress > 0 ? theGradient() : theBW()}
+                {progress ? theGradient() : theBW()}
               </defs>
               <circle
                 ref={circleRef}
@@ -85,8 +85,10 @@ function TaskButton(props) {
                 cy="100" />
             </svg>
           </div>
-          <div className="task-completion-amount">
-            <p>{props.taskCompletionAmount}</p>
+          <div className={props.taskCompletionAmount === "100%" ? "task-completed-amount" : "task-completion-amount"}>
+            <p>{props.taskCompletionAmount === "100%" ? `completed` : props.taskCompletionAmount}</p>
+            {/* <div className="task-completion-amount">
+            <p>{props.taskCompletionAmount}</p> */}
           </div>
         </FadeIn>
       </article>

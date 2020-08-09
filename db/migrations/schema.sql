@@ -21,13 +21,14 @@ CREATE TABLE achievements (
   name VARCHAR(255),
   xp INTEGER,
   image_URL TEXT,
-  description TEXT
+  description TEXT,
+  amount_to_complete INTEGER
 );
 
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255),
-  times_to_completion INTEGER DEFAULT 0,
+  amount_to_complete INTEGER DEFAULT 0,
   type VARCHAR(255),
   xp INTEGER,
   description TEXT
@@ -43,7 +44,8 @@ CREATE TABLE user_task (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE,
   progress INTEGER DEFAULT 0,
-  times_completed INTEGER DEFAULT 0 
+  times_completed INTEGER DEFAULT 0,
+  achievs_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_achievs (

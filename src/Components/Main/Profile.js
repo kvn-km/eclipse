@@ -24,7 +24,8 @@ function Profile(props) {
         axios.get('/api/user/current', { params: { id: location.slice(6, 7) } }),
         axios.get('/api/levels'),
         axios.get('/api/achievs/user', { params: { id: location.slice(6, 7) } }),
-        axios.get('/api/achievs')])
+        axios.get('/api/achievs')
+      ])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
           let allUserAchievs = all[2].data;
@@ -44,9 +45,13 @@ function Profile(props) {
 
   // 
   const userAchievBadges = user.info && user.usersAchievs
-    .filter(userAchiev => userAchiev.progress === 100)
+    .filter((userAchiev, i) => {
+      return userAchiev.times_completed / user.allAchievs[i].amount_to_complete * 100 >= 100;
+    })
     .map((uA, i) => {
-      const achievs = user.allAchievs[i];
+      const achievs = user.allAchievs[uA.achiev_id - 1];
+      console.log("<><><><>", uA);
+      console.log("++++++++", achievs);
       return (
         <Achievs
           key={uA.id}

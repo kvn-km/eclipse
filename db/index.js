@@ -94,7 +94,7 @@ const getAchievs = (request, response) => {
   });
 };
 const getUsersAchievs = (request, response) => {
-  pool.query('SELECT * FROM user_achievs WHERE user_id = $1;', [request.query.id], (error, results) => {
+  pool.query('SELECT * FROM user_achievs WHERE user_id = $1 ORDER BY id;', [request.query.id], (error, results) => {
     if (error) {
       throw error;
     }
@@ -187,6 +187,19 @@ const completeTask = (request, response) => {
     .catch(e => console.log("EEEEEEEEEEEE", e));
 };
 
+const updateAchievs = (request, response) => {
+  return pool.query(`
+        UPDATE user_achievs
+        SET times_completed = times_completed + 1
+        WHERE achiev_id = $2 AND user_id = $1
+        RETURNING *;`, [request.body.params.id, request.body.params.taskId])
+    .then(res => {
+      console.log("IT WORKS");
+      response.status(200).json(res.rows[0]);
+    })
+    .catch(e => console.log("EEEEEEEEEEEE", e));
+};
+
 module.exports = {
   getCookies,
   getUser,
@@ -201,5 +214,6 @@ module.exports = {
   getUsersAchievs,
   getLevels,
   addUser,
-  completeTask
+  completeTask,
+  updateAchievs
 };

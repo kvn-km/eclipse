@@ -65,19 +65,25 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         }
         else {
             //  Checks whether average probability is enough to register pose
-            // if (avg(probabilityArr) >= 0.01) {
+            // if (avg(probabilityArr) >= 0.1) {
 
-            Promise.resolve(axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } }))
-                .then((response) => {
-                    webcam.stop();
-                    // TIMEOUT SO NOT JARRING
-                    setTimeout(() => {
-                        redirectPage(props);
-                    }, 1500);
-                })
+            Promise.resolve(
+                axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } })
+                    .then(() => {
+                        console.log("ERERERERERERERERERE");
+                        axios.put('/api/achievs', { params: { id: stuff.info.id, taskId: stuff.task.id } })
+                            .then(() => {
+                                webcam.stop();
+                                // TIMEOUT SO NOT JARRING
+                                setTimeout(() => {
+                                    redirectPage(props);
+                                }, 1500);
+                                console.log("HERERERERERERERER");
+                            });
+                    }))
                 .catch(e => console.log("ERRORRRR", e));
+            // }
         }
-        // }
     }
 
     async function predict() {
@@ -107,7 +113,6 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
     }
 
 }
-
 
 
 

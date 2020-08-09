@@ -45,15 +45,27 @@ function TasksMain(props) {
 
   const tasks = user.info && user.allTasks.map((task, i) => {
     const userTask = user.tasks[i];
+
+    console.log("ASDFASDF", task);
+
+    let taskCompletionAmount = ((userTask.times_completed / task.amount_to_complete).toFixed(2)) * 100;
+    let taskCompleted = false;
+
+    if (taskCompletionAmount >= 100) {
+      taskCompleted = true;
+      taskCompletionAmount = 100;
+    }
+
     return (
       <TaskButton
         key={task.id}
         id={task.id}
         link={`/user/${user.info.id}/task`}
         taskTitle={task.name}
-        progress={userTask.progress}
-        taskCompletionAmount={`${userTask.progress}%`}
+        progress={taskCompletionAmount}
+        taskCompletionAmount={`${taskCompletionAmount}%`}
         description={task.description}
+        taskCompleted={taskCompleted}
       />
     );
   });
