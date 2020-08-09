@@ -1,11 +1,13 @@
 import * as tmPose from '@teachablemachine/pose';
 import axios from 'axios';
+import countdown from './countdown'
 
 const URL = "http://localhost:8000/my_model/";
 
 let model, webcam, ctx, labelContainer, maxPredictions;
 let i = "";
 const probabilityArr = [];
+let count = 10;
 
 const avg = (arr) => {
     let sum = 0;
@@ -35,8 +37,12 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
+        countdown();
         await webcam.play();
-        window.requestAnimationFrame(loop);
+        setTimeout(() => {
+            window.requestAnimationFrame(loop);
+        }, 11000);
+
 
         console.log(probabilityArr);
         console.log(avg(probabilityArr));

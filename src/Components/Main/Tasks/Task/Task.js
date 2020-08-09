@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
-
 import { preINIT } from "../../../../helpers/pose";
 
 function redirectPage(props) {
@@ -65,6 +64,7 @@ function Task(props) {
 
         <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
         <div id="label-container"></div>
+        <p id="countdown"></p> 
 
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
