@@ -21,7 +21,7 @@ function SignUp(props) {
     return <Redirect to={`${redirect.path}/${redirect.user_id}`} />;
   }
 
-  function addUser(name, password, email, phone, username) {
+  function addUser(name, password, email, username) {
     axios.post('/api/users', { params: { name: name, password: password, email: email, username: username } })
       .then(response => {
         let newState = { path: "/user", user_id: response.data.id };
@@ -45,7 +45,7 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.name = fullname;
+              setNewUser((prev) => ({ ...prev, name: fullname }));
               setSignupType("EMAIL");
             }}>
             <input
@@ -73,8 +73,7 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.email = email;
-
+              setNewUser((prev) => ({ ...prev, email: email }));
               setSignupType("USERNAME");
             }}>
             <input
@@ -102,8 +101,7 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.username = username;
-
+              setNewUser((prev) => ({ ...prev, username: username }));
               setSignupType("PASSWORD");
             }}>
             <input
@@ -131,9 +129,9 @@ function SignUp(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              newUser.password = password;
-              setNewUser();
-              addUser(newUser.name, newUser.password, newUser.email, newUser.username);
+              setNewUser((prev) => ({ ...prev, password: password }));
+              console.log(newUser);
+              addUser(newUser.name, password, newUser.email, newUser.username);
             }}>
             <input
               ref={autofocus}

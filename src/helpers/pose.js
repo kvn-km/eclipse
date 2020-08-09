@@ -73,7 +73,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
                     webcam.stop();
                     // TIMEOUT SO NOT JARRING
                     setTimeout(() => {
-                        // redirectPage(props);
+                        redirectPage(props);
                     }, 1500);
                 })
                 .catch(e => console.log("ERRORRRR", e));

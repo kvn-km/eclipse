@@ -113,9 +113,9 @@ const getLevels = (request, response) => {
 
 const addUser = (request, response) => {
   return pool.query(`
-  INSERT INTO users (name, password, email, phone, username) 
-  VALUES ($1, $2, $3, $4, $5)
-  RETURNING *;`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.phone, request.body.params.username])
+  INSERT INTO users (name, password, email, username) 
+  VALUES ($1, $2, $3, $4)
+  RETURNING *;`, [request.body.params.name, request.body.params.password, request.body.params.email, request.body.params.username])
     .then(res => {
       response.status(200).json(res.rows[0]);
       pool.query(`

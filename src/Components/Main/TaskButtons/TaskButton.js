@@ -26,6 +26,7 @@ function TaskButton(props) {
           circle.style.strokeDashoffset = offset;
         }
         mounted && setProgress(percent);
+
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -71,7 +72,7 @@ function TaskButton(props) {
               height="200"
             >
               <defs>
-                {progress !== 0 ? theGradient() : theBW()}
+                {progress > 0 ? theGradient() : theBW()}
               </defs>
               <circle
                 ref={circleRef}
