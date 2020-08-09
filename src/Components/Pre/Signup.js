@@ -10,11 +10,10 @@ function SignUp(props) {
   });
   let [fullname, setFullname] = useState(props.fullname || "");
   let [email, setEmail] = useState(props.email || "");
-  let [phone, setPhone] = useState(props.phone || "");
   let [username, setUsername] = useState(props.username || "");
   let [password, setPassword] = useState(props.password || "");
   let [signupType, setSignupType] = useState("FULLNAME");
-  let [newUser, setNewUser] = useState({ name: "", password: "", email: "", phone: "", username: "" });
+  let [newUser, setNewUser] = useState({ name: "", password: "", email: "", username: "" });
 
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
@@ -23,7 +22,7 @@ function SignUp(props) {
   }
 
   function addUser(name, password, email, phone, username) {
-    axios.post('/api/users', { params: { name: name, password: password, email: email, phone: phone, username: username } })
+    axios.post('/api/users', { params: { name: name, password: password, email: email, username: username } })
       .then(response => {
         let newState = { path: "/user", user_id: response.data.id };
         setRedirect((prev) => ({ ...prev, ...newState }));
@@ -76,7 +75,7 @@ function SignUp(props) {
               event.preventDefault();
               newUser.email = email;
 
-              setSignupType("PHONE");
+              setSignupType("USERNAME");
             }}>
             <input
               ref={autofocus}
@@ -86,35 +85,6 @@ function SignUp(props) {
               placeholder=""
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              onInput={toInputUppercase}
-            />
-          </form>
-        </section>
-      </FadeIn>
-    );
-  };
-
-  const signupTypePhone = () => {
-    return (
-      <FadeIn>
-        <div className="login-type">Phone Number</div>
-        <section className="login-input">
-          <form
-            autoComplete="off"
-            onSubmit={(event) => {
-              event.preventDefault();
-              newUser.phone = phone;
-
-              setSignupType("USERNAME");
-            }}>
-            <input
-              ref={autofocus}
-              className="login-input"
-              name="phone"
-              type="text"
-              placeholder=""
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
               onInput={toInputUppercase}
             />
           </form>
@@ -163,7 +133,7 @@ function SignUp(props) {
               event.preventDefault();
               newUser.password = password;
               setNewUser();
-              addUser(newUser.name, newUser.password, newUser.email, newUser.phone, newUser.username);
+              addUser(newUser.name, newUser.password, newUser.email, newUser.username);
             }}>
             <input
               ref={autofocus}
@@ -184,7 +154,6 @@ function SignUp(props) {
     <main className="login pre">
       {signupType === "FULLNAME" && signupTypeFullname()}
       {signupType === "EMAIL" && signupTypeEmail()}
-      {signupType === "PHONE" && signupTypePhone()}
       {signupType === "USERNAME" && signupTypeUsername()}
       {signupType === "PASSWORD" && signupTypePass()}
 

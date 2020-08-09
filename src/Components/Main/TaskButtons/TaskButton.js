@@ -7,7 +7,6 @@ import "./taskButton.scss";
 
 function TaskButton(props) {
   const [progress, setProgress] = useState(0);
-  const [hasProgress, setHasProgress] = useState(false);
 
   let circleRef = useRef();
   useEffect(() => {
@@ -27,7 +26,6 @@ function TaskButton(props) {
           circle.style.strokeDashoffset = offset;
         }
         mounted && setProgress(percent);
-        mounted && setHasProgress(props.hasProgress);
       };
       // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
@@ -36,7 +34,7 @@ function TaskButton(props) {
     };
     theCircle(circleRef.current);
     return () => { mounted = false; };
-  }, [props.progress, progress, props.hasProgress]);
+  }, [props.progress, progress]);
 
   const theGradient = () => {
     return (
@@ -73,7 +71,7 @@ function TaskButton(props) {
               height="200"
             >
               <defs>
-                {hasProgress ? theGradient() : theBW()}
+                {progress !== 0 ? theGradient() : theBW()}
               </defs>
               <circle
                 ref={circleRef}
@@ -87,7 +85,6 @@ function TaskButton(props) {
             </svg>
           </div>
           <div className="task-completion-amount">
-            {/* <p>{props.progress}</p> */}
             <p>{props.taskCompletionAmount}</p>
           </div>
         </FadeIn>

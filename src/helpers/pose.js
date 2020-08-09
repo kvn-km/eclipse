@@ -15,7 +15,7 @@ const avg = (arr) => {
     return Number(sum / arr.length);
 };
 
-export async function preINIT(stuff) {
+export async function preINIT(stuff, refreshPage, props, redirectPage) {
 
     console.log("<><><><><><>", stuff);
     async function init(stuff) {
@@ -32,7 +32,7 @@ export async function preINIT(stuff) {
         maxPredictions = model.getTotalClasses();
 
         // Convenience function to setup a webcam
-        const size = 500;
+        const size = 700;
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
@@ -70,9 +70,11 @@ export async function preINIT(stuff) {
 
             Promise.resolve(axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } }))
                 .then((response) => {
-                    console.log("RESPONSE:", response);
-                    // window.location = "/user/" 
-
+                    webcam.stop();
+                    // TIMEOUT SO NOT JARRING
+                    setTimeout(() => {
+                        // redirectPage(props);
+                    }, 1500);
                 })
                 .catch(e => console.log("ERRORRRR", e));
         }

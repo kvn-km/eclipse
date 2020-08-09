@@ -5,8 +5,12 @@ import axios from "axios";
 
 import { preINIT } from "../../../../helpers/pose";
 
-function refreshPage() {
-  window.location.reload(false);
+function redirectPage(props) {
+  props.history.goBack();
+}
+
+function refreshPage(props) {
+  props.history.go();
 }
 
 function Task(props) {
@@ -38,6 +42,7 @@ function Task(props) {
             task: theTask
           };
           mounted && setUser(prev => newState);
+        }).then(() => {
         })
         .catch(e => console.log("ERRORRRR", e));
     };
@@ -45,18 +50,24 @@ function Task(props) {
     return () => { mounted = false; };
   }, [location]);
 
+
+  useEffect(() => {
+
+    user.info && preINIT(user, refreshPage, props, redirectPage);
+
+  }, [user, props]);
+
+
   return (
     <FadeIn>
       <section className="task main">
-
         <div className="task-title">{user.task && user.task.name}</div>
 
-        <button type="button" onClick={() => { preINIT(user); }}>Start</button>
         <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
         <div id="label-container"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-        <button type="button" onClick={refreshPage}>Refresh</button>
       </section >
     </FadeIn>
   );

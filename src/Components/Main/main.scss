@@ -58,8 +58,15 @@
 
   #canvas {
     object-fit: cover;
-    // height: 40vmin;
     border-radius: 50%;
+    // background-color: red;
+  }
+
+  .canvas-canvas {
+    // width: 5vmin;
+    padding: 0;
+    margin-bottom: 7rem;
+    // background-color: blue;
   }
 
   .next-level-display {
@@ -78,6 +85,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+#canvas {
 }
 
 .task-title {

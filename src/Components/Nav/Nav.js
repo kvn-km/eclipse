@@ -86,7 +86,6 @@ function Nav(props) {
       {props.location.pathname === `/user/${user_id}/side` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/tasks` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/task` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location.pathname.includes(`/user/${user_id}/task/`) && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/goals` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/profile` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

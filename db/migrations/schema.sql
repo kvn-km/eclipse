@@ -10,7 +10,6 @@ CREATE TABLE users (
   name VARCHAR(255),
   password VARCHAR(255),
   email VARCHAR(255),
-  phone BIGINT,
   username VARCHAR(255),
   date_created DATE DEFAULT CURRENT_DATE,
   xp INTEGER DEFAULT 0,
@@ -28,7 +27,7 @@ CREATE TABLE achievements (
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255),
-  completion_time_in_seconds INTEGER DEFAULT 0,
+  times_to_completion INTEGER DEFAULT 0,
   type VARCHAR(255),
   xp INTEGER,
   description TEXT
