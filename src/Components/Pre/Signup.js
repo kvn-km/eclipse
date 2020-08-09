@@ -130,7 +130,6 @@ function SignUp(props) {
             onSubmit={(event) => {
               event.preventDefault();
               setNewUser((prev) => ({ ...prev, password: password }));
-              console.log(newUser);
               addUser(newUser.name, password, newUser.email, newUser.username);
             }}>
             <input

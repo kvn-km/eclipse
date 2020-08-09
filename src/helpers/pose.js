@@ -17,7 +17,6 @@ const avg = (arr) => {
 
 export async function preINIT(stuff, refreshPage, props, redirectPage) {
 
-    console.log("<><><><><><>", stuff);
     async function init(stuff) {
         i = 0;
         // const modelURL = URL + "model.json";

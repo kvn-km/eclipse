@@ -13,8 +13,6 @@ function Goals(props) {
     allAchievs: []
   });
 
-  console.log("TEMPVAR", user);
-
   let location = props.location.pathname;
 
   useEffect(() => {

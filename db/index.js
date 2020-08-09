@@ -161,7 +161,6 @@ const addUser = (request, response) => {
 };
 
 const completeTask = (request, response) => {
-  console.log("REQUEST HERE: ", request.body);
   return pool.query(`
   UPDATE user_task
   SET progress = progress + $3, times_completed = times_completed + 1

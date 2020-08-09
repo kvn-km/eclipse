@@ -7,8 +7,6 @@ import "./taskButton.scss";
 function GoalButton(props) {
   const [progress, setProgress] = useState(0);
 
-  console.log("TEMPVAR", props);
-
   let circleRef = useRef();
   useEffect(() => {
     let mounted = true;
