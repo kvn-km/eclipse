@@ -47,6 +47,7 @@ app.put('/api/tasks/user', db.completeTask);
 
 app.put('/api/achievs', db.updateAchievs);
 
+app.put('/api/tasks/task/reset', db.resetTask);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

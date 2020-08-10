@@ -15,6 +15,7 @@ import Profile from "./Main/Profile";
 import TasksMain from "./Main/Tasks/TasksMain";
 import TasksSide from "./Main/Tasks/TasksSide";
 import Task from "./Main/Tasks/Task/Task";
+import ResetTask from "./Main/Tasks/Task/ResetTask";
 import Goals from "./Main/GoalsAchievs/Goals";
 
 function App() {
@@ -41,6 +42,18 @@ function App() {
       <Route exact path="/user/:user_id/task" component={Task} />
       <Route exact path="/user/:user_id/task/:task_id" component={Task} />
       <Route exact path="/user/:user_id/goals" component={Goals} />
+
+      <Route exact path="/user/:user_id/task/:task_id/resetTask" render={(props) => (
+        <>
+          <ResetTask {...props} resetValue={true} />
+        </>
+      )} />
+      <Route exact path="/user/:user_id/side/:task_id/resetTask" render={(props) => (
+        <>
+          <ResetTask {...props} resetValue={true} />
+        </>
+      )} />
+
     </Switch >
   );
 

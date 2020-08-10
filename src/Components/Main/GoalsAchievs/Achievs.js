@@ -17,7 +17,7 @@ function Achievs(props) {
       circle.style.strokeDashoffset = `${circumference}`;
       function setTheProgress(percent) {
         if (percent === 0) {
-          const offset = circumference - 100 / 100 * circumference;
+          const offset = circumference - 0 / 100 * circumference;
           circle.style.strokeDashoffset = offset;
         } else {
           const offset = circumference - percent / 100 * circumference;

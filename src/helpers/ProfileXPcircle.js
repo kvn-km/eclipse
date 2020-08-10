@@ -7,6 +7,7 @@ function ProfileXPcircle(props) {
   const [progress, setProgress] = useState(0);
 
   let circleRef = useRef();
+  let circleRef2 = useRef();
   useEffect(() => {
     let mounted = true;
     let theCircle = (el) => {
@@ -66,6 +67,15 @@ function ProfileXPcircle(props) {
                 <stop offset="100%" stopColor={props.progress > 0 ? stopColour.offset100 : stopColourBW.offset100} />
               </linearGradient>
             </defs>
+            <circle
+              ref={circleRef2}
+              className="progress-ring__circle2"
+              stroke="white"
+              strokeWidth="0.5"
+              fill="transparent"
+              r="95"
+              cx="100"
+              cy="100" />
             <circle
               ref={circleRef}
               className="progress-ring__circle"

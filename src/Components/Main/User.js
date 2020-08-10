@@ -24,19 +24,43 @@ function User(props) {
     return () => { mounted = false; };
   }, [props.match.params.user_id]);
 
-
-
-  // WRONG INFO: NEEDS LEVEL'S TOTAL XP AMOUNT, NOT 100 or PROGRESS
+  const currentXPDisplay = () => {
+    if (user.info.xp === user.levelInfo) {
+      return (
+        <p className="currentXPDisplay">
+          level up!
+        </p>
+      );
+    } else {
+      return (
+        <p className="currentXPDisplay">
+          xp<br />
+          {user.info.xp} / {user.levelInfo}
+        </p>
+      );
+    }
+  };
   const nextLevelDisplay = () => {
-    return (
-      <div className="next-level-display">
-        <p>{`Next level in ${Math.floor(user.levelInfo - user.info.xp)} points`}</p>
-      </div>
-    );
+    console.log(user, progress, props);
+    const remainingXP = Math.floor(user.levelInfo - user.info.xp);
+    if (remainingXP === 0) {
+      return (
+        <div className="next-level-display">
+          <p>{``}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="next-level-display">
+          <p>{`Next level in ${remainingXP} points`}</p>
+        </div>
+      );
+    }
   };
 
   // FIND WHERE TO RENDER CIRCLE
   let circleRef = useRef();
+  let circleRef2 = useRef();
 
   // CREATE THE CIRCLE
   useEffect(() => {
@@ -83,6 +107,21 @@ function User(props) {
     offset100: "#6666664d"
   };
 
+  const thinLineStyle = {
+    "strokeDasharray": "10 0",
+    "transition": "stroke-dashoffset 0.35s",
+    "transform": "rotate(-90deg)",
+    "transformOrigin": "50% 50%",
+    "opacity": "0.25"
+  };
+  const noLineStyle = {
+    "strokeDasharray": "10 0",
+    "transition": "stroke-dashoffset 0.35s",
+    "transform": "rotate(-90deg)",
+    "transformOrigin": "50% 50%",
+    "opacity": "0"
+  };
+
   return (
     <section className="user">
       <div className="main">
@@ -101,6 +140,16 @@ function User(props) {
               </linearGradient>
             </defs>
             <circle
+              ref={circleRef2}
+              // className="progress-ring__circle2"
+              stroke="white"
+              strokeWidth="1"
+              fill="transparent"
+              r="260"
+              cx="300"
+              cy="300"
+              style={user.info && user.info.xp === 0 ? noLineStyle : thinLineStyle} />
+            <circle
               ref={circleRef}
               className="progress-ring__circle"
               stroke="white"
@@ -110,6 +159,9 @@ function User(props) {
               cx="300"
               cy="300" />
           </svg>
+          <div className="task-completion-amount-profile">
+            {user.info && currentXPDisplay()}
+          </div>
         </FadeIn>
         {user.info && nextLevelDisplay()}
       </div>

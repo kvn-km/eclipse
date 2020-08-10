@@ -77,6 +77,7 @@ const getSideTasks = (request, response) => {
   });
 };
 const getTaskById = (request, response) => {
+  console.log("GET TASK BY ID", request.query.id);
   pool.query('SELECT * FROM tasks WHERE id = $1;', [request.query.id], (error, results) => {
     if (error) {
       throw error;
@@ -200,6 +201,20 @@ const updateAchievs = (request, response) => {
     .catch(e => console.log("EEEEEEEEEEEE", e));
 };
 
+const resetTask = (request, response) => {
+  return pool.query(`
+  UPDATE user_task
+  SET times_completed = 0
+  WHERE task_id = $2 AND user_id = $1
+  RETURNING *;`, [request.body.params.user_id, request.body.params.task_id])
+    .then(res => {
+      console.log("TASK RESET");
+      response.status(200).json(res.rows[0]);
+    })
+    .catch(e => console.log("REST INDEX.js EEEEEEEEEEEE", e));
+};
+
+
 module.exports = {
   getCookies,
   getUser,
@@ -215,5 +230,6 @@ module.exports = {
   getLevels,
   addUser,
   completeTask,
-  updateAchievs
+  updateAchievs,
+  resetTask
 };

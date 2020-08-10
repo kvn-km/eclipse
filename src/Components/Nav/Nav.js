@@ -13,8 +13,6 @@ function Nav(props) {
     setLocation((prev) => props.location);
   }, [props.location]);
 
-
-
   let user_id = "";
   if (props.location.pathname.includes("/user")) {
     user_id = props.location.pathname.slice(6, 7);
@@ -22,11 +20,20 @@ function Nav(props) {
 
   useEffect(() => {
     let mounted = true;
+    const currentLevel = () => {
+      if (user.info && user.info.xp === user.levelInfo) {
+        let levelUp = user.info.level;
+        setUser((prev) => ({ ...prev.info, level: levelUp + 1 }));
+      }
+    };
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
           mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
+        })
+        .then(() => {
+          mounted && currentLevel();
         });
     };
     if (props.location.pathname.includes("/user")) {
@@ -87,7 +94,7 @@ function Nav(props) {
       {props.location.pathname === `/user/${user_id}/tasks` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/task` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/user/${user_id}/goals` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
-      {props.location.pathname === `/user/${user_id}/profile` && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
+      {props.location.pathname === `/user/${user_id}/profile` && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">&lt; back</Link>}
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>

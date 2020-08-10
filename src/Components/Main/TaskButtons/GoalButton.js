@@ -8,6 +8,7 @@ function GoalButton(props) {
   const [progress, setProgress] = useState(0);
 
   let circleRef = useRef();
+  let circleRef2 = useRef();
 
   useEffect(() => {
     let mounted = true;
@@ -19,7 +20,7 @@ function GoalButton(props) {
       circle.style.strokeDashoffset = `${circumference}`;
       function setTheProgress(percent) {
         if (percent === 0) {
-          const offset = circumference - 100 / 100 * circumference;
+          const offset = circumference - 0 / 100 * circumference;
           circle.style.strokeDashoffset = offset;
         } else {
           const offset = circumference - percent / 100 * circumference;
@@ -77,6 +78,15 @@ function GoalButton(props) {
                   <stop offset="100%" stopColor={stopColour.offset100} />
                 </linearGradient>
               </defs>
+              <circle
+                ref={circleRef2}
+                className="progress-ring__circle2"
+                stroke="white"
+                strokeWidth="0.5"
+                fill="transparent"
+                r="95"
+                cx="100"
+                cy="100" />
               <circle
                 ref={circleRef}
                 className="progress-ring__circle"
