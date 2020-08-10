@@ -4,6 +4,7 @@ import axios from "axios";
 import { Textfit } from "react-textfit";
 
 import { preINIT } from "../../../../helpers/pose";
+import "./task.scss";
 
 function redirectPage(props) {
   props.history.goBack();
@@ -69,10 +70,11 @@ function Task(props) {
             {user.task && user.task.name}
           </Textfit>
         </div>
-
-        <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
-        <div id="label-container"></div>
-        <p id="countdown"></p> 
+        <div className="camera">
+          <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
+          <div id="label-container"></div>
+          <h3 id="countdown"></h3> 
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
