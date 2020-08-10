@@ -6,9 +6,10 @@ const countdown = () =>
   let downloadTimer = setInterval(function(){
     if(count < 0){
       clearInterval(downloadTimer);
+      document.getElementById("canvas").style = "border: 5px solid yellow;"
       countNum.style.visibility = "collapse";
     }
-    countNum.textContent = "Please get ready. Camera will start in: " + count;
+    countNum.textContent = "Please get ready. Recording will start in: " + count;
     count --;
   }, 1000);
 

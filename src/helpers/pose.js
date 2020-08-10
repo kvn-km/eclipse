@@ -37,15 +37,12 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
-        countdown();
         await webcam.play();
+        countdown();
+
         setTimeout(() => {
             window.requestAnimationFrame(loop);
         }, 11000);
-
-
-        console.log(probabilityArr);
-        console.log(avg(probabilityArr));
 
         // append/get elements to the DOM
         const canvas = document.getElementById("canvas");
@@ -95,16 +92,18 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
     async function predict() {
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
+
         const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
 
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
 
         //Task name on the task page
-        let taskTitle = document.getElementsByClassName('task-title')[0].innerHTML;
+        let taskTitle = document.getElementsByClassName('task-title')[0].textContent;
 
         for (let i = 0; i < maxPredictions; i++) {
-
+            console.log(taskTitle)
+            console.log(prediction[i].className)
             //
             if (taskTitle === prediction[i].className) {
                 const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
@@ -115,6 +114,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         }
 
         // finally draw the poses; shows webcam
+        
         drawPose(pose);
     }
 
