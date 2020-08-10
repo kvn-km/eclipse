@@ -1,4 +1,4 @@
-!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/transCircle.png) 
+!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/transCircle.png = 50x50) 
 
 # ECLIPSE (LIFERPG)
 
@@ -47,7 +47,7 @@ Each task is completed based on the amount of times they are completed. Users wi
 
 
 
-**Thank you playing with our app!**
+### **Thank you playing with our app!**
 
 More functional changes will be applied in the near future (hopefully)!
 
