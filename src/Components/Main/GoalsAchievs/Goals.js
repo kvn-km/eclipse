@@ -46,15 +46,12 @@ function Goals(props) {
   const achievs = user.info && user.allAchievs.map((achievs, i) => {
     const goal = user.goals[i];
     console.log("FASDFASDFASFD", achievs);
-
     let taskCompletionAmount = ((goal.times_completed / achievs.amount_to_complete).toFixed(2)) * 100;
     let goalCompleted = false;
-
     if (taskCompletionAmount >= 100) {
       goalCompleted = true;
       taskCompletionAmount = 100;
     }
-
     return (
       <GoalButton
         key={achievs.id}
@@ -72,11 +69,9 @@ function Goals(props) {
     <section className="main">
       <div className="tasks-main">
         <FadeIn>
-
           <div className="task-container">
             {user.info && achievs}
           </div>
-
         </FadeIn>
       </div>
     </section>

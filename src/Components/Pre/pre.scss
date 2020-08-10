@@ -14,13 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.landing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-}
+
 .login-input {
   font-size: 10rem;
   resize: none;
@@ -39,6 +33,49 @@
   margin-top: 10rem;
   margin-left: 11.5rem;
   font-size: 1rem;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.task-completion-amount-landing {
+  position: absolute;
+  padding-left: 1.5rem;
+  top: -24rem;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 2rem;
+}
+.welcome {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+}
+.landing-strong {
+  padding-top: -3rem;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
 }
 
 .about {

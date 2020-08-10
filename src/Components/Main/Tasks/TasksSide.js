@@ -44,12 +44,10 @@ function TasksSide(props) {
     const userTask = user.tasks[i + 8];
     let taskCompletionAmount = ((userTask.times_completed / task.amount_to_complete).toFixed(2)) * 100;
     let taskCompleted = false;
-
     if (taskCompletionAmount >= 100) {
       taskCompleted = true;
       taskCompletionAmount = 100;
     }
-
     return (
       <TaskButton
         key={task.id}
@@ -68,11 +66,9 @@ function TasksSide(props) {
     <section className="main">
       <div className="tasks-main">
         <FadeIn>
-
           <div className="task-container">
             {user.info && tasks}
           </div>
-
         </FadeIn>
       </div>
     </section>

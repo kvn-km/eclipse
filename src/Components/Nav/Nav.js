@@ -85,7 +85,6 @@ function Nav(props) {
 
   return (
     <nav className="navbar navbar-expand-lg bg-black navbar-custom justify-content-end">
-      {props.location.pathname === "/" && <h1 className="navbar" >ECLIPSE</h1>}
       {props.location.pathname.includes("/user") && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">ECLIPSE</Link>}
       {props.location.pathname === "/about" && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/signup` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}
