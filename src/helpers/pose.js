@@ -38,17 +38,32 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
-        
-        countdown();
 
-        setTimeout(() => {
-            window.requestAnimationFrame(loop);
-        }, 11000);
-
-        // append/get elements to the DOM
         const canvas = document.getElementById("canvas");
         canvas.width = size; canvas.height = size;
         ctx = canvas.getContext("2d");
+        
+        const cameraOn = () => {
+            let cameraTimer = setInterval(() => {
+                if(count < 0) {
+                    clearInterval(cameraTimer);
+                }
+                else {
+                window.requestAnimationFrame(looping);
+                count--;
+                }
+            }, 1000);
+        }
+        
+        countdown();
+        cameraOn();
+
+        setTimeout(() => {
+            window.requestAnimationFrame(loop);
+        }, 12000);
+
+        // append/get elements to the DOM
+
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
@@ -58,6 +73,12 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         }
     }
     init();
+
+    async function looping(timestamp) {
+        webcam.update();
+        ctx.drawImage(webcam.canvas, 0, 0);
+        window.requestAnimationFrame(looping);
+    }
 
     async function loop(timestamp) {
         webcam.update(); // update the webcam frame
@@ -105,13 +126,12 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
 
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
+        console.log(prediction);
 
         //Task name on the task page
         let taskTitle = document.getElementsByClassName('task-title')[0].textContent;
 
         for (let i = 0; i < maxPredictions; i++) {
-            console.log(taskTitle)
-            console.log(prediction[i].className)
             //
             if (taskTitle === prediction[i].className) {
                 const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
