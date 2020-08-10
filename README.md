@@ -1,22 +1,18 @@
-![alt text](https://github.com/victorzzz12/tinyapp/blob/master/public/images/transCircle.png "Eclipse Logo") 
+!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/transCircle.png) 
 
 # ECLIPSE (LIFERPG)
-===================
 
 ## Welcome to Eclipse!
-----------------------
 
 When life as we knew it changed due to quarantine, we began to run out of things to do. Eclipse was inspired by the idea that we still need to do daily tasks everyday. Instead of just completing them because life depends on it, you can also log them in our app! 
 
 ## About
---------
 
 Eclipse is a full-stack web application built with Node JS, React, Express, PostgresSQL and Google's Teachable Machine (with the PoseNet model). This project is an interactive web-based application designed to capture your everyday actions in the way of a role-playing game using the user's webcam. Users can create an account and begin their adventure right away.
 
 Each task is completed based on the amount of times they are completed. Users will be granted one completion if their actions are similar to 75% or greater to our action models. Users also have individual achievements and milestones they can acquire through continued use of the application. 
 
 ## Main Dependencies
---------------------
 
 - Node 10.x or above
 - NPM 5.x or above
@@ -30,7 +26,6 @@ Each task is completed based on the amount of times they are completed. Users wi
 
 
 ## Getting Started
-------------------
 
 - Install all dependencies (using the `npm install` command)
 - In the file `node_modules/react-scripts/scripts/start.js` change LINE 60 to the following:
@@ -51,8 +46,8 @@ Each task is completed based on the amount of times they are completed. Users wi
 - Finally, Run the app using the `npm start` command.
 
 
-**Thank you for your time!**
-----------------------------
+
+**Thank you playing with our app!**
 
 More functional changes will be applied in the near future (hopefully)!
 
