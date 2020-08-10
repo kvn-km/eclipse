@@ -14,19 +14,19 @@ Each task is completed based on the amount of times they are completed. Users wi
 
 ## Screenshots
 
-!["Landing Page"](https://github.com/kvn-km/eclipse/blob/feature/mvp/public/images/screenshots/e-screen-1.png?raw=true)
+!["Landing Page"](public/images/screenshots/e-screen-1.png)
 
 ##### Track your overall progress!
 
-!["User Homepage"](https://github.com/kvn-km/eclipse/blob/feature/mvp/public/images/screenshots/e-screen-3.png?raw=true)
+!["User Homepage"](public/images/screenshots/e-screen-3.png)
 
 ##### A Variety of daily and side tasks to do!
 
-!["User's Daily and Side Tasks"](https://github.com/kvn-km/eclipse/blob/feature/mvp/public/images/screenshots/e-screen-2.png?raw=true)
+!["User's Daily and Side Tasks"](public/images/screenshots/e-screen-2.png)
 
 ##### Do more tasks and LEVEL UP!
 
-!["Do more tasks to level up!"](https://github.com/kvn-km/eclipse/blob/feature/mvp/public/images/screenshots/e-screen-4.png?raw=true)
+!["Do more tasks to level up!"](public/images/screenshots/e-screen-4.png)
 
 ## Main Dependencies
 
