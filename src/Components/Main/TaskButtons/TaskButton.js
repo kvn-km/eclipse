@@ -51,7 +51,6 @@ function TaskButton(props) {
               className="progress-ring"
               width="200"
               height="200"
-            // style={progress && props.progress > 0 ? { filterStyleC } : { filterStyleBW }}
             >
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">

@@ -20,24 +20,26 @@ function Nav(props) {
 
   useEffect(() => {
     let mounted = true;
-    const currentLevel = () => {
-      if (user.info && user.info.xp === user.levelInfo) {
-        let levelUp = user.info.level;
-        setUser((prev) => ({ ...prev.info, level: levelUp + 1 }));
-      }
-    };
+    // const currentLevel = () => {
+    //   if (user.info && (user.info.xp === user.levelInfo)) {
+    //     let levelUp = user.info.level + 1;
+    //     mounted && setUser((prev) => ({ ...prev.info, level: levelUp }));
+    //   }
+    // };
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
           mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         })
-        .then(() => {
-          mounted && currentLevel();
-        });
+        // .then(() => {
+        //   mounted && currentLevel();
+        // })
+        .catch(e => console.log("NAV ERRRR", e));
     };
+
     if (props.location.pathname.includes("/user")) {
-      currentUser();
+      mounted && currentUser();
     }
     return () => { mounted = false; };
   }, [props.location.pathname, location]);

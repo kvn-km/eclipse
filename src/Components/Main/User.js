@@ -27,7 +27,7 @@ function User(props) {
   const currentXPDisplay = () => {
     if (user.info.xp === user.levelInfo) {
       return (
-        <p className="currentXPDisplay">
+        <p className="currentXPDisplay-levelUp">
           level up!
         </p>
       );
