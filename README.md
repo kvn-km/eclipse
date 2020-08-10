@@ -1,4 +1,4 @@
-!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/eclipse-logo.png)
+!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/eclipse-logo.png=400px)
 
 # ECLIPSE (LIFERPG)
 
@@ -14,19 +14,19 @@ Each task is completed based on the amount of times they are completed. Users wi
 
 ## Screenshots
 
-!["Landing Page"](public/images/screenshots/e-screen-1.png)
+!["Landing Page"](https://github.com/kvn-km/eclipse/blob/master/public/images/screenshots/e-screen-1.png)
 
 ##### Track your overall progress!
 
-!["User Homepage"](public/images/screenshots/e-screen-3.png)
+!["User Homepage"](https://github.com/kvn-km/eclipse/blob/master/public/images/screenshots/e-screen-3.png)
 
 ##### A Variety of daily and side tasks to do!
 
-!["User's Daily and Side Tasks"](public/images/screenshots/e-screen-2.png)
+!["User's Daily and Side Tasks"](https://github.com/kvn-km/eclipse/blob/master/public/images/screenshots/e-screen-2.png)
 
 ##### Do more tasks and LEVEL UP!
 
-!["Do more tasks to level up!"](public/images/screenshots/e-screen-4.png)
+!["Do more tasks to level up!"](https://github.com/kvn-km/eclipse/blob/master/public/images/screenshots/e-screen-4.png)
 
 ## Main Dependencies
 
