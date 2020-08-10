@@ -1,6 +1,6 @@
 import * as tmPose from '@teachablemachine/pose';
 import axios from 'axios';
-import countdown from './countdown'
+import countdown from './countdown';
 
 const URL = "http://localhost:8000/my_model/";
 
@@ -16,6 +16,8 @@ const avg = (arr) => {
     }
     return Number(sum / arr.length);
 };
+
+let asdf = true;
 
 export async function preINIT(stuff, refreshPage, props, redirectPage) {
 
@@ -38,17 +40,20 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
-        
-        countdown();
 
+
+        const canvas = document.getElementById("canvas");
+        canvas.width = size; canvas.height = size;
+        ctx = canvas.getContext("2d");
+
+        countdown();
         setTimeout(() => {
             window.requestAnimationFrame(loop);
         }, 11000);
 
         // append/get elements to the DOM
-        const canvas = document.getElementById("canvas");
-        canvas.width = size; canvas.height = size;
-        ctx = canvas.getContext("2d");
+
+
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
@@ -68,25 +73,26 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
             i++;
         }
         else {
+
             //  Checks whether average probability is enough to register pose
             if (avg(probabilityArr) >= 0.75) {
 
-            Promise.resolve(
-                axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } })
-                    .then(() => {
-                        console.log("ERERERERERERERERERE");
-                        axios.put('/api/achievs', { params: { id: stuff.info.id, taskId: stuff.task.id } })
-                            .then(() => {
-                                webcam.stop();
-                                // TIMEOUT SO NOT JARRING
-                                setTimeout(() => {
-                                    redirectPage(props);
-                                }, 1500);
-                                console.log("HERERERERERERERER");
-                            });
-                    }))
-                .catch(e => console.log("ERRORRRR", e));
-            } 
+                Promise.resolve(
+                    axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } })
+                        .then(() => {
+                            console.log("ERERERERERERERERERE");
+                            axios.put('/api/achievs', { params: { id: stuff.info.id, taskId: stuff.task.id } })
+                                .then(() => {
+                                    webcam.stop();
+                                    // TIMEOUT SO NOT JARRING
+                                    setTimeout(() => {
+                                        redirectPage(props);
+                                    }, 1500);
+                                    console.log("HERERERERERERERER");
+                                });
+                        }))
+                    .catch(e => console.log("ERRORRRR", e));
+            }
             else {
                 document.getElementById("countdown").textContent = "Incomplete! Please Try Again. Redirecting back to tasks...";
                 document.getElementById("countdown").style.visibility = "visible";
@@ -110,8 +116,8 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         let taskTitle = document.getElementsByClassName('task-title')[0].textContent;
 
         for (let i = 0; i < maxPredictions; i++) {
-            console.log(taskTitle)
-            console.log(prediction[i].className)
+            console.log(taskTitle);
+            console.log(prediction[i].className);
             //
             if (taskTitle === prediction[i].className) {
                 const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
@@ -122,7 +128,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         }
 
         // finally draw the poses; shows webcam
-        
+
         drawPose(pose);
     }
 
@@ -132,7 +138,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
 
 
 
-function drawPose(pose) {
+async function drawPose(pose) {
     if (webcam.canvas) {
         ctx.drawImage(webcam.canvas, 0, 0);
         // draw the keypoints and skeleton
