@@ -1,4 +1,4 @@
-![alt-text](https://github.com/kvn-km/eclipse/blob/master/public/images/transCircle.png "Eclipse Logo") 
+!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/transCircle.png) <!-- .element height="50px" width="50px" --> 
 
 # ECLIPSE (LIFERPG)
 
