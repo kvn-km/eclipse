@@ -20,24 +20,26 @@ function Nav(props) {
 
   useEffect(() => {
     let mounted = true;
-    const currentLevel = () => {
-      if (user.info && user.info.xp === user.levelInfo) {
-        let levelUp = user.info.level;
-        setUser((prev) => ({ ...prev.info, level: levelUp + 1 }));
-      }
-    };
+    // const currentLevel = () => {
+    //   if (user.info && (user.info.xp === user.levelInfo)) {
+    //     let levelUp = user.info.level + 1;
+    //     mounted && setUser((prev) => ({ ...prev.info, level: levelUp }));
+    //   }
+    // };
     const currentUser = () => {
       Promise.all([axios.get('/api/user/current', { params: { id: props.location.pathname.slice(6, 7) } }), axios.get('/api/levels')])
         .then((all) => {
           let level = all[1].data[all[0].data.level - 1];
           mounted && setUser((prev) => ({ ...prev, info: all[0].data, levelInfo: level.xp }));
         })
-        .then(() => {
-          mounted && currentLevel();
-        });
+        // .then(() => {
+        //   mounted && currentLevel();
+        // })
+        .catch(e => console.log("NAV ERRRR", e));
     };
+
     if (props.location.pathname.includes("/user")) {
-      currentUser();
+      mounted && currentUser();
     }
     return () => { mounted = false; };
   }, [props.location.pathname, location]);
@@ -85,7 +87,6 @@ function Nav(props) {
 
   return (
     <nav className="navbar navbar-expand-lg bg-black navbar-custom justify-content-end">
-      {props.location.pathname === "/" && <h1 className="navbar" >ECLIPSE</h1>}
       {props.location.pathname.includes("/user") && <Link to={`/user/${user_id}`} className="navbar-brand nav-link">ECLIPSE</Link>}
       {props.location.pathname === "/about" && <Link to="" onClick={() => props.history.goBack()} className="navbar-brand nav-link">&lt; back</Link>}
       {props.location.pathname === `/signup` && <Link to={`/`} className="navbar-brand nav-link">ECLIPSE  &lt; back</Link>}

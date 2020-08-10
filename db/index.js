@@ -176,9 +176,9 @@ const completeTask = (request, response) => {
         .then(() => {
           return pool.query(`
             UPDATE users
-            SET level = level + 1, xp = 0
+            SET level = level + 1, xp = $3
             WHERE id = $1 AND xp > $2
-            RETURNING *;`, [request.body.params.id, request.body.params.levelXP])
+            RETURNING *;`, [request.body.params.id, request.body.params.levelXP, request.body.params.taskXP])
             .then(() => {
               console.log("WE MADE IT");
               response.status(200).json(res.rows[0]);

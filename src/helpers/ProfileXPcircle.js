@@ -26,9 +26,8 @@ function ProfileXPcircle(props) {
         }
         mounted && setProgress(percent);
       };
-      // TIMEOUT TO ANIMATE XP BAR
       setTimeout(() => {
-        setTheProgress(props.progress); // USER XP IS BE PASSED HERE
+        setTheProgress(props.progress);
       }, 350);
     };
     theCircle(circleRef.current);

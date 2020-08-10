@@ -27,7 +27,7 @@ function User(props) {
   const currentXPDisplay = () => {
     if (user.info.xp === user.levelInfo) {
       return (
-        <p className="currentXPDisplay">
+        <p className="currentXPDisplay-levelUp">
           level up!
         </p>
       );
@@ -41,7 +41,6 @@ function User(props) {
     }
   };
   const nextLevelDisplay = () => {
-    console.log(user, progress, props);
     const remainingXP = Math.floor(user.levelInfo - user.info.xp);
     if (remainingXP === 0) {
       return (
@@ -141,7 +140,6 @@ function User(props) {
             </defs>
             <circle
               ref={circleRef2}
-              // className="progress-ring__circle2"
               stroke="white"
               strokeWidth="1"
               fill="transparent"
