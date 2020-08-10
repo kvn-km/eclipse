@@ -38,6 +38,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
         await webcam.play();
+        
         countdown();
 
         setTimeout(() => {
@@ -68,7 +69,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         }
         else {
             //  Checks whether average probability is enough to register pose
-            // if (avg(probabilityArr) >= 0.1) {
+            if (avg(probabilityArr) >= 0.75) {
 
             Promise.resolve(
                 axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } })
@@ -85,7 +86,14 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
                             });
                     }))
                 .catch(e => console.log("ERRORRRR", e));
-            // }
+            } 
+            else {
+                document.getElementById("countdown").textContent = "Incomplete! Please Try Again. Redirecting back to tasks...";
+                document.getElementById("countdown").style.visibility = "visible";
+                setTimeout(() => {
+                    redirectPage(props);
+                }, 2000);
+            }
         }
     }
 
