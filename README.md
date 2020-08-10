@@ -1,4 +1,4 @@
-!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/eclipse-logo.png=400px)
+!["Eclipse Logo"](https://github.com/kvn-km/eclipse/blob/master/public/images/readme-logo-heroimg.png)
 
 # ECLIPSE (LIFERPG)
 
