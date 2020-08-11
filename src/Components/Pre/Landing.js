@@ -10,7 +10,7 @@ function Landing() {
         <FadeIn>
           <img src={logo} className="App-logo" alt="logo" />
           <div className="task-completion-amount-landing">
-            <p className="welcome">Welcome to</p><p className="landing-strong">Eclipse</p>
+            <p className="landing-strong">Eclipse</p>
           </div>
         </FadeIn>
       </div>
