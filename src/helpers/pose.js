@@ -60,12 +60,6 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         countdown();
         cameraOn();
 
-
-        const canvas = document.getElementById("canvas");
-        canvas.width = size; canvas.height = size;
-        ctx = canvas.getContext("2d");
-
-        countdown();
         setTimeout(() => {
             window.requestAnimationFrame(loop);
         }, 12000);
