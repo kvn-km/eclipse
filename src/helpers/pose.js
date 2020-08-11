@@ -19,9 +19,9 @@ const avg = (arr) => {
 
 let asdf = true;
 
-export async function preINIT(stuff, refreshPage, props, redirectPage) {
+export async function preINIT(status, refreshPage, props, redirectPage) {
 
-    async function init(stuff) {
+    async function init(status) {
         i = 0;
         // const modelURL = URL + "model.json";
         // const metadataURL = URL + "metadata.json";
@@ -44,8 +44,10 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         const canvas = document.getElementById("canvas");
         canvas.width = size; canvas.height = size;
         ctx = canvas.getContext("2d");
+        // ctx.drawImage(webcam.canvas, 0, 0);
         
         const cameraOn = () => {
+            count = 10;
             let cameraTimer = setInterval(() => {
                 if(count < 0) {
                     clearInterval(cameraTimer);
@@ -70,23 +72,26 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
-        if (stuff === "STOP") {
+        if (status === "STOP") {
             await webcam.stop();
         }
     }
     init();
 
     async function looping(timestamp) {
-        webcam.update();
-        ctx.drawImage(webcam.canvas, 0, 0);
-        window.requestAnimationFrame(looping);
+        if (webcam.canvas) {
+            webcam.play();
+            ctx.drawImage(webcam.canvas, 0, 0);
+            webcam.update();
+            window.requestAnimationFrame(looping);
+        }
     }
 
     async function loop(timestamp) {
         webcam.update(); // update the webcam frame
         await predict();
 
-        if (i < 100) {
+        if (i < 10) {
             window.requestAnimationFrame(loop);
             i++;
         }
@@ -96,10 +101,10 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
             if (avg(probabilityArr) >= 0.75) {
 
                 Promise.resolve(
-                    axios.put('/api/tasks/user', { params: { id: stuff.info.id, taskId: stuff.task.id, taskXP: stuff.task.xp, levelXP: stuff.levelInfo } })
+                    axios.put('/api/tasks/user', { params: { id: status.info.id, taskId: status.task.id, taskXP: status.task.xp, levelXP: status.levelInfo } })
                         .then(() => {
                             console.log("ERERERERERERERERERE");
-                            axios.put('/api/achievs', { params: { id: stuff.info.id, taskId: stuff.task.id } })
+                            axios.put('/api/achievs', { params: { id: status.info.id, taskId: status.task.id } })
                                 .then(() => {
                                     webcam.stop();
                                     // TIMEOUT SO NOT JARRING
@@ -114,6 +119,7 @@ export async function preINIT(stuff, refreshPage, props, redirectPage) {
             else {
                 document.getElementById("countdown").textContent = "Incomplete! Please Try Again. Redirecting back to tasks...";
                 document.getElementById("countdown").style.visibility = "visible";
+                webcam.stop();
                 setTimeout(() => {
                     redirectPage(props);
                 }, 2000);
