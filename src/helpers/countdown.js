@@ -1,5 +1,5 @@
 const countdown = () => {
-  let count = 5;
+  let count = 10;
   let countNum = document.getElementById("countdown");
 
   let downloadTimer = setInterval(function () {

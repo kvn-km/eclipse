@@ -7,7 +7,7 @@ const URL = "http://localhost:8000/my_model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 let i = "";
 const probabilityArr = [];
-let count = 5;
+let count = 10;
 
 const avg = (arr) => {
     let sum = 0;
@@ -45,7 +45,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         // ctx.drawImage(webcam.canvas, 0, 0);
 
         const cameraOn = () => {
-            count = 5;
+            count = 10;
             let cameraTimer = setInterval(() => {
                 if (count < 0) {
                     clearInterval(cameraTimer);
@@ -62,7 +62,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
 
         setTimeout(() => {
             window.requestAnimationFrame(loop);
-        }, 10000);
+        }, 11000);
 
         // append/get elements to the DOM
 
@@ -78,7 +78,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
 
     async function looping(timestamp) {
         if (webcam.canvas) {
-            webcam.play();
+            // webcam.play();
             ctx.drawImage(webcam.canvas, 0, 0);
             webcam.update();
             window.requestAnimationFrame(looping);
@@ -89,20 +89,18 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         webcam.update(); // update the webcam frame
         await predict();
 
-        if (i < 10) {
+        if (i < 60) {
             window.requestAnimationFrame(loop);
             i++;
         }
         else {
-            console.log(avg(probabilityArr))
-
             //  Checks whether average probability is enough to register pose
             if (avg(probabilityArr) >= 0.7) {
 
                 Promise.resolve(
                     axios.put('/api/tasks/user', { params: { id: status.info.id, taskId: status.task.id, taskXP: status.task.xp, levelXP: status.levelInfo } })
                         .then(() => {
-                            console.log("ERERERERERERERERERE");
+                            console.log("Updated User Tasks");
                             axios.put('/api/achievs', { params: { id: status.info.id, taskId: status.task.id } })
                                 .then(() => {
                                     webcam.stop();
@@ -110,10 +108,10 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
                                     setTimeout(() => {
                                         redirectPage(props);
                                     }, 1500);
-                                    console.log("HERERERERERERERER");
+                                    console.log("Redirected back to Main tasks page");
                                 });
                         }))
-                    .catch(e => console.log("ERRORRRR", e));
+                    .catch(e => console.log("ERROR: ", e));
             }
             else {
                 document.getElementById("countdown").textContent = "Incomplete! Please Try Again. Redirecting back to tasks...";
@@ -134,15 +132,14 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
 
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
-        console.log(prediction);
 
         //Task name on the task page
         let taskTitle = document.getElementsByClassName('task-title')[0].textContent;
 
         for (let i = 0; i < maxPredictions; i++) {
             //
-            if (taskTitle === prediction[i].className) {
-                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2) + "%";
+            if (taskTitle.includes(prediction[i].className)) {
+                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2)*100 + "% Match";
 
                 probabilityArr.push(prediction[i].probability.toFixed(2));
                 labelContainer.childNodes[i].innerHTML = classPrediction;
