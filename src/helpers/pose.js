@@ -91,7 +91,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         webcam.update(); // update the webcam frame
         await predict();
 
-        if (i < 60) {
+        if (i < 100) {
             window.requestAnimationFrame(loop);
             i++;
         }
