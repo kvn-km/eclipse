@@ -94,9 +94,10 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
             i++;
         }
         else {
+            console.log(avg(probabilityArr))
 
             //  Checks whether average probability is enough to register pose
-            if (avg(probabilityArr) >= 0.75) {
+            if (avg(probabilityArr) >= 0.7) {
 
                 Promise.resolve(
                     axios.put('/api/tasks/user', { params: { id: status.info.id, taskId: status.task.id, taskXP: status.task.xp, levelXP: status.levelInfo } })
