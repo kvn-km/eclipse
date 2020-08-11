@@ -46,7 +46,7 @@ function Goals(props) {
   const achievs = user.info && user.allAchievs.map((achievs, i) => {
     const goal = user.goals[i];
     console.log("FASDFASDFASFD", achievs);
-    let taskCompletionAmount = ((goal.times_completed / achievs.amount_to_complete).toFixed(2)) * 100;
+    let taskCompletionAmount = ((goal.times_completed / achievs.amount_to_complete).toFixed(1)) * 100;
     let goalCompleted = false;
     if (taskCompletionAmount >= 100) {
       goalCompleted = true;
