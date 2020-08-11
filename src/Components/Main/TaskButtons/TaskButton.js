@@ -35,7 +35,6 @@ function TaskButton(props) {
       }, 350);
     };
     theCircle(circleRef.current);
-    console.log("<><><><><>", props);
     return () => { mounted = false; };
   }, []);
 

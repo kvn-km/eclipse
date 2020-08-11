@@ -8,7 +8,6 @@ function ResetTask(props) {
   let [user, setUser] = useState({ info: null, levelInfo: null });
 
   function redirectPage(props) {
-    debugger;
     Promise.resolve(
       axios.put('/api/tasks/task/reset', {
         params: {

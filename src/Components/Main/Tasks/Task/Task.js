@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import axios from "axios";
-import { Textfit } from "react-textfit";
 
 import { preINIT } from "../../../../helpers/pose";
 import "./task.scss";
@@ -23,6 +22,24 @@ function Task(props) {
   });
 
   let location = props.location.pathname;
+
+  const innerEl = () => {
+    return (
+      <section className="task-task-container task main">
+        <div className="task-title">
+          <h3 id="countdown"></h3>
+          {user.task && user.task.name}
+        </div>
+        <div className="camera">
+          <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
+          <div id="label-container"></div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+      </section >
+    );
+  };
 
   useEffect(() => {
     let mounted = true;
@@ -60,20 +77,8 @@ function Task(props) {
 
   return (
     <FadeIn>
-      <section className="task-task-container task main">
-        <div className="task-title">
-          <h3 id="countdown"></h3>
-          {user.task && user.task.name}
-        </div>
-        <div className="camera">
-          <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
-          <div id="label-container"></div>
-        </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
-      </section >
-
+      {user.info && innerEl()}
 
     </FadeIn>
   );

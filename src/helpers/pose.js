@@ -4,10 +4,10 @@ import countdown from './countdown';
 
 const URL = "http://localhost:8000/my_model/";
 
-let model, webcam, ctx, labelContainer, maxPredictions;
+let model, webcam, ctx, labelContainer, maxPredictions, msgContainer;
 let i = "";
 const probabilityArr = [];
-let count = 10;
+let count = 6;
 
 const avg = (arr) => {
     let sum = 0;
@@ -45,7 +45,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         // ctx.drawImage(webcam.canvas, 0, 0);
 
         const cameraOn = () => {
-            count = 10;
+            count = 6;
             let cameraTimer = setInterval(() => {
                 if (count < 0) {
                     clearInterval(cameraTimer);
@@ -62,11 +62,13 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
 
         setTimeout(() => {
             window.requestAnimationFrame(loop);
-        }, 11000);
+            // }, 11000);
+        }, 6500);
 
         // append/get elements to the DOM
 
         labelContainer = document.getElementById("label-container");
+        msgContainer = document.getElementById("countdown");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
@@ -103,7 +105,9 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
                             console.log("Updated User Tasks");
                             axios.put('/api/achievs', { params: { id: status.info.id, taskId: status.task.id } })
                                 .then(() => {
+                                    document.getElementById("countdown").textContent = "Completed! Redirecting back to tasks...";
                                     webcam.stop();
+                                    document.getElementById("countdown").style.visibility = "visible";
                                     // TIMEOUT SO NOT JARRING
                                     setTimeout(() => {
                                         redirectPage(props);
@@ -115,11 +119,12 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
             }
             else {
                 document.getElementById("countdown").textContent = "Incomplete! Please Try Again. Redirecting back to tasks...";
-                document.getElementById("countdown").style.visibility = "visible";
                 webcam.stop();
+                // document.getElementById("countdown").style.visibility = "visible";
                 setTimeout(() => {
                     redirectPage(props);
                 }, 2000);
+
             }
         }
     }
@@ -139,10 +144,12 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         for (let i = 0; i < maxPredictions; i++) {
             //
             if (taskTitle.includes(prediction[i].className)) {
-                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2)*100 + "% Match";
+                // const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(1) * 100 + "% Match";
 
                 probabilityArr.push(prediction[i].probability.toFixed(2));
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+                document.getElementById("countdown").textContent = prediction[i].probability.toFixed(1) * 100 + "% Match";
+                // labelContainer.childNodes[i].innerHTML = classPrediction;
+                // document.getElementsByClassName('task-title')[0].textContent = classPrediction;
             }
         }
 

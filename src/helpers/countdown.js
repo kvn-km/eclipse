@@ -1,16 +1,18 @@
 const countdown = () => {
-  let count = 10;
+  let count = 6;
   let countNum = document.getElementById("countdown");
 
   let downloadTimer = setInterval(function () {
     if (count < 0) {
       clearInterval(downloadTimer);
-      document.getElementById("canvas").style = "border: 5px solid yellow;";
-      countNum.style.visibility = "collapse";
+      document.getElementById("canvas").style = "border: 5px solid lime;";
+      // countNum.style.visibility = "hidden";
     }
-    countNum.textContent = "Please get ready. Recording will start in: " + count;
+    if (count !== -1) {
+      countNum.textContent = "Please get ready. Recording will start in: " + count;
+    }
     count--;
-  }, 1000);
+  }, 950);
 
 };
 
