@@ -87,9 +87,9 @@ VALUES  ('plank', 5, 'main', 50, 'An exercise training the bodys core.'),
         ('stretch neck', 3, 'side', 25, 'Stretch your neck.');
 
 INSERT INTO users (name, password, email, username, date_created, xp, level) 
-VALUES  ('Test','test123','test@email.com', 'test123', '2020-08-03', 0, 1),
-        ('Kevin','123456','kkim@email.com', 'kvnkm', '2020-08-02', 200, 5),
-        ('Victor','vliang','vliang@email.com', 'vilang', '2020-08-02', 2500, 30);
+VALUES  ('Test','test123','test@email.com', 'TEST123', '2020-08-03', 0, 1),
+        ('Kevin','123456','kkim@email.com', 'KVNKM', '2020-08-02', 200, 5),
+        ('Victor','vliang','vliang@email.com', 'VLIANG', '2020-08-02', 2500, 30);
 
 INSERT INTO user_achievs (user_id, achiev_id, progress, times_completed) 
 VALUES  (1, 1, 75, 1),

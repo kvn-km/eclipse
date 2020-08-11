@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 
+let name = "";
+
 function Login(props) {
   let [username, setUsername] = useState();
   let [redirect, setRedirect] = useState({
@@ -11,7 +13,6 @@ function Login(props) {
   });
   let [password, setPassword] = useState(props.password || "");
   let [loginType, setLoginType] = useState("LOGIN");
-
 
   const autofocus = useCallback(el => el ? el.focus() : null, []);
 
@@ -23,19 +24,29 @@ function Login(props) {
     e.target.value = ("" + e.target.value).toUpperCase();
   };
 
-  function authUser(username, password) {
-    axios.get('/api/user', { params: { username: username, password: password }, withCredentials: true })
+  function authUser(username) {
+    axios.get('/api/user', { params: { username: username }, withCredentials: true })
       .then(response => {
-        if (response.data.username !== undefined && response.data.username.toUpperCase() === username) {
+        if (username === response.data.username) {
+          name = username;
           setLoginType("PASSWORD");
         }
-        else if (response.data.password === password) {
+        else {
+          setLoginType("LOGIN");
+        }
+      });
+  }
+  function authUserPass(username, password) {
+    axios.get('/api/userpass', { params: { username: username, password: password }, withCredentials: true })
+      .then(response => {
+        console.log(response.data);
+        if (username === response.data.username && password === response.data.password) {
           console.log('YOU ARE IN!');
           let newState = { path: "/user", user_id: response.data.id };
           setRedirect((prev) => ({ ...prev, ...newState }));
-        } else {
-          console.log('WRONG!');
-          setLoginType("PASSWORD");
+        }
+        else {
+          setLoginType("LOGIN");
         }
       });
   }
@@ -49,7 +60,7 @@ function Login(props) {
             autoComplete="off"
             onSubmit={(event) => {
               event.preventDefault();
-              authUser(username, null);
+              authUser(username);
             }}>
             <input
               ref={autofocus}
@@ -77,8 +88,9 @@ function Login(props) {
           <form
             autoComplete="off"
             onSubmit={(event) => {
-              event.preventDefault();
-              authUser(null, password);
+            event.preventDefault();
+            console.log(name, password);
+            authUserPass(name, password);
             }}>
             <input
               ref={autofocus}

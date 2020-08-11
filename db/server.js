@@ -29,6 +29,7 @@ app.get('/api/user', db.getUser);
 app.get('/api/user/current', db.getCurrentUser);
 // GET ALL USERS/TASKS/ACHIEVS/LEVELS
 app.get('/api/users', db.getUsers);
+app.get('/api/userpass', db.getUserPass);
 app.get('/api/tasks', db.getTasks);
 app.get('/api/achievs', db.getAchievs);
 app.get('/api/levels', db.getLevels);

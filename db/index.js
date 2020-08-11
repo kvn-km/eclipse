@@ -10,7 +10,19 @@ const pool = new Pool({
 
 //ISSUE: IF USERS PASSWORD OF ANOTHER USER, THEY CAN STILL GET IN
 const getUser = (request, response) => {
-  pool.query('SELECT * FROM users WHERE UPPER(username) = $1 OR password = $2;', [request.query.username, request.query.password], (error, results) => {
+  console.log(typeof request.query.username, request.query.username);
+  pool.query('SELECT * FROM users WHERE username = $1;', [request.query.username], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    request.session = { username: results.rows[0] };
+    response.status(200).json(results.rows[0]);
+  });
+};
+
+const getUserPass = (request, response) => {
+  console.log(request.query);
+  pool.query('SELECT * FROM users WHERE username = $1 AND password = $2;', [request.query.username, request.query.password], (error, results) => {
     if (error) {
       throw error;
     }
@@ -218,6 +230,7 @@ const resetTask = (request, response) => {
 module.exports = {
   getCookies,
   getUser,
+  getUserPass,
   getCurrentUser,
   getUsers,
   getTasks,
