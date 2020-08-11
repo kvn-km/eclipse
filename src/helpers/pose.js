@@ -7,7 +7,7 @@ const URL = "http://localhost:8000/my_model/";
 let model, webcam, ctx, labelContainer, maxPredictions;
 let i = "";
 const probabilityArr = [];
-let count = 10;
+let count = 5;
 
 const avg = (arr) => {
     let sum = 0;
@@ -16,8 +16,6 @@ const avg = (arr) => {
     }
     return Number(sum / arr.length);
 };
-
-let asdf = true;
 
 export async function preINIT(status, refreshPage, props, redirectPage) {
 
@@ -45,26 +43,26 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         canvas.width = size; canvas.height = size;
         ctx = canvas.getContext("2d");
         // ctx.drawImage(webcam.canvas, 0, 0);
-        
+
         const cameraOn = () => {
-            count = 10;
+            count = 5;
             let cameraTimer = setInterval(() => {
-                if(count < 0) {
+                if (count < 0) {
                     clearInterval(cameraTimer);
                 }
                 else {
-                window.requestAnimationFrame(looping);
-                count--;
+                    window.requestAnimationFrame(looping);
+                    count--;
                 }
             }, 1000);
-        }
-        
+        };
+
         countdown();
         cameraOn();
 
         setTimeout(() => {
             window.requestAnimationFrame(loop);
-        }, 12000);
+        }, 10000);
 
         // append/get elements to the DOM
 
@@ -143,7 +141,7 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         for (let i = 0; i < maxPredictions; i++) {
             //
             if (taskTitle === prediction[i].className) {
-                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2) + "%";
 
                 probabilityArr.push(prediction[i].probability.toFixed(2));
                 labelContainer.childNodes[i].innerHTML = classPrediction;

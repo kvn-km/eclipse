@@ -60,25 +60,21 @@ function Task(props) {
 
   return (
     <FadeIn>
-      <section className="task main">
+      <section className="task-task-container task main">
         <div className="task-title">
-          <Textfit
-            mode="single"
-            forceSingleModeWidth={false}
-            max="160px"
-          >
-            {user.task && user.task.name}
-          </Textfit>
+          <h3 id="countdown"></h3>
+          {user.task && user.task.name}
         </div>
         <div className="camera">
           <div className="canvas-canvas" ><canvas id="canvas"></canvas></div>
           <div id="label-container"></div>
-          <h3 id="countdown"></h3> 
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
       </section >
+
+
     </FadeIn>
   );
 }
