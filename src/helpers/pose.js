@@ -91,13 +91,13 @@ export async function preINIT(status, refreshPage, props, redirectPage) {
         webcam.update(); // update the webcam frame
         await predict();
 
-        if (i < 100) {
+        if (i < 50) {
             window.requestAnimationFrame(loop);
             i++;
         }
         else {
             //  Checks whether average probability is enough to register pose
-            if (avg(probabilityArr) >= 0.1) {
+            if (avg(probabilityArr) >= 0.5) {
 
                 Promise.resolve(
                     axios.put('/api/tasks/user', { params: { id: status.info.id, taskId: status.task.id, taskXP: status.task.xp, levelXP: status.levelInfo } })
