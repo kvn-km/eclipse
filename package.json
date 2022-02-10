@@ -17,7 +17,7 @@
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.4",
     "pg": "^8.3.0",
     "react": "^16.13.1",
